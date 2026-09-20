@@ -1,0 +1,134 @@
+{
+  "title": "How Plants Eat",
+  "summary": "This lesson explores photosynthesis, the process by which plants make food. Students will examine how chlorophyll, sunlight, carbon dioxide, and water interact to produce glucose and release oxygen.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Capturing Sunlight"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A green leaf is shown with chlorophyll inside, capturing sunlight to begin the food-making process. I wonder...? Answer: Chlorophyll in leaves captures sunlight to help plants make food."
+    },
+    {
+      "type": "subheading",
+      "text": "Taking in Ingredients"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram displays carbon dioxide entering through stomata and water being absorbed through roots. I wonder...? Answer: Plants take in carbon dioxide through stomata and water through roots."
+    },
+    {
+      "type": "heading",
+      "text": "Producing Food and Energy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: The Calvin cycle is illustrated converting light energy into chemical energy stored in sugar, while glucose is produced and oxygen is released. I wonder...? Answer: They produce glucose, release oxygen, and use the Calvin cycle to convert light energy into chemical energy stored in sugar."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Chlorophyll",
+    "Stomata",
+    "Calvin cycle",
+    "Glucose and oxygen"
+  ],
+  "learning_objectives": [
+    "Explain how plants make food using photosynthesis.",
+    "Describe the role of chlorophyll, stomata, and roots in capturing light, carbon dioxide, and water.",
+    "Identify the products of photosynthesis including glucose, oxygen, and stored chemical energy."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "How plants make food."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "A substance in leaves that captures sunlight."
+    },
+    {
+      "term": "Stomata",
+      "definition": "Structures through which plants take in carbon dioxide."
+    },
+    {
+      "term": "Calvin cycle",
+      "definition": "The process that converts light energy into chemical energy stored in sugar."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "How plants make food."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "A substance in leaves that captures sunlight."
+      },
+      {
+        "term": "Stomata",
+        "emoji": "🔎",
+        "definition": "Structures through which plants take in carbon dioxide."
+      },
+      {
+        "term": "Calvin cycle",
+        "emoji": "🔎",
+        "definition": "The process that converts light energy into chemical energy stored in sugar."
+      },
+      {
+        "term": "Glucose and oxygen",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 40,
+  "subject": "Science",
+  "course_id": "Science",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "merge_test_s1_5242f83a891c",
+  "created_at": "2026-09-18T21:59:14.955594"
+}

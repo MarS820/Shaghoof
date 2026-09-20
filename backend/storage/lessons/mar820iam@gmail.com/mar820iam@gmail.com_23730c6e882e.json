@@ -1,0 +1,127 @@
+{
+  "title": "Task 8: Build an Automated Generative AI Email Assistant with API Functions",
+  "summary": "This lesson guides learners through building a Generative AI system that automatically generates and processes email replies. The system simulates a real-world business workflow where incoming messages are handled by an LLM and actions are executed using API-like functions.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Task Overview and Objectives"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A clean digital diagram displays a flowchart layout with bright blue boxes connected by dark arrows, outlining the automation pipeline. A glowing purple node highlights the core goals: loading an LLM, generating structured email responses, creating API-like functions, automating the pipeline, and handling simple errors.\nI wonder...?\nAnswer: The system is designed to load or call an LLM, generate structured responses, create API-like functions for saving, sending, and logging, automate the pipeline, and handle simple errors like empty input or failed saves."
+    },
+    {
+      "type": "heading",
+      "text": "Task Scenario Workflow"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A step-by-step sequential graphic illustrates the user entering a customer message that feeds directly into the AI. Green checkmarks and file icons light up as the system automatically formats the email, simulates sending it, and saves it to a file or database.\nI wonder...?\nAnswer: The user enters a customer message, the AI generates a professional email reply, the system automatically formats the email, simulates sending the email, and saves the email to a file or database."
+    }
+  ],
+  "key_concepts": [
+    "Generative AI",
+    "API Functions",
+    "Email Assistant",
+    "Business Workflow",
+    "Automation Pipeline",
+    "Error Handling"
+  ],
+  "learning_objectives": [
+    "Load or call an LLM and generate structured responses in email format",
+    "Create API-like functions to save, send, and log emails",
+    "Automate the pipeline and handle simple errors like empty input or failed saves"
+  ],
+  "vocabulary": [
+    {
+      "term": "Generative AI",
+      "definition": "A system used to automatically generate and process email replies."
+    },
+    {
+      "term": "API-like functions",
+      "definition": "Functions used to automatically process replies by saving, sending, and logging."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Generative AI",
+        "emoji": "🔎",
+        "definition": "A system used to automatically generate and process email replies."
+      },
+      {
+        "term": "API-like functions",
+        "emoji": "🔎",
+        "definition": "Functions used to automatically process replies by saving, sending, and logging."
+      },
+      {
+        "term": "API Functions",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Email Assistant",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Business Workflow",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Automation Pipeline",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "ai_generated": true,
+  "source_type": "pdf",
+  "filename": "Task 8 (Automation and API).pdf",
+  "pdf_session_id": "mar820iam_gmail_com_3c18ab9324",
+  "word_count": 206,
+  "subject": "code",
+  "course_id": "1789847190291",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "mar820iam@gmail.com_23730c6e882e",
+  "created_at": "2026-09-19T19:48:53.352467"
+}

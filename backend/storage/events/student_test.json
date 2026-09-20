@@ -1,0 +1,37 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "The Water Cycle: Earth's Endless Journey",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "student_test_911746133e",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T16:38:58.257318"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "The Water Cycle: Earth's Continuous Water Journey",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "student_test_8ec634ca50",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T16:39:26.193588"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "The Water Cycle: Earth's Essential Journey",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "student_test_4bcc5fdc2c"
+    },
+    "timestamp": "2026-09-18T16:39:58.122249"
+  }
+]

@@ -1,0 +1,132 @@
+{
+  "title": "Friction Test 1",
+  "summary": "This lesson explores the force of friction between touching surfaces, how it slows objects down, and how rough surfaces create more friction than smooth ones. It also covers how friction produces heat and how oil can be used to reduce friction between engine parts.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Understanding Friction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram shows two distinct surfaces touching each other with arrows pointing inward to indicate contact. The visual highlights the invisible force that acts between them to slow moving objects down.\nI wonder...?: What is friction and what does it do to moving objects?\nAnswer: Friction is a force between two surfaces touching each other, and it slows moving objects down."
+    },
+    {
+      "type": "subheading",
+      "text": "Surface Texture and Heat"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: An illustration compares a rough surface with a smooth surface, using close-up textures and visual heat waves radiating from the contact point. The rough surface graphic shows more resistance than the smooth one.\nI wonder...?: How do different surfaces affect friction and what does friction produce?\nAnswer: Rough surfaces create more friction than smooth ones, and friction produces heat."
+    },
+    {
+      "type": "subheading",
+      "text": "Reducing Friction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A cross-section of engine parts shows a golden layer of oil placed smoothly between them to keep the touching surfaces separated. The visual demonstrates how this substance changes the interaction.\nI wonder...?: How can friction be reduced between engine parts?\nAnswer: Oil reduces friction between engine parts."
+    }
+  ],
+  "key_concepts": [
+    "Friction",
+    "Force between two surfaces touching each other",
+    "Slowing moving objects down",
+    "Rough surfaces creating more friction than smooth ones",
+    "Production of heat",
+    "Oil reducing friction between engine parts"
+  ],
+  "learning_objectives": [
+    "Define friction as a force between two touching surfaces and explain how it slows moving objects down.",
+    "Compare how rough and smooth surfaces affect the amount of friction created.",
+    "Identify that friction produces heat and explain how oil reduces friction between engine parts."
+  ],
+  "vocabulary": [
+    {
+      "term": "Friction",
+      "definition": "A force between two surfaces touching each other that slows moving objects down."
+    },
+    {
+      "term": "Oil",
+      "definition": "A substance that reduces friction between engine parts."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Friction",
+        "emoji": "🔎",
+        "definition": "A force between two surfaces touching each other that slows moving objects down."
+      },
+      {
+        "term": "Oil",
+        "emoji": "🔎",
+        "definition": "A substance that reduces friction between engine parts."
+      },
+      {
+        "term": "Force between two surfaces touching each other",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Slowing moving objects down",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Rough surfaces creating more friction than smooth ones",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Production of heat",
+        "emoji": "🌡️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 32,
+  "subject": "Physics",
+  "course_id": "Physics",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "diag_friction_3006b32ac38a",
+  "created_at": "2026-09-18T22:55:20.606460"
+}

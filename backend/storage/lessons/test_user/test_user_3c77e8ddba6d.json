@@ -1,0 +1,137 @@
+{
+  "title": "Photosynthesis: Conversion of Light into Chemical Energy",
+  "summary": "This lesson explores photosynthesis, the biological process used by photopigment-bearing autotrophic organisms to convert light energy into chemical energy. It covers both oxygenic and anoxygenic photosynthesis, light-dependent reactions, and the Calvin cycle.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram showing a schematic of photosynthesis in plants, illustrating how carbohydrates are produced and stored. A composite image displays the global distribution of photosynthesis, with dark red and blue-green indicating high photosynthetic activity in the ocean and on land. I wonder...?: What do photopigment-bearing autotrophic organisms convert light energy into? Answer: They convert light energy into the chemical energy necessary to fuel their metabolism."
+    },
+    {
+      "type": "subheading",
+      "text": "Oxygenic and Anoxygenic Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A microscopic view showing purple bacteria utilizing bacteriochlorophyll to split hydrogen sulfide. Archaea are shown using retinal and microbial rhodopsin derivatives to absorb green light and produce a proton gradient across the cell membrane. I wonder...?: What does anoxygenic photosynthesis release instead of oxygen? Answer: It releases sulfur when using hydrogen sulfide as a reductant."
+    },
+    {
+      "type": "heading",
+      "text": "Light-Dependent Reactions and the Calvin Cycle"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Chloroplasts in leaf cells containing chlorophylls that absorb red and blue spectra of light while reflecting green. A sequence depicts atmospheric carbon dioxide being incorporated into organic compounds like ribulose bisphosphate using ATP and NADPH. I wonder...?: What sequence of light-independent reactions synthesizes sugars in plants, algae, and cyanobacteria? Answer: The Calvin cycle."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Oxygenic photosynthesis",
+    "Anoxygenic photosynthesis",
+    "Calvin cycle",
+    "Light-dependent reactions",
+    "Photoautotrophs"
+  ],
+  "learning_objectives": [
+    "Define photosynthesis and distinguish between oxygenic and anoxygenic photosynthesis.",
+    "Describe the role of light-dependent reactions and pigments like chlorophyll.",
+    "Explain how the Calvin cycle synthesizes sugars using ATP and NADPH."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "A system of biological processes by which photopigment-bearing autotrophic organisms convert light energy into chemical energy."
+    },
+    {
+      "term": "Photoautotrophs",
+      "definition": "Organisms that are able to synthesize food directly from carbon dioxide and water using energy from light."
+    },
+    {
+      "term": "Calvin cycle",
+      "definition": "A sequence of light-independent reactions where atmospheric carbon dioxide is incorporated into already existing organic compounds to form carbohydrates."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "A system of biological processes by which photopigment-bearing autotrophic organisms convert light energy into chemical energy."
+      },
+      {
+        "term": "Photoautotrophs",
+        "emoji": "🔎",
+        "definition": "Organisms that are able to synthesize food directly from carbon dioxide and water using energy from light."
+      },
+      {
+        "term": "Calvin cycle",
+        "emoji": "🔎",
+        "definition": "A sequence of light-independent reactions where atmospheric carbon dioxide is incorporated into already existing organic compounds to form carbohydrates."
+      },
+      {
+        "term": "Oxygenic photosynthesis",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Anoxygenic photosynthesis",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Light-dependent reactions",
+        "emoji": "💡",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "url",
+  "source_url": "https://en.wikipedia.org/wiki/Photosynthesis",
+  "word_count": 13642,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user_3c77e8ddba6d",
+  "created_at": "2026-09-18T21:09:25.453443"
+}

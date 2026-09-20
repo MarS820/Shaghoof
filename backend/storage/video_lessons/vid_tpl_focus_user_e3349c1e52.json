@@ -1,0 +1,62 @@
+{
+  "title": "Plants 101",
+  "total_duration_seconds": 180,
+  "total_duration_label": "3:00",
+  "scene_count": 4,
+  "vark_mode": "visual",
+  "sen_profile": "focus",
+  "template_id": "T1",
+  "scenes": [
+    {
+      "scene": 1,
+      "type": "intro",
+      "duration_seconds": 22,
+      "narration": "Welcome to Plants 101. How plants make food....",
+      "visual": "mascot_wave",
+      "text_overlay": "Plants 101",
+      "transition": "fade_in"
+    },
+    {
+      "scene": 2,
+      "type": "content",
+      "duration_seconds": 64,
+      "narration": "Plants need sunlight, water and air to make their food.",
+      "visual": "diagram",
+      "text_overlay": "Plants need sunlight, water and air to make their food.",
+      "transition": "slide_left",
+      "pause_after": true,
+      "pause_seconds": 2,
+      "template_id": "T1",
+      "style": "quest_card",
+      "accent": "#F97316",
+      "max_bubbles": 2
+    },
+    {
+      "scene": 3,
+      "type": "content",
+      "duration_seconds": 64,
+      "narration": "Roots take in water from soil.",
+      "visual": "animation",
+      "text_overlay": "Roots take in water from soil.",
+      "transition": "slide_right",
+      "template_id": "T1",
+      "style": "quest_card",
+      "accent": "#F97316",
+      "max_bubbles": 2
+    },
+    {
+      "scene": 4,
+      "type": "review",
+      "duration_seconds": 30,
+      "narration": "Let's review the key concepts: photosynthesis, roots.",
+      "visual": "concept_grid",
+      "text_overlay": "Key Concepts",
+      "transition": "fade_in",
+      "show_concepts": [
+        "photosynthesis",
+        "roots"
+      ]
+    }
+  ],
+  "status": "generated"
+}

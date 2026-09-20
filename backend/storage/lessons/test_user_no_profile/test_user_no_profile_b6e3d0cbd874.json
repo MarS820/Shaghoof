@@ -1,0 +1,133 @@
+{
+  "title": "Test Lesson",
+  "summary": "Explore the biological process of photosynthesis used by green plants and some other organisms to synthesize foods. Learn how chlorophyll pigments absorb sunlight, split water molecules, fix carbon dioxide into glucose, and release oxygen as a byproduct.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A detailed biological diagram illustrates green plants and some other organisms using sunlight next to green chlorophyll pigments. The visual shows the fundamental elements required to synthesize foods.\n\nI wonder...?\nAnswer: Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+    },
+    {
+      "type": "subheading",
+      "text": "The Role of Chlorophyll and Oxygen"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A spatial layout highlights the green pigment chlorophyll inside plant structures alongside a clear depiction of oxygen generated as a byproduct. The color scheme emphasizes the vibrant green of the pigment.\n\nI wonder...?\nAnswer: Photosynthesis in plants generally involves the green pigment chlorophyll and generates oxygen as a byproduct."
+    },
+    {
+      "type": "subheading",
+      "text": "Steps of the Process"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A step-by-step flowchart displays light absorption by chlorophyll, water molecules being split, carbon dioxide being fixed into glucose, and oxygen being released as a byproduct. Each stage is mapped out in a clear sequence.\n\nI wonder...?\nAnswer: The process of photosynthesis in plants involves light absorption by chlorophyll, water molecules being split, carbon dioxide being fixed into glucose, and oxygen being released as a byproduct."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Green plants and some other organisms",
+    "Sunlight",
+    "Chlorophyll pigments",
+    "Water molecules splitting",
+    "Carbon dioxide fixed into glucose",
+    "Oxygen as a byproduct"
+  ],
+  "learning_objectives": [
+    "Define photosynthesis and identify which organisms use it.",
+    "Describe the role of chlorophyll pigments and sunlight in synthesizing foods.",
+    "Outline the specific steps involved in plant photosynthesis, including water splitting, carbon dioxide fixation, and oxygen release."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "A green pigment that helps in photosynthesis by absorbing light and is involved in generating oxygen as a byproduct."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "A green pigment that helps in photosynthesis by absorbing light and is involved in generating oxygen as a byproduct."
+      },
+      {
+        "term": "Green plants and some other organisms",
+        "emoji": "🌿",
+        "definition": ""
+      },
+      {
+        "term": "Sunlight",
+        "emoji": "☀️",
+        "definition": ""
+      },
+      {
+        "term": "Chlorophyll pigments",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Water molecules splitting",
+        "emoji": "💧",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 69,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user_no_profile_b6e3d0cbd874",
+  "created_at": "2026-09-18T21:10:10.823444"
+}

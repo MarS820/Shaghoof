@@ -1,0 +1,142 @@
+{
+  "title": "Photosynthesis in Plants",
+  "summary": "Photosynthesis is the process by which green plants and other organisms use sunlight and chlorophyll pigments to synthesize foods and produce oxygen as a byproduct. It consists of a four-step process that converts carbon dioxide, water, and light energy into glucose and oxygen. This process is fundamental to life on Earth as it removes carbon dioxide, generates oxygen, supports food chains, and forms organic compounds.",
+  "learning_objectives": [
+    "Describe the role of chlorophyll pigments, sunlight, water, and carbon dioxide in photosynthesis.",
+    "List the four steps involved in the process of photosynthesis including photolysis.",
+    "State the chemical equation for photosynthesis and explain its importance for life on Earth."
+  ],
+  "key_concepts": [
+    "Photosynthesis definition and green pigment chlorophyll",
+    "Four steps of photosynthesis and photolysis",
+    "Chemical equation for photosynthesis",
+    "Ecological importance of photosynthesis"
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "The green pigment in plants that helps absorb sunlight during photosynthesis."
+    },
+    {
+      "term": "Photolysis",
+      "definition": "The step in photosynthesis where water molecules are split."
+    }
+  ],
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Overview of Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: On a bright diagram, a leaf containing green pigment called chlorophyll absorbs shining yellow sunlight from above. Models of water molecules and carbon dioxide enter the green leaf while oxygen gas bubbles outward as a byproduct. I wonder...? How do green plants synthesize foods using sunlight? Answer: Green plants and some other organisms use chlorophyll pigments to absorb sunlight and synthesize foods. This process generates oxygen as a byproduct."
+    },
+    {
+      "type": "heading",
+      "text": "The Four Steps of Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A four-step flowchart shows green chlorophyll absorbing sunlight at step one and water molecules splitting during photolysis at step two. Step three shows carbon dioxide being fixed into glucose, while step four depicts oxygen being released as a byproduct. I wonder...? What sequence of steps occurs during photosynthesis? Answer: The process begins with light absorption by chlorophyll, followed by photolysis splitting water molecules. Next, carbon dioxide is fixed into glucose, and oxygen is released as a byproduct."
+    },
+    {
+      "type": "heading",
+      "text": "The Photosynthesis Equation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A large diagram displays chemical formulas aligned from left to right in clear lettering. On the left side, 6CO2 and 6H2O sit beside light energy, pointing across a center arrow to C6H12O6 and 6O2 on the right. I wonder...? What is the overall chemical equation for photosynthesis? Answer: The overall equation for photosynthesis is 6CO2 + 6H2O + light energy → C6H12O6 + 6O2."
+    },
+    {
+      "type": "heading",
+      "text": "Importance for Life on Earth"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: An ecological chart shows green plants positioned at the base of a food chain underneath aerobic organisms. Arrows illustrate carbon dioxide being removed from the atmospheric air while fresh oxygen gas is produced. I wonder...? Why is photosynthesis important for life on Earth? Answer: It produces oxygen for aerobic organisms and removes carbon dioxide from the atmosphere. It also forms the base of most food chains and produces organic compounds from inorganic materials."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "The green pigment in plants that helps absorb sunlight during photosynthesis."
+      },
+      {
+        "term": "Photolysis",
+        "emoji": "🔎",
+        "definition": "The step in photosynthesis where water molecules are split."
+      },
+      {
+        "term": "Photosynthesis definition and green pigment chlorophyll",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Four steps of photosynthesis and photolysis",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Chemical equation for photosynthesis",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 126,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user4_8ca9d7fb114d",
+  "created_at": "2026-09-18T20:08:38.195817"
+}

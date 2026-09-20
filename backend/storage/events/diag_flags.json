@@ -1,0 +1,14 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Magnetism Check",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "diag_flags_020414faa448",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:10:15.300062"
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "event_type": "tutor_chat",
+    "topic": "",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {},
+    "timestamp": "2026-09-17T19:56:42.599756"
+  },
+  {
+    "event_type": "tutor_chat",
+    "topic": "math",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {},
+    "timestamp": "2026-09-17T19:57:12.361607"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Hackathon_Comprehensive_Guide_AI_Clinical_Decision_Support_Lite (1).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "user_4iaa_b237c2b4a9",
+      "subject": "math"
+    },
+    "timestamp": "2026-09-18T18:12:10.492540"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Hackathon_Comprehensive_Guide_AI_Clinical_Decision_Support_Lite (1).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "user_4iaa_b237c2b4a9",
+      "subject": "math"
+    },
+    "timestamp": "2026-09-18T18:12:27.348239"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Hackathon_Comprehensive_Guide_AI_Clinical_Decision_Support_Lite (1).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "user_4iaa_b237c2b4a9",
+      "subject": "math"
+    },
+    "timestamp": "2026-09-18T18:32:22.975818"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Hackathon_Comprehensive_Guide_AI_Clinical_Decision_Support_Lite (1).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "user_4iaa_b237c2b4a9",
+      "subject": "math"
+    },
+    "timestamp": "2026-09-18T18:35:34.890936"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Hackathon_Comprehensive_Guide_AI_Clinical_Decision_Support_Lite (1).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "user_4iaa_b237c2b4a9",
+      "subject": "math"
+    },
+    "timestamp": "2026-09-18T18:53:15.177694"
+  }
+]

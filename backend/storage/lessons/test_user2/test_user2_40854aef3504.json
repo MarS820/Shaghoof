@@ -1,0 +1,135 @@
+{
+  "title": "Photosynthesis Basics",
+  "summary": "Photosynthesis is the process where plants convert sunlight into energy. Chlorophyll located inside the leaves absorbs this light energy. The plant utilizes carbon dioxide and water to produce glucose and oxygen.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Energy Conversion in Plants"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A green leaf sits under a glowing yellow sun shape in a simple visual diagram. Bright arrows point from the sunlight directly onto the flat surface of the leaf. I wonder...? How do plants convert sunlight into energy? Answer: Photosynthesis is the process by which plants convert sunlight into energy."
+    },
+    {
+      "type": "heading",
+      "text": "Light Absorption by Chlorophyll"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Zooming inside the green leaf diagram, small chlorophyll structures fill the spatial layout. Sunlight rays touch these green chlorophyll areas, showing light energy being collected inside the leaf. I wonder...? What component in the leaves absorbs light energy? Answer: Chlorophyll in the leaves absorbs light energy."
+    },
+    {
+      "type": "heading",
+      "text": "Inputs and Outputs of Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: On the left side of the plant diagram, blue water shapes and carbon dioxide arrows flow into the plant. On the right side, glucose and oxygen arrows move outward from the plant outline. I wonder...? What materials does the plant use and produce during photosynthesis? Answer: The plant uses carbon dioxide and water to produce glucose and oxygen."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis process",
+    "Energy conversion from sunlight",
+    "Chlorophyll light absorption",
+    "Inputs: Carbon dioxide and water",
+    "Products: Glucose and oxygen"
+  ],
+  "learning_objectives": [
+    "Define photosynthesis and how plants convert sunlight into energy.",
+    "Identify the role of chlorophyll in leaves during light absorption.",
+    "List the specific substances used and produced by plants during photosynthesis."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which plants convert sunlight into energy."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "A substance in the leaves that absorbs light energy."
+    },
+    {
+      "term": "Glucose",
+      "definition": "A substance produced by the plant during photosynthesis, along with oxygen."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which plants convert sunlight into energy."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "A substance in the leaves that absorbs light energy."
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "A substance produced by the plant during photosynthesis, along with oxygen."
+      },
+      {
+        "term": "Photosynthesis process",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Energy conversion from sunlight",
+        "emoji": "☀️",
+        "definition": ""
+      },
+      {
+        "term": "Chlorophyll light absorption",
+        "emoji": "💡",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 30,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user2_40854aef3504",
+  "created_at": "2026-09-18T19:54:35.730819"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Test Lesson",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user_no_profile_b6e3d0cbd874",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T21:10:10.827149"
+  }
+]

@@ -1,0 +1,125 @@
+{
+  "title": "Test Lesson",
+  "summary": "This lesson explores photosynthesis, the process by which green plants and some other organisms use sunlight and chlorophyll pigments to synthesize foods. Students will learn the key steps involved in the process, including light absorption, water molecule splitting, carbon dioxide fixation into glucose, and the generation of oxygen as a byproduct.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram showing green plants and some other organisms under bright sunlight. The visual highlights green chlorophyll pigments actively capturing light rays to synthesize foods. I wonder...?: How do green plants and some other organisms synthesize foods? Answer: They use sunlight with the help of chlorophyll pigments."
+    },
+    {
+      "type": "subheading",
+      "text": "Steps of the Process"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A sequential flowchart illustrating light absorption by chlorophyll, water molecules being split, carbon dioxide being fixed into glucose, and oxygen being released as a byproduct. I wonder...?: What are the steps involved in photosynthesis in plants? Answer: The steps include light absorption by chlorophyll, water molecules are split, carbon dioxide is fixed into glucose, and oxygen is released as a byproduct."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Sunlight",
+    "Chlorophyll pigments",
+    "Light absorption",
+    "Water molecules splitting",
+    "Carbon dioxide fixation into glucose",
+    "Oxygen byproduct"
+  ],
+  "learning_objectives": [
+    "Understand how green plants and some other organisms use sunlight to synthesize foods.",
+    "Identify the role of chlorophyll pigments in photosynthesis.",
+    "List the steps involved in the process of photosynthesis in plants."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "Green pigments involved in photosynthesis that help absorb light."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "Green pigments involved in photosynthesis that help absorb light."
+      },
+      {
+        "term": "Sunlight",
+        "emoji": "☀️",
+        "definition": ""
+      },
+      {
+        "term": "Chlorophyll pigments",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Light absorption",
+        "emoji": "💡",
+        "definition": ""
+      },
+      {
+        "term": "Water molecules splitting",
+        "emoji": "💧",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 69,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "debug_user2_e4f646f910f1",
+  "created_at": "2026-09-18T21:06:38.752207"
+}

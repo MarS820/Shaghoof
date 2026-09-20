@@ -1,0 +1,147 @@
+{
+  "title": "Photosynthesis",
+  "summary": "Photosynthesis is the process by which plants convert sunlight into energy. Chlorophyll absorbs light energy, while plants use CO2 and water to produce glucose and oxygen.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "The Process of Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A green plant is shown in bright sunlight with light rays hitting its leaves. Chlorophyll is depicted inside the plant absorbing this light energy."
+    },
+    {
+      "type": "subheading",
+      "text": "Scene Question"
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? What absorbs light energy during photosynthesis?\nAnswer: Chlorophyll absorbs light energy."
+    },
+    {
+      "type": "heading",
+      "text": "Inputs and Outputs"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram displays CO2 and water entering the plant. The plant is shown producing glucose and oxygen as a result."
+    },
+    {
+      "type": "subheading",
+      "text": "Scene Question"
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? What do plants use to produce glucose and oxygen?\nAnswer: Plants use CO2 and water to produce glucose and oxygen."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Chlorophyll",
+    "Sunlight to energy conversion",
+    "CO2 and water usage",
+    "Glucose and oxygen production"
+  ],
+  "learning_objectives": [
+    "Understand how plants convert sunlight into energy through photosynthesis",
+    "Identify the role of chlorophyll in absorbing light energy",
+    "Recognize the inputs and outputs of photosynthesis including CO2, water, glucose, and oxygen"
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which plants convert sunlight into energy"
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "The substance that absorbs light energy"
+    },
+    {
+      "term": "Glucose",
+      "definition": "One of the products produced by plants using CO2 and water"
+    },
+    {
+      "term": "Oxygen",
+      "definition": "One of the products produced by plants using CO2 and water"
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which plants convert sunlight into energy"
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "The substance that absorbs light energy"
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "One of the products produced by plants using CO2 and water"
+      },
+      {
+        "term": "Oxygen",
+        "emoji": "🔎",
+        "definition": "One of the products produced by plants using CO2 and water"
+      },
+      {
+        "term": "Sunlight to energy conversion",
+        "emoji": "☀️",
+        "definition": ""
+      },
+      {
+        "term": "CO2 and water usage",
+        "emoji": "💧",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 25,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "final_test_dfb003745616",
+  "created_at": "2026-09-18T20:19:15.896770"
+}

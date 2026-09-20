@@ -1,0 +1,125 @@
+{
+  "title": "Task 7 (Multi-Agent Collaboration)",
+  "summary": "This lesson covers building a multi-agent AI system where multiple agents collaborate to generate a structured report from a user question. You will learn to create a system with at least four specific agent roles working step by step.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Step 1: Understand the Task Description"
+    },
+    {
+      "type": "paragraph",
+      "text": "Step 1. In this task, you will build a multi-agent AI system where multiple agents collaborate to generate a structured report from a user question. Instead of using one LLM, you must create multiple agents, where each agent has a specific role. The agents must work together to complete the task step by step. Done."
+    },
+    {
+      "type": "heading",
+      "text": "Step 2: Review the Task Objective"
+    },
+    {
+      "type": "paragraph",
+      "text": "Step 2. You must build a system with at least 4 agents: Planner Agent, Research Agent, Writer Agent, Summary Agent, and an optional Evaluator Agent. The system should take a user question and generate a final report using collaboration between agents. Done."
+    }
+  ],
+  "key_concepts": [
+    "Multi-Agent AI System",
+    "Report Generation",
+    "Planner Agent",
+    "Research Agent",
+    "Writer Agent",
+    "Summary Agent",
+    "Evaluator Agent"
+  ],
+  "learning_objectives": [
+    "Build a multi-agent AI system for report generation",
+    "Configure at least four specific agent roles to work together step by step"
+  ],
+  "vocabulary": [
+    {
+      "term": "Multi-Agent AI System",
+      "definition": "A system where multiple agents collaborate to generate a structured report from a user question instead of using one LLM."
+    },
+    {
+      "term": "Planner Agent",
+      "definition": "One of the required agents in the multi-agent system."
+    },
+    {
+      "term": "Research Agent",
+      "definition": "One of the required agents in the multi-agent system."
+    },
+    {
+      "term": "Writer Agent",
+      "definition": "One of the required agents in the multi-agent system."
+    },
+    {
+      "term": "Summary Agent",
+      "definition": "One of the required agents in the multi-agent system."
+    },
+    {
+      "term": "Evaluator Agent",
+      "definition": "An optional agent in the multi-agent system."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 25,
+    "use_bullet_points": true,
+    "audio_available": true,
+    "sign_language_hint": false,
+    "sensory_reduced": true,
+    "step_by_step": true,
+    "visual_aids_priority": false,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "auditory",
+  "sen_profile": "structure",
+  "template_id": "T6",
+  "wordwall": {
+    "kind": "wheel",
+    "title": "Spin the Wheel",
+    "segments": [
+      "Multi-Agent AI System",
+      "Planner Agent",
+      "Research Agent",
+      "Writer Agent",
+      "Summary Agent",
+      "Evaluator Agent",
+      "Report Generation"
+    ],
+    "lesson_title": "Task 7 (Multi-Agent Collaboration)",
+    "prompt": {
+      "en": "Explain it in your own words — or give an example!",
+      "ar": "اشرحها بكلماتك — أو أعطِ مثالاً!"
+    },
+    "template_id": "T6",
+    "game": {
+      "en": "Spin the Wheel",
+      "ar": "عجلة الدوران"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "ai_generated": true,
+  "source_type": "pdf",
+  "filename": "Task 7 (Multi-Agent Collabration).pdf",
+  "pdf_session_id": "mahmoud_gmail_com_ef9b0bd38b",
+  "word_count": 116,
+  "subject": "code",
+  "course_id": "1789865564473",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "mahmoud@gmail.com_e6a3f05f68e5",
+  "created_at": "2026-09-20T01:17:45.258299"
+}

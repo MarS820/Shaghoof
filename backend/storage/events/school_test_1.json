@@ -1,0 +1,110 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis: The Plant's Food-Making Process",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_b0f5598524",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T17:43:28.911764"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_e82f2d8e492d",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T22:49:42.612894"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_943adb1f2e75",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T22:58:15.659382"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_aa09b0458b0a",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:02:08.134531"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_9d63647e4d2f",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:11:10.288930"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_28ec9331d267",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:19:58.170088"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_c67a1c07c1c5",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:35:54.866341"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_dfb537c1e20b",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:43:15.893332"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "school_test_1_41a25248fc99",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T23:48:25.345596"
+  }
+]

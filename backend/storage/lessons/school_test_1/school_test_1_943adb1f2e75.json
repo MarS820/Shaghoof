@@ -1,0 +1,139 @@
+{
+  "title": "Water Cycle Basics",
+  "summary": "This lesson explores how water moves above and below the Earth's surface through the continuous process of the water cycle. Students will examine the four main stages: evaporation, condensation, precipitation, and collection.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to the Water Cycle"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram of the Earth is shown with blue arrows illustrating how water moves continuously above and below the Earth's surface. The layout highlights the path water takes through different stages. I wonder...?: How does water move across the Earth? Answer: The water cycle describes how water moves both above and below the Earth's surface."
+    },
+    {
+      "type": "subheading",
+      "text": "Evaporation and Condensation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A bright yellow sun shines down, heating liquid water and turning it into vapor that rises upward. High in the sky, the vapor cools to form visible clouds. I wonder...?: How do clouds form in the sky? Answer: Evaporation turns liquid water into vapor using heat from the sun, and condensation forms clouds when this vapor cools high in the sky."
+    },
+    {
+      "type": "subheading",
+      "text": "Precipitation and Collection"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Heavy clouds release water down toward the ground as rain or snow, which then flows into rivers, lakes, and oceans. The visual map traces runoff pooling into large bodies of water. I wonder...?: How does water return to the Earth? Answer: Precipitation returns water as rain or snow, and collection gathers runoff into rivers, lakes, and oceans."
+    }
+  ],
+  "key_concepts": [
+    "Water movement above and below the Earth's surface",
+    "Evaporation driven by heat from the sun",
+    "Condensation forming clouds high in the sky",
+    "Precipitation returning water as rain or snow",
+    "Collection gathering runoff into rivers, lakes, and oceans"
+  ],
+  "learning_objectives": [
+    "Describe how water moves above and below the Earth's surface",
+    "Identify the four stages of the water cycle: evaporation, condensation, precipitation, and collection",
+    "Explain the role of the sun and temperature in evaporation and condensation"
+  ],
+  "vocabulary": [
+    {
+      "term": "Evaporation",
+      "definition": "The process that turns liquid water into vapor using heat from the sun."
+    },
+    {
+      "term": "Condensation",
+      "definition": "The process that forms clouds when vapor cools high in the sky."
+    },
+    {
+      "term": "Precipitation",
+      "definition": "The return of water to the Earth as rain or snow."
+    },
+    {
+      "term": "Collection",
+      "definition": "The process that gathers runoff into rivers, lakes, and oceans."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Evaporation",
+        "emoji": "🔎",
+        "definition": "The process that turns liquid water into vapor using heat from the sun."
+      },
+      {
+        "term": "Condensation",
+        "emoji": "🔎",
+        "definition": "The process that forms clouds when vapor cools high in the sky."
+      },
+      {
+        "term": "Precipitation",
+        "emoji": "🔎",
+        "definition": "The return of water to the Earth as rain or snow."
+      },
+      {
+        "term": "Collection",
+        "emoji": "🔎",
+        "definition": "The process that gathers runoff into rivers, lakes, and oceans."
+      },
+      {
+        "term": "Water movement above and below the Earth's surface",
+        "emoji": "💧",
+        "definition": ""
+      },
+      {
+        "term": "Evaporation driven by heat from the sun",
+        "emoji": "☀️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 49,
+  "subject": "Science",
+  "course_id": "subj1",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "school_test_1_943adb1f2e75",
+  "created_at": "2026-09-18T22:58:15.651596"
+}

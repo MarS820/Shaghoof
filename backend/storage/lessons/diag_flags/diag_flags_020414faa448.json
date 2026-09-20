@@ -1,0 +1,129 @@
+{
+  "title": "Magnetism Check",
+  "summary": "This lesson explores the fundamental properties of magnets, including their attraction to iron, polar characteristics, magnetic fields, and application in compasses using Earth's magnetic field. Students will examine how opposite poles attract and like poles repel.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Magnetic Attraction and Poles"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram showing a magnet pulling an iron object toward it. Every magnet is illustrated with a north and south pole clearly labeled at opposite ends."
+    },
+    {
+      "type": "subheading",
+      "text": "Poles and Fields"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Two magnets are shown with their poles facing each other. Opposite poles attract while like poles repel, and the magnetic field lines show the greatest concentration of strength at the poles."
+    }
+  ],
+  "key_concepts": [
+    "Magnets attract iron",
+    "North and south pole",
+    "Opposite poles attract",
+    "Like poles repel",
+    "Magnetic field is strongest at the poles",
+    "Compasses use Earth magnetic field"
+  ],
+  "learning_objectives": [
+    "Identify that magnets attract iron and possess north and south poles",
+    "Explain how opposite and like poles interact with each other",
+    "Describe where the magnetic field is strongest and how compasses function"
+  ],
+  "vocabulary": [
+    {
+      "term": "Magnet",
+      "definition": "An object that attracts iron and has a north and south pole"
+    },
+    {
+      "term": "Magnetic field",
+      "definition": "The area around a magnet that is strongest at the poles"
+    },
+    {
+      "term": "Compass",
+      "definition": "A tool that uses Earth's magnetic field to show direction"
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Magnet",
+        "emoji": "🔎",
+        "definition": "An object that attracts iron and has a north and south pole"
+      },
+      {
+        "term": "Magnetic field",
+        "emoji": "🔎",
+        "definition": "The area around a magnet that is strongest at the poles"
+      },
+      {
+        "term": "Compass",
+        "emoji": "🔎",
+        "definition": "A tool that uses Earth's magnetic field to show direction"
+      },
+      {
+        "term": "Magnets attract iron",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "North and south pole",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Opposite poles attract",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "ai_generated": true,
+  "source_type": "text",
+  "word_count": 34,
+  "subject": "Science",
+  "course_id": "Science",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "diag_flags_020414faa448",
+  "created_at": "2026-09-18T23:10:15.296406"
+}

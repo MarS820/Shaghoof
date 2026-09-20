@@ -1,0 +1,139 @@
+{
+  "title": "Test Lesson: Photosynthesis",
+  "summary": "Photosynthesis is the process by which green plants and some other organisms use sunlight and chlorophyll pigments to synthesize foods. During this process, water molecules are split, carbon dioxide is fixed into glucose, and oxygen is generated and released as a byproduct. The process follows a specific sequence of steps within plants.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Overview of Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram shows green plants and other organisms positioned under bright sunlight. Green chlorophyll pigments inside the leaves absorb sunlight to help synthesize foods. I wonder...? What process do green plants use to synthesize foods using sunlight? Answer: Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with chlorophyll pigments. It generally involves the green pigment chlorophyll and generates oxygen as a byproduct."
+    },
+    {
+      "type": "heading",
+      "text": "Light Absorption and Water Splitting"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: In a detailed illustration, light absorption occurs as sunlight strikes the green pigment chlorophyll. Next to it, water molecules are shown being split apart in a clear step-by-step layout. I wonder...? What happens during the first steps of photosynthesis in plants? Answer: First, light absorption by chlorophyll occurs. Then, water molecules are split as part of the photosynthetic process."
+    },
+    {
+      "type": "heading",
+      "text": "Carbon Fixation and Oxygen Release"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: The diagram illustrates carbon dioxide being fixed into glucose inside the plant structure. Arrows point outward showing oxygen being released into the surrounding space as a byproduct. I wonder...? How is carbon dioxide transformed and what is released as a byproduct? Answer: Carbon dioxide is fixed into glucose during photosynthesis. Oxygen is then generated and released as a byproduct."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis in green plants and organisms",
+    "Light absorption by green chlorophyll pigments",
+    "Splitting of water molecules",
+    "Fixation of carbon dioxide into glucose",
+    "Release of oxygen as a byproduct"
+  ],
+  "learning_objectives": [
+    "Define photosynthesis and describe the role of chlorophyll pigments and sunlight.",
+    "Identify the sequence of steps involved in plant photosynthesis.",
+    "Explain how water, carbon dioxide, glucose, and oxygen are involved in the photosynthetic process."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "The green pigment in plants involved in light absorption for synthesizing foods."
+    },
+    {
+      "term": "Glucose",
+      "definition": "The food molecule into which carbon dioxide is fixed during photosynthesis."
+    },
+    {
+      "term": "Byproduct",
+      "definition": "A substance generated during a process, such as oxygen released during photosynthesis."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll pigments."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "The green pigment in plants involved in light absorption for synthesizing foods."
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "The food molecule into which carbon dioxide is fixed during photosynthesis."
+      },
+      {
+        "term": "Byproduct",
+        "emoji": "🔎",
+        "definition": "A substance generated during a process, such as oxygen released during photosynthesis."
+      },
+      {
+        "term": "Photosynthesis in green plants and organisms",
+        "emoji": "🌿",
+        "definition": ""
+      },
+      {
+        "term": "Light absorption by green chlorophyll pigments",
+        "emoji": "💡",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 69,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "debug_test_f6c31d91858c",
+  "created_at": "2026-09-18T21:07:35.778056"
+}

@@ -1,0 +1,183 @@
+{
+  "title": "Building a Context-Aware Chat Assistant with Memory",
+  "summary": "This lesson guides you through building a context-aware AI chat assistant that remembers past interactions. You will learn to load a language model, maintain conversation memory of user messages and AI responses, and inject history as context in prompts. This allows the AI to maintain a continuous conversation rather than answering each question in isolation.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Loading the Language Model"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A sleek terminal display shows green Python code loading a model using Hugging Face Transformers. A rounded blue rectangle lights up on screen, representing the loaded language model ready to receive prompts."
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? How do we initialize the AI system before starting a chat?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Answer: We load a language model using a Python library such as Hugging Face Transformers to generate responses."
+    },
+    {
+      "type": "heading",
+      "text": "Maintaining Conversation Memory"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Visual memory boxes appear in two distinct colors: blue rectangles for user messages and yellow rectangles for AI responses. They line up neatly inside a vertical tray that stores conversation history."
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? How does the chat assistant hold onto past information?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Answer: The system maintains conversation memory by storing user messages and AI responses together over time."
+    },
+    {
+      "type": "heading",
+      "text": "Injecting Context into Prompts"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram shows stored conversation history combining with a new user question arrow inside a clear rectangular prompt container. This merged block of text is injected straight into the language model box."
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? How is previous conversation history sent to the model for a new question?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Answer: We combine the previous conversation history with the new user question and send everything as context in each new prompt."
+    },
+    {
+      "type": "heading",
+      "text": "Running a Continuous Chat Loop"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A circular arrow loops continuously between a text input line and the output panel. In the first turn, the user inputs 'My name is Ahmed.', and in the next turn asks 'What is my name?'."
+    },
+    {
+      "type": "paragraph",
+      "text": "I wonder...? What is the result of running a continuous chat loop with memory?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Answer: The AI maintains a conversation and uses context to recall details like Ahmed's name instead of responding to each message independently."
+    }
+  ],
+  "key_concepts": [
+    "Language model",
+    "Conversation memory",
+    "Prompt context",
+    "Context injection",
+    "Continuous chat loop"
+  ],
+  "learning_objectives": [
+    "Load a language model using a Python library such as Hugging Face Transformers",
+    "Maintain conversation memory by storing user messages and AI responses",
+    "Build context for each prompt by combining conversation history with new questions",
+    "Run a continuous chat loop to observe how memory affects model responses"
+  ],
+  "vocabulary": [
+    {
+      "term": "Language model",
+      "definition": "A generative AI model loaded via a Python library like Hugging Face Transformers to process context and answer questions."
+    },
+    {
+      "term": "Conversation memory",
+      "definition": "The stored record of previous user messages and AI responses kept across a chat session."
+    },
+    {
+      "term": "Context",
+      "definition": "The combined history of past interactions along with the new user question, sent into the model with every prompt."
+    },
+    {
+      "term": "Chat loop",
+      "definition": "A continuous system loop allowing a user to submit multiple questions and receive memory-aware responses."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Language model",
+        "emoji": "🔎",
+        "definition": "A generative AI model loaded via a Python library like Hugging Face Transformers to process context and answer questions."
+      },
+      {
+        "term": "Conversation memory",
+        "emoji": "🔎",
+        "definition": "The stored record of previous user messages and AI responses kept across a chat session."
+      },
+      {
+        "term": "Context",
+        "emoji": "🔎",
+        "definition": "The combined history of past interactions along with the new user question, sent into the model with every prompt."
+      },
+      {
+        "term": "Chat loop",
+        "emoji": "🔎",
+        "definition": "A continuous system loop allowing a user to submit multiple questions and receive memory-aware responses."
+      },
+      {
+        "term": "Prompt context",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Context injection",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "ai_generated": true,
+  "source_type": "pdf",
+  "filename": "Task 6 (Memory and context).pdf",
+  "pdf_session_id": "mariam_m_samir8g20_gmail_com_6dc54903ae",
+  "word_count": 245,
+  "subject": "coding",
+  "course_id": "coding",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "mariam.m.samir8g20@gmail.com_d708a62a93c5",
+  "created_at": "2026-09-19T00:47:40.388698"
+}

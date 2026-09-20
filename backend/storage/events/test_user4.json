@@ -1,0 +1,14 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis in Plants",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user4_8ca9d7fb114d",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T20:08:38.198296"
+  }
+]

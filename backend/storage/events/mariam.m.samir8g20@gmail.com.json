@@ -1,0 +1,38 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Building a Context-Aware Chat Assistant with Memory",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "mariam.m.samir8g20@gmail.com_d708a62a93c5",
+      "subject": "coding"
+    },
+    "timestamp": "2026-09-19T00:47:40.390216"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Task 6: Build a Context-Aware Chat Assistant with Memory",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "mariam.m.samir8g20@gmail.com_112a385fdeb2",
+      "subject": "coding"
+    },
+    "timestamp": "2026-09-19T11:44:13.153408"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Task 6: Build a Context-Aware Chat Assistant with Memory",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "mariam.m.samir8g20@gmail.com_f70320bb91c9",
+      "subject": "coding"
+    },
+    "timestamp": "2026-09-19T11:48:02.115949"
+  }
+]

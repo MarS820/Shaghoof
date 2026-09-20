@@ -1,0 +1,26 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "How Plants Make Food",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "tpl_focus_user_b803576159",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T13:30:12.832834"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "How Plants Make Food",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "tpl_focus_user_b803576159",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T13:33:21.048173"
+  }
+]

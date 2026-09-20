@@ -1,0 +1,134 @@
+{
+  "title": "Photosynthesis Basics",
+  "summary": "Photosynthesis is the process by which plants convert sunlight into energy. Leaves contain chlorophyll, which absorbs light energy to power this transformation. Using carbon dioxide and water, the plant produces glucose and oxygen.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Understanding Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Picture a plant standing under bright sunlight in an open space. The plant absorbs this sunlight to begin converting it into energy. I wonder...? How do plants convert sunlight into energy? Answer: Plants perform a process called photosynthesis to convert sunlight into energy."
+    },
+    {
+      "type": "heading",
+      "text": "The Role of Chlorophyll"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Zoom in on the green surface of a leaf receiving bright light. Inside the leaf, chlorophyll absorbs this light energy. I wonder...? What absorbs light energy in the leaves? Answer: Chlorophyll in the leaves absorbs light energy."
+    },
+    {
+      "type": "heading",
+      "text": "Inputs and Outputs"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Imagine a visual layout with carbon dioxide and water flowing into a plant. Output arrows display glucose and oxygen being produced. I wonder...? What inputs does a plant use to produce glucose and oxygen? Answer: The plant uses carbon dioxide and water to produce glucose and oxygen."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis as energy conversion",
+    "Chlorophyll and light absorption",
+    "Inputs: Carbon dioxide and water",
+    "Outputs: Glucose and oxygen"
+  ],
+  "learning_objectives": [
+    "Define photosynthesis and explain how plants convert sunlight into energy.",
+    "Describe the function of chlorophyll in leaf light absorption.",
+    "Identify the inputs used and outputs produced during photosynthesis."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which plants convert sunlight into energy."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "A substance in the leaves that absorbs light energy."
+    },
+    {
+      "term": "Glucose",
+      "definition": "A product created by the plant during photosynthesis alongside oxygen."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which plants convert sunlight into energy."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "A substance in the leaves that absorbs light energy."
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "A product created by the plant during photosynthesis alongside oxygen."
+      },
+      {
+        "term": "Photosynthesis as energy conversion",
+        "emoji": "⚡",
+        "definition": ""
+      },
+      {
+        "term": "Chlorophyll and light absorption",
+        "emoji": "💡",
+        "definition": ""
+      },
+      {
+        "term": "Inputs: Carbon dioxide and water",
+        "emoji": "💧",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 30,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user3_96d1a93aaa33",
+  "created_at": "2026-09-18T20:05:15.956041"
+}

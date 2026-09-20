@@ -1,0 +1,14 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Water Cycle Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "diag_user_1_ad95e49335b6",
+      "subject": "Science"
+    },
+    "timestamp": "2026-09-18T22:42:44.508717"
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "title": "Photosynthesis",
+  "sections": [
+    {
+      "type": "paragraph",
+      "text": "Photosynthesis is the process by which plants convert sunlight into energy. Chlorophyll absorbs light energy. Plants use CO2 and water to produce glucose and oxygen."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis is the process by which plants convert sunlight into energy"
+  ],
+  "summary": "Photosynthesis is the process by which plants convert sunlight into energy. Chlorophyll absorbs light energy. Plants use CO2 and water to produce glucose and oxygen.",
+  "total_paragraphs": 1,
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis is the process by which plants convert sunlight into energy",
+        "emoji": "☀️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 25,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_tutor_c43d399143ce",
+  "created_at": "2026-09-18T20:11:09.434941"
+}

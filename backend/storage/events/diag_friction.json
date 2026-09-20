@@ -1,0 +1,38 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Friction Test 1",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "diag_friction_3006b32ac38a",
+      "subject": "Physics"
+    },
+    "timestamp": "2026-09-18T22:55:20.609752"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Friction Test 2",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "diag_friction_315783eaeacb",
+      "subject": "Physics"
+    },
+    "timestamp": "2026-09-18T22:55:23.375434"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Friction Test 3",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "diag_friction_56304327d3b7",
+      "subject": "Physics"
+    },
+    "timestamp": "2026-09-18T22:55:26.169373"
+  }
+]

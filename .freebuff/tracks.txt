@@ -1,0 +1,707 @@
+--- PAGE 1 ---
+The 4 Independent Tracks
+Developer Track Name Theme Main Deliverable
+Developer A Auth & Onboarding Track User management, VARK 
+Quiz, Brain Wheel, Digital 
+Twin
+Complete student 
+onboarding flow (Sign-up 
+→ Quiz → Brain Wheel 
+Dashboard)
+Developer B Lesson & Tutor Track Lesson delivery, Tutor 
+Chat, Accessibility, SEN 
+features
+Complete lesson player 
+with 4 modalities + Tutor 
+Chat + SEN 
+accommodations
+Developer C Assessment & Growth 
+Track
+Assessment engine, Two-
+Pass Grading, Stretch 
+Zone, Retention
+Complete assessment 
+system + Growth 
+Dashboard
+Developer D Teacher & Infrastructure 
+Track
+Teacher Dashboard, LMS 
+integration, DevOps, 
+Database
+Complete teacher tools + 
+production deployment
+
+--- PAGE 2 ---
+DEVELOPER A
+Auth & Onboarding Track
+Theme: User management, VARK Quiz, Brain Wheel, Digital Twin
+Frameworks: Next.js 14, Zustand, TanStack Query, Supabase Auth
+Track Overview
+Module Tasks Deliverable
+A1: Auth Module • Supabase Auth integration (email + 
+Google OAuth) • Login/Signup 
+screens • Role-based routing 
+(student/teacher) • Session 
+management
+Working auth system
+A2: VARK Quiz Module • 5 interactive puzzle cards with 4 
+pathways • Track interactions (first 
+click, hover, solving path) • Progress 
+indicator (1/5 → 5/5) • Submit results 
+to backend
+Complete VARK quiz
+A3: Brain Wheel Module • Recharts donut chart with 4 
+segments • Entrance animation 
+(Framer Motion pulse) • Center badge 
+(Bronze → Silver → Gold) • VARK 
+vector visualization
+Brain Wheel dashboard
+A4: Digital Twin Module • Profile creation with VARK + SEN 
+flags • Display user profile • Course 
+recommendations display • 
+Accessibility settings persistence
+Complete profile system
+Detailed Task List
+A1: Auth Module (Days 1–3)
+Day Task Description Deliverable
+1 Supabase Auth Setup Configure Supabase Auth 
+with email/password + 
+Google OAuth. Set up 
+session management.
+Auth configured
+1 Login Screen Login page with 
+email/password + Google 
+button. Error handling for 
+invalid credentials.
+Login working
+2 Sign-up Screen Sign-up with 
+email/password. Post-
+signup redirect to VARK 
+Quiz.
+Sign-up working
+2 Role-based Routing Redirect students to 
+dashboard, teachers to 
+roster. Protect routes with 
+middleware.
+RBAC working
+3 Session Management Zustand store for user 
+session. Handle token 
+refresh.
+Session stable
+3 Logout Logout button with 
+confirmation. Clear session 
+and redirect to login.
+Logout working
+A2: VARK Quiz Module (Days 4–5)
+Day Task Description Deliverable
+4 Quiz Layout Full-screen quiz with 5 
+steps. Each step shows 4 
+pathway cards (Visual, 
+Audio, Read/Write, 
+Kinesthetic).
+Quiz layout
+4 Interaction Tracking Track first click, hover 
+duration, final solving path 
+for each puzzle.
+Tracking working
+5 Progress Stepper Step indicator (1/5, 2/5, ...) 
+with animation.
+Progress visible
+5 Quiz Submission Send interaction data to 
+backend (POST 
+/api/v1/quiz/submit). 
+Navigate to dashboard on 
+success.
+Submission working
+A3: Brain Wheel Module (Days 6–7)
+Day Task Description Deliverable
+6 Brain Wheel Setup Recharts PieChart with 4 
+segments. Colors: Visual 
+(Blue), Auditory (Purple), 
+Read/Write (Green), 
+Kinesthetic (Orange).
+Brain Wheel
+6 Entrance Animation Framer Motion scale-up 
+animation (1.0 → 1.1 → 
+1.0) with pulse effect.
+Animation working
+7 Center Badge Center text: "VARK 4.0" + 
+dynamic badge 
+(Bronze/Silver/Gold).
+Badge working
+7 Slice Display Hover tooltips showing 
+percentage. Click to filter 
+courses by style.
+Interaction working
+A4: Digital Twin Module (Days 8–10)
+Day Task Description Deliverable
+8 Profile API Integration Fetch profile from GET 
+/api/v1/profile. Display 
+VARK scores + SEN flags.
+Profile loaded
+8 SEN Profile Display Show SEN flags (Dyslexia, 
+ADHD, ESL) with icons 
+and descriptions.
+SEN visible
+9 Course RecommendationsDisplay 3 recommended 
+courses with progress 
+bars.
+Recommendations
+9 Growth Path Display "Next milestone: +5% 
+Auditory" with progress 
+indicator.
+Growth visible
+10 Accessibility Settings Persistent settings: Font, 
+TTS, Zen Mode, White 
+Noise, Contrast.
+Settings saved
+
+--- PAGE 3 ---
+DEVELOPER B
+Lesson & Tutor Track
+Theme: Lesson delivery, Tutor Chat, Accessibility, SEN features
+Frameworks: Next.js 14, shadcn/ui, Framer Motion, Web Speech API, Vercel AI SDK
+Track Overview
+Module Tasks Deliverable
+B1: Lesson Player Module • Split screen (content + chat) • 4 
+Modality Tabs • Content renderer for 
+each modality • Kinesthetic widgets
+Complete lesson player
+B2: Tutor Chat Module • Persistent chat with streaming • 
+Quick action buttons • Keystroke 
+psychology • TTS integration
+Full Tutor Chat
+B3: Dyslexia Suite • OpenDyslexic font toggle • Line 
+Focus Mode • Bullet-Point 
+Reformatting • TTS controls
+Dyslexia accommodations
+B4: ADHD & ESL Suites • Micro-Quest Mode • XP Rain • Zen 
+Mode • White Noise • Bilingual Toggle 
+• Click-to-Define Glossary
+ADHD + ESL features
+Detailed Task List
+B1: Lesson Player Module (Days 1–3)
+Day Task Description Deliverable
+1 Lesson Player Layout Split screen: Content 70%, 
+Chat 30%. Top bar with 
+course title and progress.
+Layout complete
+1 Modality Tabs Visual, Audio, Read/Write, 
+Kinesthetic tabs. Active = 
+primary style. Inactive = 
+grayed with "+10 XP" 
+badge.
+Tabs working
+2 Visual Content RendererSVG/Mermaid diagrams, 
+infographics, charts.
+Visual working
+2 Audio Content RendererWaveform player with 
+Play/Pause, speed control 
+(0.5x–1.5x), transcript 
+toggle.
+Audio working
+3 Read/Write Content 
+Renderer
+Clean typography with 
+prose class, bolded 
+keywords, bullet points.
+Read/Write working
+3 Kinesthetic Content 
+Renderer
+Drag-drop sliders, sortable 
+lists, interactive graphs.
+Kinesthetic working
+B2: Tutor Chat Module (Days 4–6)
+Day Task Description Deliverable
+4 Chat UI Setup Messages list with user/bot 
+bubbles, typing indicator (3 
+dots animation).
+Chat UI
+4 Streaming Integration Vercel AI SDK useChat 
+hook for SSE streaming.
+Streaming working
+5 Quick Action Buttons "Give me a hint", "I'm 
+stuck", "Explain differently" 
+buttons.
+Quick actions
+5 Message History Persistent chat history 
+stored in Zustand.
+History working
+6 Keystroke Psychology Track backspaces, pauses 
+> 4 seconds. Send events 
+to backend.
+Tracking working
+6 TTS Integration "🔊 Listen" button on all 
+chat messages. Web 
+Speech API wrapper.
+TTS working
+B3: Dyslexia Suite (Days 7–8)
+Day Task Description Deliverable
+7 OpenDyslexic Font Toggle Global font toggle. Load 
+OpenDyslexic font from 
+public folder.
+Font toggle
+7 Line Focus Mode Reading ruler highlighting 
+one line at a time. 
+Keyboard/mouse 
+navigation.
+Line focus
+8 Bullet-Point ReformattingAuto-convert paragraphs to 
+lists and short sentences.
+Reformatter
+8 TTS Controls Play/Pause/Resume/Stop. 
+Speed control (0.5x–1.5x).
+TTS controls
+B4: ADHD & ESL Suites (Days 9–12)
+Day Task Description Deliverable
+9 Micro-Quest Mode Break lessons into 2–3 
+minute chunks with 
+countdown rings.
+Micro-quests
+9 XP Rain +5 XP burst animation after 
+every micro-step.
+XP rain
+10 Zen Mode Full-screen distraction-free 
+reading. Hide sidebar, 
+timer, chat.
+Zen Mode
+10 White Noise Toggle Background audio: rain, 
+coffee shop, white noise.
+White noise
+11 Bilingual Toggle Arabic/English side-by-side 
+translation.
+Bilingual
+11 Click-to-Define GlossaryUnderlined complex words 
+→ popup with definition, 
+image, pronunciation.
+Glossary
+12 Cultural Adaptation DisplayShow when idioms are 
+swapped (e.g., "baseball" 
+→ "cricket").
+Cultural display
+12 Sensory Load Indicator 🌿 icon showing current 
+stimulation level. Click to 
+reduce.
+Sensory indicator
+
+--- PAGE 4 ---
+DEVELOPER C
+Assessment & Growth Track
+Theme: Assessment engine, Two-Pass Grading, Stretch Zone, Retention
+Frameworks: FastAPI, LangGraph, Gemini API, Google Cloud Translation
+Track Overview
+Module Tasks Deliverable
+C1: Assessment Engine • Two-Pass Grading system • 
+Conceptual logic checker • Spelling-
+forgiving grading • Misconception 
+Bins
+Complete grading engine
+C2: Stretch Zone Module • Weakest style detection • Lenient 
+grading logic • Keyword matching • 
+Growth scoring
+Stretch Zone working
+C3: Digital Twin Update • VARK score recalculation • XP & 
+badge system • Spaced Repetition 
+Scheduler • Brain Wheel data 
+endpoint
+Profile update system
+C4: Retention Mechanics • Zeigarnik Hook • Endowed Progress 
+• Scheduled Surprises • Emotion 
+Check-In logic
+Retention system
+Detailed Task List
+C1: Assessment Engine (Days 1–3)
+Day Task Description Deliverable
+1 Assessment Endpoint POST 
+/api/v1/assess/submit. 
+Accepts question ID, 
+student answer, reasoning 
+steps.
+Endpoint created
+1 Pass 1: Correctness Rule-based checking for 
+numeric/string correctness.
+Correctness pass
+2 Pass 2: Conceptual LogicGemini prompt to evaluate 
+reasoning steps. Output: 
+"Mastery" / "Partial" / "Fail".
+Conceptual pass
+2 Spelling-Forgiving GradingIf Dyslexic flag is true → 
+ignore spelling errors in 
+Pass 1.
+SEN grading
+3 Misconception Bins Cluster wrong answers into 
+bins. Map errors to specific 
+misconceptions.
+Bins working
+3 Assessment Results Return scores + 
+misconception bin + 
+conceptual feedback.
+Results returned
+C2: Stretch Zone Module (Days 4–6)
+Day Task Description Deliverable
+4 Weakest Style DetectionQuery Digital Twin → 
+identify weakest VARK 
+style.
+Style detection
+4 Stretch Zone Generator Creator Agent generates 
+assessment in weakest 
+style (e.g., audio for 
+Kinesthetic-learner).
+Stretch content
+5 Lenient Grading Keyword matching for 
+audio/text assessments. 
+Check for key concepts, 
+not exact wording.
+Lenient grading
+5 Growth Scoring Score = 0–100 based on 
+keyword capture. 
+Threshold: 60% = "Great 
+Attempt".
+Growth score
+6 Stretch Zone Endpoint POST 
+/api/v1/assess/stretch. 
+Accepts answer, returns 
+growth score.
+Endpoint working
+6 Growth Feedback Return "Mastery: 95% 
+Growth: 70%" feedback.
+Feedback returned
+C3: Digital Twin Update (Days 7–9)
+Day Task Description Deliverable
+7 VARK Recalculation Update VARK scores 
+based on assessment 
+performance. Weighted 
+moving average.
+VARK update
+7 XP & Badge System XP earned per 
+assessment. Badge levels: 
+Bronze (0–500), Silver 
+(500–1000), Gold (1000+).
+XP system
+8 Spaced Repetition 
+Scheduler
+Calculate next review date 
+based on forgetting curve 
+(Ebbinghaus).
+Scheduler
+8 Brain Wheel Data GET 
+/api/v1/profile/brainwheel. 
+Return VARK scores for 
+chart.
+Brain Wheel data
+9 Profile Update EndpointPUT /api/v1/profile. Update 
+VARK, SEN flags, XP, 
+badges.
+Profile update
+C4: Retention Mechanics (Days 10–12)
+Day Task Description Deliverable
+10 Zeigarnik Hook Logout interception. 
+Generate "You are 2 
+questions away..." prompt.
+Hook logic
+10 Endowed Progress Courses start at 15% 
+completion. Calculate 
+based on VARK profile.
+Endowed progress
+11 Scheduled Surprises Random agent takeovers: 
+"Double XP!", "New TTS 
+voice!", "Cultural swap!".
+Surprise logic
+11 Emotion Check-In Store pre-session emotion 
+data. Adapt session based 
+on mood.
+Emotion logic
+12 Affirmation Bank Generate personalized 
+affirmations based on 
+progress + SEN profile.
+Affirmations
+12 Break Reminder After 15 minutes of 
+continuous work → popup: 
+"Take a 2-minute break?"
+Break reminder
+
+--- PAGE 5 ---
+DEVELOPER D
+Teacher & Infrastructure Track
+Theme: Teacher Dashboard, LMS integration, DevOps, Database
+Frameworks: Supabase, GitHub Actions, Vercel, Railway, Sentry
+Track Overview
+Module Tasks Deliverable
+D1: Teacher Dashboard • Class Roster • Student Profile View • 
+Submission Manager • Misconception 
+Bins (Teacher) • Export Reports
+Complete teacher tools
+D2: LMS Integration • Moodle REST API Client • LMS 
+Connect endpoint • LMS Sync 
+endpoint • Automatic Prioritization
+Moodle integration
+D3: Infrastructure • Supabase setup & migrations • RLS 
+policies • CORS & rate limiting • 
+CI/CD pipeline
+Production environment
+D4: Monitoring & Security • Sentry error tracking • LangSmith 
+agent tracing • LLM cost monitoring • 
+GDPR/COPPA compliance
+Monitoring & security
+Detailed Task List
+D1: Teacher Dashboard (Days 1–5)
+Day Task Description Deliverable
+1 Class Roster Endpoint GET /api/v1/teacher/roster. 
+Returns all students in 
+teacher's class with VARK, 
+SEN, progress, status.
+Endpoint
+1 Class Roster UI Sortable table: Name, 
+VARK badge, SEN flags, 
+Progress %, Status (🟢/
+🟡/🔴).
+Roster UI
+2 Student Profile EndpointGET 
+/api/v1/teacher/student/{id}. 
+Returns Brain Wheel, 
+submissions, AI scores, 
+teacher notes.
+Endpoint
+2 Student Profile UI Brain Wheel display, 
+submissions list, AI scores, 
+teacher notes text box.
+Profile UI
+3 Submission Manager List of assignments with AI-
+graded scores. Override 
+checkbox.
+Submission manager
+3 Grade Override EndpointPOST 
+/api/v1/teacher/override. 
+Updates grade in 
+database.
+Override endpoint
+4 Misconception Bins 
+(Teacher)
+Aggregated bins with 
+student lists. "Generate 
+Review PDF" button.
+Bins UI
+4 Review PDF GenerationCreator Agent generates 
+PDF. Download link 
+returned.
+PDF generation
+5 Export Progress Report CSV/PDF export for 
+parent-teacher 
+conferences.
+Export
+5 Teacher Settings Class management, LMS 
+sync configuration.
+Settings
+D2: LMS Integration (Days 6–8)
+Day Task Description Deliverable
+6 Moodle REST API Client core_course_get_enrolled_
+courses_by_timeline, 
+core_course_get_contents, 
+mod_assign_get_assignm
+ents, 
+gradereport_user_get_gra
+de_items.
+Moodle client
+6 LMS Connect Endpoint POST /api/v1/lms/connect. 
+Authenticate with Moodle 
+token.
+Connect endpoint
+7 LMS Sync Endpoint GET /api/v1/lms/sync. Pull 
+courses, assignments, 
+grades.
+Sync endpoint
+7 Data Normalization Map Moodle data to 
+Shaghoof's internal 
+schema (Course, 
+Assignment, Grade).
+Normalization
+8 Automatic Prioritization If exam in 3 days → 
+prioritize subject.
+Prioritization
+8 LMS Sync UI Connect button + sync 
+status + display synced 
+courses.
+UI
+D3: Infrastructure (Days 1–10 – Parallel)
+Day Task Description Deliverable
+1 Supabase Project SetupCreate dev, staging, 
+production projects. Enable 
+SSL.
+Supabase
+1 Database Schema Tables: users, profiles, 
+courses, lessons, 
+assessments, 
+submissions, 
+teacher_notes, lms_sync, 
+agent_checkpoints.
+Schema
+2 Migrations Alembic migrations for all 
+tables.
+Migrations
+2 Seed Data Demo course "Quadratic 
+Equations" with 4 modality 
+content.
+Seed data
+3 RLS Policies Row Level Security for 
+student/teacher role 
+separation.
+RLS
+3 Authentication Supabase Auth with 
+Google OAuth.
+Auth
+4 CI/CD Frontend GitHub Actions → Vercel 
+preview/production.
+FE pipeline
+4 CI/CD Backend GitHub Actions → Railway 
+staging/production.
+BE pipeline
+5 Vercel Deployment Deploy frontend to 
+production.
+FE live
+5 Railway Deployment Deploy backend to 
+production.
+BE live
+6 CORS Configuration Explicit origin allowlist for 
+security.
+CORS
+7 Rate Limiting slowapi with Redis. 100 
+requests/min limit.
+Rate limiting
+8 CDN Setup CloudFront/Cloudflare for 
+static assets.
+CDN
+9 Database Indexing Index foreign keys: 
+profiles.user_id, 
+submissions.lesson_id, 
+submissions.student_id.
+Indexes
+10 Environment Variables dev, staging, production 
+env files.
+Env config
+D4: Monitoring & Security (Days 11–15)
+Day Task Description Deliverable
+11 Sentry Error Tracking Frontend + backend error 
+tracking.
+Sentry
+11 LangSmith Agent Tracing Trace all LangGraph agent 
+calls.
+LangSmith
+12 LLM Cost Monitoring Track Gemini token usage 
+per user. Set per-run cost 
+caps.
+Cost tracking
+12 Performance MonitoringPrometheus + Grafana 
+metrics.
+Monitoring
+13 GDPR/COPPA Compliance Data deletion workflows, 
+consent logs, privacy 
+policy.
+Compliance
+13 Security Headers CSP, HSTS, X-Frame-
+Options.
+Headers
+14 Accessibility Audit WCAG 2.1 AA compliance 
+audit.
+Audit report
+14 Load Testing 50 concurrent users. Load test
+15 Production Deployment Final production 
+deployment with rollback 
+plan.
+Production
+15 Documentation API docs, deployment 
+guide, user manual.
+Documentation
+
+--- PAGE 6 ---
+Summary: What Each Developer Builds
+Developer Track Main Deliverable Total Tasks
+Developer A Auth & Onboarding Complete student 
+onboarding (Sign-up → 
+Quiz → Brain Wheel 
+Dashboard)
+~20 tasks
+Developer B Lesson & Tutor Complete lesson player + 
+Tutor Chat + SEN 
+accommodations
+~25 tasks
+Developer C Assessment & Growth Complete assessment 
+system + Stretch Zone + 
+Retention mechanics
+~20 tasks
+Developer D Teacher & InfrastructureComplete teacher tools + 
+LMS integration + 
+production deployment
+~25 tasks
+
+--- PAGE 7 ---
+Timeline Overview (15 Days)
+Day Developer A 
+(Onboarding)
+Developer B 
+(Lesson/Tutor)
+Developer C 
+(Assessment)
+Developer D 
+(Teacher/Infra)
+1 Auth Setup Lesson Layout Assessment 
+Endpoint
+Supabase Setup
+2 Login/Sign-up Modality Tabs Two-Pass Grading Schema + 
+Migrations
+3 Session/RBAC Content RenderersMisconception BinsRLS + Auth
+4 Quiz Layout Chat UI Weakest Style 
+Detection
+CI/CD Pipeline
+5 Quiz Submission Streaming 
+Integration
+Stretch Zone 
+Generator
+FE + BE 
+Deployment
+6 Brain Wheel Setup Keystroke 
+Psychology
+Lenient Grading CORS Configuration
+7 Brain Wheel 
+Animation
+Dyslexia Suite Growth Scoring Rate Limiting
+8 Profile Integration Line Focus Mode VARK RecalculationCDN Setup
+9 Course 
+Recommendations
+ADHD Suite XP & Badge SystemDatabase Indexing
+10 Accessibility 
+Settings
+ESL Suite Spaced Repetition Env Configuration
+11 — — Zeigarnik Hook Sentry + LangSmith
+12 — — Emotion Check-In LLM Cost Monitoring
+13 Integration Testing Integration Testing Integration Testing Security Audit
+14 Bug Fixes Bug Fixes Bug Fixes Load Testing
+15 Rehearsal Rehearsal Rehearsal Production 
+Deployment
+
+--- PAGE 8 ---
+Integration Points (Where Tracks Meet)
+Integration Point Developer A Developer B Developer C Developer D
+VARK Quiz → 
+Profile
+✅ Builds quiz — ✅ Receives data —
+Profile → Lesson ✅ Provides profile ✅ Fetches profile 
+for rendering
+— —
+Lesson → 
+Assessment
+— ✅ Displays 
+assessment
+✅ Provides 
+assessment
+—
+Assessment → 
+Profile Update
+✅ Displays updated 
+profile
+— ✅ Updates profile —
+Teacher Dashboard 
+→ Student Data
+— — ✅ Provides 
+assessment data
+✅ Builds dashboard
+LMS → Profile — — — ✅ Syncs data

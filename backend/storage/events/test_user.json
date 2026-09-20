@@ -1,0 +1,37 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user_ebaa7dd28353",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T19:53:10.662743"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Test",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user_1e24dc1b2950",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T21:09:21.568378"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis: Conversion of Light into Chemical Energy",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user_3c77e8ddba6d"
+    },
+    "timestamp": "2026-09-18T21:09:25.477729"
+  }
+]

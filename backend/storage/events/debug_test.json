@@ -1,0 +1,25 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Test Lesson: Photosynthesis",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "debug_test_f6c31d91858c",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T21:07:35.782722"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis: Conversion of Light into Chemical Energy",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "debug_test_187650b53124"
+    },
+    "timestamp": "2026-09-18T21:08:23.826524"
+  }
+]

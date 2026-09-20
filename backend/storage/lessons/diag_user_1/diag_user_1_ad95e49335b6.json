@@ -1,0 +1,138 @@
+{
+  "title": "Water Cycle Basics",
+  "summary": "This lesson explores how water moves above and below the Earth's surface through the continuous process of the water cycle. Students will examine the four main stages: evaporation, condensation, precipitation, and collection.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to the Water Cycle"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram on a light blue background displays arrows forming a circular loop above and below the Earth's surface. The arrows trace the continuous movement of water through different states."
+    },
+    {
+      "type": "subheading",
+      "text": "Evaporation and Condensation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A bright yellow sun at the top of the page sends heat rays down to liquid water, turning it into vapor. Higher up in the cool sky, that vapor transforms into fluffy white clouds."
+    },
+    {
+      "type": "subheading",
+      "text": "Precipitation and Collection"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Darkened clouds release blue droplets of rain and white flakes of snow falling back down to the ground. Below, the runoff gathers together into blue rivers, lakes, and oceans."
+    }
+  ],
+  "key_concepts": [
+    "Water cycle movement above and below the Earth surface",
+    "Evaporation using heat from the sun",
+    "Condensation forming clouds when vapor cools high in the sky",
+    "Precipitation returning water as rain or snow",
+    "Collection gathering runoff into rivers, lakes and oceans"
+  ],
+  "learning_objectives": [
+    "Describe how water moves above and below the Earth surface",
+    "Identify the four stages of the water cycle: evaporation, condensation, precipitation, and collection"
+  ],
+  "vocabulary": [
+    {
+      "term": "Evaporation",
+      "definition": "Turns liquid water into vapor using heat from the sun"
+    },
+    {
+      "term": "Condensation",
+      "definition": "Forms clouds when vapor cools high in the sky"
+    },
+    {
+      "term": "Precipitation",
+      "definition": "Returns water as rain or snow"
+    },
+    {
+      "term": "Collection",
+      "definition": "Gathers runoff into rivers, lakes and oceans"
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Evaporation",
+        "emoji": "🔎",
+        "definition": "Turns liquid water into vapor using heat from the sun"
+      },
+      {
+        "term": "Condensation",
+        "emoji": "🔎",
+        "definition": "Forms clouds when vapor cools high in the sky"
+      },
+      {
+        "term": "Precipitation",
+        "emoji": "🔎",
+        "definition": "Returns water as rain or snow"
+      },
+      {
+        "term": "Collection",
+        "emoji": "🔎",
+        "definition": "Gathers runoff into rivers, lakes and oceans"
+      },
+      {
+        "term": "Water cycle movement above and below the Earth surface",
+        "emoji": "💧",
+        "definition": ""
+      },
+      {
+        "term": "Evaporation using heat from the sun",
+        "emoji": "☀️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 49,
+  "subject": "Science",
+  "course_id": "Science",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "diag_user_1_ad95e49335b6",
+  "created_at": "2026-09-18T22:42:44.505100"
+}

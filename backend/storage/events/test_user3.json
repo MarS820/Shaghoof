@@ -1,0 +1,14 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Photosynthesis Basics",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "test_user3_96d1a93aaa33",
+      "subject": "Biology"
+    },
+    "timestamp": "2026-09-18T20:05:15.958386"
+  }
+]

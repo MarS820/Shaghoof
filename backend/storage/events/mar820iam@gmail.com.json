@@ -1,0 +1,26 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Build a Context-Aware Chat Assistant with Memory",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "mar820iam@gmail.com_767c122a7eb8",
+      "subject": "coding"
+    },
+    "timestamp": "2026-09-19T12:05:00.348362"
+  },
+  {
+    "event_type": "lesson_generated",
+    "topic": "Task 8: Build an Automated Generative AI Email Assistant with API Functions",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "mar820iam@gmail.com_23730c6e882e",
+      "subject": "code"
+    },
+    "timestamp": "2026-09-19T19:48:53.358897"
+  }
+]

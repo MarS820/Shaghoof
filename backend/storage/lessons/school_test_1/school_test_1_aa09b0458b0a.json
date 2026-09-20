@@ -1,0 +1,139 @@
+{
+  "title": "Water Cycle Basics",
+  "summary": "This lesson explores the water cycle and how water moves above and below the Earth's surface. Students will examine the four main stages: evaporation, condensation, precipitation, and collection.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to the Water Cycle"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A diagram displays the Earth's surface with blue arrows pointing above and below to show movement. The layout is split into upper sky regions and lower ground and water areas. I wonder...? What does the water cycle describe? Answer: The water cycle describes how water moves above and below the Earth surface."
+    },
+    {
+      "type": "heading",
+      "text": "Evaporation and Condensation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Bright yellow sun rays point down toward liquid water, showing heat turning the liquid into vapor. Higher up in the sky, the vapor cools to form visible white clouds. I wonder...? How do clouds form? Answer: Condensation forms clouds when vapor cools high in the sky."
+    },
+    {
+      "type": "heading",
+      "text": "Precipitation and Collection"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Rain and snow fall down from the clouds toward the ground, while runoff flows into rivers, lakes, and oceans. Blue arrows trace the water returning and gathering together. I wonder...? What gathers runoff into rivers, lakes and oceans? Answer: Collection gathers runoff into rivers, lakes and oceans."
+    }
+  ],
+  "key_concepts": [
+    "Water movement above and below the Earth surface",
+    "Evaporation using heat from the sun",
+    "Condensation forming clouds when vapor cools",
+    "Precipitation returning water as rain or snow",
+    "Collection gathering runoff into rivers, lakes and oceans"
+  ],
+  "learning_objectives": [
+    "Describe how water moves above and below the Earth surface",
+    "Identify the roles of evaporation, condensation, precipitation, and collection",
+    "Explain how heat from the sun and cooling vapor drive the cycle"
+  ],
+  "vocabulary": [
+    {
+      "term": "Evaporation",
+      "definition": "Turns liquid water into vapor using heat from the sun"
+    },
+    {
+      "term": "Condensation",
+      "definition": "Forms clouds when vapor cools high in the sky"
+    },
+    {
+      "term": "Precipitation",
+      "definition": "Returns water as rain or snow"
+    },
+    {
+      "term": "Collection",
+      "definition": "Gathers runoff into rivers, lakes and oceans"
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Evaporation",
+        "emoji": "🔎",
+        "definition": "Turns liquid water into vapor using heat from the sun"
+      },
+      {
+        "term": "Condensation",
+        "emoji": "🔎",
+        "definition": "Forms clouds when vapor cools high in the sky"
+      },
+      {
+        "term": "Precipitation",
+        "emoji": "🔎",
+        "definition": "Returns water as rain or snow"
+      },
+      {
+        "term": "Collection",
+        "emoji": "🔎",
+        "definition": "Gathers runoff into rivers, lakes and oceans"
+      },
+      {
+        "term": "Water movement above and below the Earth surface",
+        "emoji": "💧",
+        "definition": ""
+      },
+      {
+        "term": "Evaporation using heat from the sun",
+        "emoji": "☀️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 49,
+  "subject": "Science",
+  "course_id": "subj1",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "school_test_1_aa09b0458b0a",
+  "created_at": "2026-09-18T23:02:08.130586"
+}

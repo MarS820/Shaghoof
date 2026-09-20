@@ -1,0 +1,140 @@
+{
+  "title": "Test",
+  "summary": "This lesson explores photosynthesis, the essential process by which plants convert sunlight into energy. Students will examine how chlorophyll absorbs light, and how plants use carbon dioxide and water to produce glucose and oxygen.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Introduction to Photosynthesis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A bright green plant leaf is shown under warm sunlight, with glowing light rays touching its surface. The illustration clearly pictures the plant converting sunlight into energy.\nI wonder...?\nAnswer: Photosynthesis is the process by which plants convert sunlight into energy."
+    },
+    {
+      "type": "subheading",
+      "text": "The Role of Chlorophyll and Inputs"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A close-up diagram displays green pigment molecules absorbing bright yellow light rays. Nearby, arrows indicate carbon dioxide and water entering the plant structure.\nI wonder...?\nAnswer: Chlorophyll absorbs light energy, while plants use CO2 and water in the process."
+    },
+    {
+      "type": "subheading",
+      "text": "Outputs and Importance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: The diagram maps out the final products, showing sweet-looking glucose and oxygen molecules being released outward. The spatial layout highlights this vital cycle supporting life on Earth.\nI wonder...?\nAnswer: Plants produce glucose and oxygen, making this process essential for life on Earth."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Sunlight conversion to energy",
+    "Chlorophyll light absorption",
+    "Use of CO2 and water",
+    "Production of glucose and oxygen",
+    "Essential nature for life on Earth"
+  ],
+  "learning_objectives": [
+    "Explain how plants convert sunlight into energy through photosynthesis",
+    "Identify the role of chlorophyll in absorbing light energy",
+    "List the inputs (CO2 and water) and outputs (glucose and oxygen) of photosynthesis"
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "The process by which plants convert sunlight into energy"
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "The substance that absorbs light energy in plants"
+    },
+    {
+      "term": "Glucose",
+      "definition": "A product produced by plants using CO2 and water"
+    },
+    {
+      "term": "Oxygen",
+      "definition": "A product produced by plants during the process"
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "The process by which plants convert sunlight into energy"
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "The substance that absorbs light energy in plants"
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "A product produced by plants using CO2 and water"
+      },
+      {
+        "term": "Oxygen",
+        "emoji": "🔎",
+        "definition": "A product produced by plants during the process"
+      },
+      {
+        "term": "Sunlight conversion to energy",
+        "emoji": "☀️",
+        "definition": ""
+      },
+      {
+        "term": "Chlorophyll light absorption",
+        "emoji": "💡",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 33,
+  "subject": "Biology",
+  "course_id": "Biology",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "test_user_1e24dc1b2950",
+  "created_at": "2026-09-18T21:09:21.563343"
+}

@@ -1,0 +1,161 @@
+{
+  "title": "Photosynthesis: The Plant's Food-Making Process",
+  "summary": "Photosynthesis is the essential process by which green plants create their own food. This involves specific parts of the plant working together to capture sunlight, absorb water, and take in carbon dioxide. The end result is glucose for energy and the release of oxygen into the air.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "1. What is Photosynthesis?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Imagine a vibrant green plant soaking up sunshine in a garden. Tiny, invisible factories are at work inside its leaves, bustling with activity. I wonder...? What exactly is this amazing process happening inside green plants? Answer: Photosynthesis is the special way green plants make their own food to grow and thrive."
+    },
+    {
+      "type": "heading",
+      "text": "2. Gathering the Ingredients"
+    },
+    {
+      "type": "subheading",
+      "text": "Capturing Sunlight"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Picture a green leaf, flat and wide, acting like a solar panel. Inside its many cells, a special green substance called chlorophyll is eagerly waiting. I wonder...? How do plants harness the energy from the sun? Answer: Chlorophyll, located within the leaves, is responsible for capturing the sunlight's energy."
+    },
+    {
+      "type": "subheading",
+      "text": "Absorbing Water"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Look closely at the plant's roots, spreading out like a network of tiny straws in the soil. They are diligently seeking out moisture. I wonder...? Where does the plant get the water it needs for making food? Answer: The plant's roots are designed to absorb water directly from the surrounding soil."
+    },
+    {
+      "type": "subheading",
+      "text": "Taking in Carbon Dioxide"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Envision the underside of a leaf, dotted with countless microscopic openings, too small to see with the naked eye. These tiny mouths are constantly opening and closing. I wonder...? How does a plant breathe in the air it needs? Answer: Leaves take in carbon dioxide from the air through these small openings, which are called stomata."
+    },
+    {
+      "type": "heading",
+      "text": "3. The Sweet Outcome: Food and Fresh Air"
+    },
+    {
+      "type": "subheading",
+      "text": "Producing Glucose for Energy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: Inside the plant's food factory, all the captured sunlight, water, and carbon dioxide are mixed and transformed. A sweet, energy-rich substance is being created. I wonder...? What kind of food does the plant make for itself? Answer: The plant produces a sugar called glucose, which it uses as its primary source of energy."
+    },
+    {
+      "type": "subheading",
+      "text": "Releasing Oxygen"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: As the plant finishes making its food, another gas, essential for most living things, quietly floats away from the leaves. It's a clear, invisible substance enriching the atmosphere. I wonder...? What other important substance does the plant release into the air? Answer: Along with making glucose, the plant also releases oxygen as a byproduct into the surrounding air."
+    }
+  ],
+  "key_concepts": [
+    "Photosynthesis",
+    "Chlorophyll",
+    "Sunlight",
+    "Roots",
+    "Water",
+    "Carbon Dioxide",
+    "Stomata",
+    "Glucose",
+    "Oxygen"
+  ],
+  "learning_objectives": [
+    "Identify photosynthesis as the process by which green plants make food.",
+    "List the components (sunlight, water, carbon dioxide) used by plants for photosynthesis.",
+    "Describe what plants produce (glucose and oxygen) during photosynthesis."
+  ],
+  "vocabulary": [
+    {
+      "term": "Photosynthesis",
+      "definition": "How green plants make food."
+    },
+    {
+      "term": "Chlorophyll",
+      "definition": "A substance in leaves that captures sunlight."
+    },
+    {
+      "term": "Stomata",
+      "definition": "Tiny pores in leaves."
+    },
+    {
+      "term": "Glucose",
+      "definition": "What the plant produces for energy."
+    },
+    {
+      "term": "Oxygen",
+      "definition": "What the plant releases into the air."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Photosynthesis",
+        "emoji": "🔎",
+        "definition": "How green plants make food."
+      },
+      {
+        "term": "Chlorophyll",
+        "emoji": "🔎",
+        "definition": "A substance in leaves that captures sunlight."
+      },
+      {
+        "term": "Stomata",
+        "emoji": "🔎",
+        "definition": "Tiny pores in leaves."
+      },
+      {
+        "term": "Glucose",
+        "emoji": "🔎",
+        "definition": "What the plant produces for energy."
+      },
+      {
+        "term": "Oxygen",
+        "emoji": "🔎",
+        "definition": "What the plant releases into the air."
+      },
+      {
+        "term": "Sunlight",
+        "emoji": "☀️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    }
+  },
+  "source_type": "text",
+  "word_count": 40,
+  "session_id": "school_test_1_b0f5598524",
+  "created_at": "2026-09-18T17:43:28.906934"
+}

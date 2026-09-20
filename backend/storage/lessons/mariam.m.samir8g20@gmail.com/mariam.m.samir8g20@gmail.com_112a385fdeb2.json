@@ -1,0 +1,126 @@
+{
+  "title": "Task 6: Build a Context-Aware Chat Assistant with Memory",
+  "summary": "This lesson guides you through building a simple AI chat assistant that remembers previous messages and uses conversation history as context. You will learn how to maintain memory and build context so the AI can have a continuous conversation rather than responding independently.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Task Description and Objectives"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A developer's screen displays a simple AI chat assistant diagram showing conversation history flowing into a language model. The color scheme is a calm blue interface with glowing text blocks representing user messages and AI responses. I wonder...?: How do we make an AI remember previous messages instead of treating every prompt independently? Answer: We load an LLM using a Python library such as Hugging Face Transformers and store conversation history to send back as context."
+    },
+    {
+      "type": "subheading",
+      "text": "Required Features"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A flowchart diagram highlights three connected steps: loading a language model, maintaining conversation memory, and building context for each prompt. The boxes are arranged sequentially to show the continuous chat loop. I wonder...?: What specific features are required to build this system? Answer: The required features include loading a language model, maintaining conversation memory for user messages and AI responses, building context by combining previous history with new user questions, and running a continuous chat loop."
+    }
+  ],
+  "key_concepts": [
+    "Context-Aware Chat Assistant",
+    "Conversation History",
+    "Hugging Face Transformers",
+    "Continuous Chat Loop",
+    "Model Memory"
+  ],
+  "learning_objectives": [
+    "Load an LLM using a Python library such as Hugging Face Transformers",
+    "Build a chat loop where the user can ask multiple questions and store conversation history",
+    "Inject the previous conversation as context in each new prompt to observe how memory affects responses"
+  ],
+  "vocabulary": [
+    {
+      "term": "Language Model",
+      "definition": "An AI model loaded using a Python library like Hugging Face Transformers to generate responses."
+    },
+    {
+      "term": "Conversation Memory",
+      "definition": "Stored history of user messages and AI responses that allows the system to maintain a conversation."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Language Model",
+        "emoji": "🔎",
+        "definition": "An AI model loaded using a Python library like Hugging Face Transformers to generate responses."
+      },
+      {
+        "term": "Conversation Memory",
+        "emoji": "🔎",
+        "definition": "Stored history of user messages and AI responses that allows the system to maintain a conversation."
+      },
+      {
+        "term": "Context-Aware Chat Assistant",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Conversation History",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Hugging Face Transformers",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Continuous Chat Loop",
+        "emoji": "🔎",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "ai_generated": true,
+  "source_type": "pdf",
+  "filename": "Task 6 (Memory and context).pdf",
+  "pdf_session_id": "mariam.m.samir8g20@gmail.com_6dc54903ae",
+  "word_count": 245,
+  "subject": "coding",
+  "course_id": "1789759859887",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "mariam.m.samir8g20@gmail.com_112a385fdeb2",
+  "created_at": "2026-09-19T11:44:13.132464"
+}

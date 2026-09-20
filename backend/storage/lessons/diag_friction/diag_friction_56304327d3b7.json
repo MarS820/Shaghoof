@@ -1,0 +1,135 @@
+{
+  "title": "Friction Test 3",
+  "summary": "This lesson explores the physics of friction, a force between two surfaces touching each other that slows moving objects down. Students will learn how surface texture affects friction, how friction produces heat, and how oil reduces friction.",
+  "sections": [
+    {
+      "type": "heading",
+      "text": "Understanding Friction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A visual diagram shows two surfaces touching each other, with a moving object being slowed down by the force between them. I wonder...?: What is friction? Answer: Friction is a force between two surfaces touching each other that slows moving objects down."
+    },
+    {
+      "type": "subheading",
+      "text": "Surfaces and Heat"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A detailed illustration compares rough surfaces and smooth surfaces, highlighting where heat is produced. I wonder...?: How do different surfaces affect friction and what does it produce? Answer: Rough surfaces create more friction than smooth ones, and friction produces heat."
+    },
+    {
+      "type": "subheading",
+      "text": "Reducing Friction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scene: A close-up view of engine parts shows oil being applied between them to change how they interact. I wonder...?: What can reduce friction between engine parts? Answer: Oil reduces friction between engine parts."
+    }
+  ],
+  "key_concepts": [
+    "Friction",
+    "Surface interaction",
+    "Rough and smooth surfaces",
+    "Heat production",
+    "Oil reduction"
+  ],
+  "learning_objectives": [
+    "Define friction and explain how it affects moving objects.",
+    "Compare how rough and smooth surfaces create friction.",
+    "Identify how heat is produced and how oil reduces friction between engine parts."
+  ],
+  "vocabulary": [
+    {
+      "term": "Friction",
+      "definition": "A force between two surfaces touching each other that slows moving objects down."
+    },
+    {
+      "term": "Rough surfaces",
+      "definition": "Surfaces that create more friction than smooth ones."
+    },
+    {
+      "term": "Oil",
+      "definition": "A substance that reduces friction between engine parts."
+    }
+  ],
+  "presentation": {
+    "font_size": "normal",
+    "line_height": "normal",
+    "max_paragraph_words": 100,
+    "use_bullet_points": false,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": true,
+    "large_text": false,
+    "high_contrast": false
+  },
+  "vark_mode": "visual",
+  "sen_profile": "general",
+  "template_id": "T3",
+  "wordwall": {
+    "kind": "wordimage",
+    "title": "Picture Words",
+    "items": [
+      {
+        "term": "Friction",
+        "emoji": "🔎",
+        "definition": "A force between two surfaces touching each other that slows moving objects down."
+      },
+      {
+        "term": "Rough surfaces",
+        "emoji": "🔎",
+        "definition": "Surfaces that create more friction than smooth ones."
+      },
+      {
+        "term": "Oil",
+        "emoji": "🔎",
+        "definition": "A substance that reduces friction between engine parts."
+      },
+      {
+        "term": "Surface interaction",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Rough and smooth surfaces",
+        "emoji": "🔎",
+        "definition": ""
+      },
+      {
+        "term": "Heat production",
+        "emoji": "🌡️",
+        "definition": ""
+      }
+    ],
+    "template_id": "T3",
+    "game": {
+      "en": "Picture Words",
+      "ar": "كلمات بالصور"
+    },
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "text",
+  "word_count": 32,
+  "subject": "Physics",
+  "course_id": "Physics",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "diag_friction_56304327d3b7",
+  "created_at": "2026-09-18T22:55:26.136159"
+}
