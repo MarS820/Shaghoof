@@ -30,9 +30,10 @@ const CORE_TABS = [
   { path: '/stretch', label: 'Stretch Zone', ar: 'منطقة التحدي', icon: '🧗' },
 ]
 
+// Teachers configure account prefs inside the Teacher Panel (settings tab);
+// the student /settings page is guarded to students only.
 const TEACHER_TABS = [
   { path: '/teacher', label: 'Teacher Panel', ar: 'لوحة المعلم', icon: '👥' },
-  { path: '/settings', label: 'Settings', ar: 'إعدادات', icon: '⚙️' },
 ]
 
 const MOBILE_TABS = [
@@ -67,7 +68,9 @@ export default function Navbar() {
   // the backend leaves an unfinished micro-goal the student wants to finish.
   const handleLogout = async () => {
     let hookMessage = null
-    if (user && user.id) {
+    // Zeigarnik hook is a student retention mechanic — teachers must not hit
+    // the student store via logoutHook (it would ensure() a teacher twin).
+    if (user && user.id && user.role !== 'teacher') {
       try {
         const res = await api.logoutHook({ user_id: user.id, questions_answered: 0, total: 5 })
         hookMessage = res?.message || res?.text || null

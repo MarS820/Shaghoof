@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useApp } from './context/AppContext'
 import Navbar from './components/Navbar'
+import ProtectedRoute, { GuestOnly } from './components/ProtectedRoute'
 import XPRain from './components/XPRain'
 import RetentionLayer from './components/RetentionLayer'
 import BreakPage, { useBreakTimer } from './components/BreakPage'
@@ -69,19 +70,19 @@ function App() {
       <main className="min-h-[calc(100vh-4.2rem)] pb-16 md:pb-0 px-4 py-6 sm:px-6 lg:px-8">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
           <Route path="/register" element={<Register />} />
           <Route path="/vark-quiz" element={<VarkQuiz />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<ProtectedRoute role="student"><Dashboard /></ProtectedRoute>} />
           <Route path="/lessons" element={<LessonHub />} />
           <Route path="/tutor" element={<LessonTutor />} />
           <Route path="/exam" element={<Exam />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/stretch" element={<StretchZone />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<ProtectedRoute role="student"><Settings /></ProtectedRoute>} />
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/moodle" element={<MoodleConnect />} />
-          <Route path="/teacher" element={<Teacher />} />
+          <Route path="/teacher" element={<ProtectedRoute role="teacher"><Teacher /></ProtectedRoute>} />
         </Routes>
       </main>
       {user && user.role !== 'teacher' && <XPRain />}

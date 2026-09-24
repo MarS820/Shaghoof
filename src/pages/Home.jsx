@@ -35,8 +35,11 @@ export default function Home() {
         />
         <div className="home-hero-cta-wrap animate-fade-in-up">
           {user ? (
-            <Link to="/dashboard" className="home-hero-cta">
-              {arabic ? 'اذهب إلى لوحتك' : 'Go to your Dashboard'} <span aria-hidden="true">→</span>
+            <Link to={user.role === 'teacher' ? '/teacher' : '/dashboard'} className="home-hero-cta">
+              {user.role === 'teacher'
+                ? (arabic ? 'اذهب إلى لوحة المعلم' : 'Go to your Teacher Panel')
+                : (arabic ? 'اذهب إلى لوحتك' : 'Go to your Dashboard')}{' '}
+              <span aria-hidden="true">→</span>
             </Link>
           ) : (
             <Link to="/register" className="home-hero-cta">

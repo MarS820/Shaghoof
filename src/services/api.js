@@ -1,4 +1,7 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+// Same-origin in production builds (VITE_API_URL="" or unset → API_BASE=""),
+// localhost in dev. `??` is required: an empty string is intentional, not
+// missing, so `||` would wrongly fall back to localhost and break deploys.
+export const API_BASE = import.meta.env.VITE_API_URL ?? (import.meta.env.PROD ? '' : 'http://localhost:8080')
 
 async function request(path, { method = 'GET', body, params, isFormData } = {}) {
   let url = `${API_BASE}${path}`

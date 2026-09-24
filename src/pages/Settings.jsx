@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { useApp } from '../context/AppContext'
-import api from '../services/api'
+import api, { API_BASE } from '../services/api'
 import Mascot from '../components/Mascot'
 
 const VARK_OPTIONS = [
@@ -105,7 +105,7 @@ export default function Settings() {
       } else if (uploadType === 'pdf' && uploadFile) {
         const fd = new FormData()
         fd.append('file', uploadFile)
-        const upRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/pdf/upload?user_id=${user.id}`, { method: 'POST', body: fd })
+        const upRes = await fetch(`${API_BASE}/pdf/upload?user_id=${user.id}`, { method: 'POST', body: fd })
         if (!upRes.ok) throw new Error('Upload failed')
         const upData = await upRes.json()
         setSources((prev) => [...prev, { id: Date.now().toString(), type: 'pdf', name: uploadFile.name, subject: '', wordCount: 0, sessionId: upData.session_id }])
@@ -126,7 +126,6 @@ export default function Settings() {
       moodleToken,
     }
     updateUser(profile)
-    localStorage.setItem('shaghoof_user', JSON.stringify({ ...user, ...profile }))
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
     // Persist the student's subjects + sources so quizzes, lessons, and the

@@ -1,0 +1,19 @@
+# Never bake local state/secrets into the image
+.git
+.env
+.env.*
+backend/.env
+backend/.env.*
+backend/data/
+backend/storage/
+*.db
+*.db-journal
+
+# Build inputs that stage 1 regenerates + heavy/irrelevant dirs
+node_modules
+dist
+SHAGHOOF-AI/
+.freebuff/
+scripts/
+*.pptx
+*.docx

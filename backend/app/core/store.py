@@ -11,6 +11,8 @@ import time
 from pathlib import Path
 from datetime import datetime
 
+from fastapi import HTTPException
+
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -83,6 +85,7 @@ def _path(user_id):
 
 
 def load(user_id):
+    reject_teacher_id(user_id)
     p = _path(user_id)
     if not p.exists():
         return None
@@ -102,7 +105,21 @@ def load(user_id):
         return None
 
 
+def is_teacher_id(user_id) -> bool:
+    return str(user_id or "").startswith("teacher-")
+
+
+def reject_teacher_id(user_id):
+    """Teacher accounts live in SQL; they must never touch the student twin store."""
+    if is_teacher_id(user_id):
+        raise HTTPException(
+            status_code=403,
+            detail="Teacher accounts do not use the student store",
+        )
+
+
 def ensure(user_id, defaults=None):
+    reject_teacher_id(user_id)
     with _lock:
         twin = load(user_id)
         if twin is None:
@@ -126,6 +143,7 @@ def ensure(user_id, defaults=None):
 
 
 def save(user_id, twin):
+    reject_teacher_id(user_id)
     struct = json.dumps(twin, ensure_ascii=False, indent=2)
     target = _path(user_id)
     # Unique temp name per process/thread so parallel workers never share
@@ -171,6 +189,7 @@ def save(user_id, twin):
 
 
 def update(user_id, patch):
+    reject_teacher_id(user_id)
     with _lock:
         twin = ensure(user_id)
         twin.update(patch)
@@ -192,6 +211,10 @@ def find_by_email(email):
             try:
                 with open(path, "r", encoding="utf-8") as f:
                     record = json.load(f)
+                # Ignore polluted teacher twins left by the old fall-through;
+                # teachers authenticate against SQL, not this store.
+                if is_teacher_id(record.get("user_id")):
+                    continue
                 if (record.get("email") or "").strip().lower() == needle:
                     return record
             except (OSError, json.JSONDecodeError):

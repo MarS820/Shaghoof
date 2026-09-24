@@ -1,0 +1,29 @@
+app = 'shaghoof-api'
+primary_region = 'iad'
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  FRONTEND_DIST = "/app/dist"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+
+[checks]
+  [checks.health]
+    port = 8000
+    type = 'http'
+    interval = '10s'
+    timeout = '5s'
+    path = '/api/v1/health'
+
+# pandas/numpy load at import time; Fly's 256MB default OOMs.
+[[vm]]
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512

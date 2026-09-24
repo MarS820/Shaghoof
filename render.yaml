@@ -1,0 +1,17 @@
+# Render Blueprint — one-click setup: Render Dashboard → New → Blueprint →
+# pick this repo. Free plan, Docker build, same-origin SPA + API.
+services:
+  - type: web
+    name: shaghoof-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      # Fill these in the Environment tab after creation (same values as
+      # backend/.env on your machine — never commit them).
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false

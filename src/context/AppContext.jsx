@@ -210,7 +210,16 @@ export function AppProvider({ children }) {
   const updateUser = (patch) => {
     setUser((current) => {
       if (!current) return current
-      const updated = { ...current, ...patch, id: patch.id || patch.user_id || current.id }
+      const isTeacher = current.role === 'teacher' || String(current.id || '').startsWith('teacher-')
+      const updated = { ...current, ...patch }
+      if (isTeacher) {
+        // A student-store patch must never demote a teacher session or
+        // overwrite the SQL teacher id with a twin/email-derived id.
+        updated.role = 'teacher'
+        updated.id = current.id
+      } else {
+        updated.id = patch.id || patch.user_id || current.id
+      }
       localStorage.setItem('shaghoof_user', JSON.stringify(updated))
       return updated
     })

@@ -398,20 +398,21 @@ def get_profile(user_id: str):
         db = SessionLocal()
         try:
             teacher = db.get(TeacherUser, user_id)
-            if teacher:
-                pub = public_user(teacher)
-                return {
-                    "user_id": pub["id"],
-                    "id": pub["id"],
-                    "role": "teacher",
-                    "name": pub["name"],
-                    "email": pub["email"],
-                    "grade": None,
-                    "subjects": [],
-                    "data_sources": [],
-                    "enrolled_classes": [],
-                    "onboarding_complete": True,
-                }
+            if not teacher:
+                raise HTTPException(status_code=404, detail="Teacher account not found")
+            pub = public_user(teacher)
+            return {
+                "user_id": pub["id"],
+                "id": pub["id"],
+                "role": "teacher",
+                "name": pub["name"],
+                "email": pub["email"],
+                "grade": None,
+                "subjects": [],
+                "data_sources": [],
+                "enrolled_classes": [],
+                "onboarding_complete": True,
+            }
         finally:
             db.close()
 
