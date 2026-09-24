@@ -1,8 +1,9 @@
 from __future__ import annotations
 import re
 import io
+import os
 import hashlib
-from typing import Any
+from typing import Any, Optional
 
 
 class ChampionshipService:
@@ -53,7 +54,8 @@ class ChampionshipService:
     @staticmethod
     async def synthesize_speech(
         text: str, speaker: str = "host1", language: str = "ar",
-        dialect: bool = True, speed: float = 1.0, engine: str = "azure",
+        dialect: bool = True, speed: float = 1.0, engine: str = "elevenlabs",
+        api_key: Optional[str] = None,
     ) -> bytes:
         is_ar = language == "ar"
         cleaned = ChampionshipService.clean_text_for_speech(text, is_arabic=is_ar)
@@ -62,7 +64,39 @@ class ChampionshipService:
             return ChampionshipService._audio_cache[cache_key]
 
         audio = b""
-        if engine == "azure":
+
+        # 1. Flagship: ElevenLabs Multilingual v2 (from SHAGHOOF-AI-main)
+        if engine == "elevenlabs":
+            effective_key = api_key or os.getenv("ELEVENLABS_API_KEY", "")
+            if effective_key:
+                try:
+                    import httpx
+                    # Adam for Dr. Yusuf (host1), Bella for Mariam (host2)
+                    voice_id = "pNInz6obpgDQGcFmaJgB" if speaker == "host1" else "EXAVITQu4vr4xnSDxMaL"
+                    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+                    headers = {"xi-api-key": effective_key, "Content-Type": "application/json"}
+                    raw_clean = ChampionshipService.clean_text_for_speech(text, is_arabic=False)
+                    payload = {
+                        "text": raw_clean,
+                        "model_id": "eleven_multilingual_v2",
+                        "voice_settings": {"stability": 0.5, "similarity_boost": 0.8, "style": 0.3},
+                    }
+                    if speed and abs(speed - 1.0) > 0.01:
+                        payload["voice_settings"]["speed"] = max(0.5, min(2.0, speed))
+                    async with httpx.AsyncClient(timeout=25.0) as client:
+                        resp = await client.post(url, json=payload, headers=headers)
+                        if resp.status_code == 200 and resp.content:
+                            audio = resp.content
+                            print(f"[TTS] ElevenLabs multilingual_v2 success: {len(audio)} bytes ({voice_id})")
+                        else:
+                            print(f"[TTS] ElevenLabs notice ({resp.status_code}): {resp.text[:120]}, falling back to Azure")
+                except Exception as el_err:
+                    print(f"[TTS] ElevenLabs error: {el_err}, falling back to Azure")
+            else:
+                print("[TTS] ElevenLabs key not provided, falling back to Azure")
+
+        # 2. Azure Neural (edge-tts) — also the automatic fallback
+        if not audio and engine in ("elevenlabs", "azure"):
             try:
                 import edge_tts
                 if is_ar:
@@ -77,9 +111,11 @@ class ChampionshipService:
                     if chunk["type"] == "audio":
                         data += chunk["data"]
                 audio = data
-            except Exception:
+            except Exception as azure_err:
+                print(f"[TTS] Azure Neural failed: {azure_err}, falling back to Google")
                 engine = "google"
 
+        # 3. Google gTTS final fallback
         if not audio or engine == "google":
             try:
                 from gtts import gTTS
@@ -89,8 +125,8 @@ class ChampionshipService:
                 fp = io.BytesIO()
                 tts.write_to_fp(fp)
                 audio = fp.getvalue()
-            except Exception:
-                pass
+            except Exception as gtts_err:
+                print(f"[TTS] Google TTS failed: {gtts_err}")
 
         if audio:
             ChampionshipService._audio_cache[cache_key] = audio

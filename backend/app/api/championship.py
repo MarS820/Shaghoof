@@ -1,7 +1,8 @@
 """Championship & Academic Rigor Suite — Podcast, TTS, Feynman, Knowledge Graph, RAG Benchmark."""
 
-from fastapi import APIRouter, HTTPException, Query, Response
+from fastapi import APIRouter, HTTPException, Query, Request, Response
 from pydantic import BaseModel, Field
+from typing import Optional
 from ..services.championship import ChampionshipService
 from ..core.security import limiter
 
@@ -21,7 +22,8 @@ class TTSRequest(BaseModel):
     language: str = Field("ar", example="ar")
     dialect: bool = Field(True, example=True)
     speed: float = Field(1.0, example=1.0)
-    engine: str = Field("azure", example="azure")
+    engine: str = Field("elevenlabs", example="elevenlabs")
+    api_key: Optional[str] = Field(None, description="Optional ElevenLabs xi-api-key")
 
 
 class FeynmanRequest(BaseModel):
@@ -32,7 +34,7 @@ class FeynmanRequest(BaseModel):
 
 @router.post("/podcast/generate")
 @limiter.limit("10/minute")
-def generate_podcast(request, req: PodcastRequest):
+def generate_podcast(request: Request, req: PodcastRequest):
     """Generate NotebookLM-style two-speaker conversational podcast overview."""
     try:
         return ChampionshipService.generate_podcast(
@@ -44,23 +46,26 @@ def generate_podcast(request, req: PodcastRequest):
 
 @router.post("/podcast/tts")
 @limiter.limit("20/minute")
-async def synthesize_podcast_audio(request, req: TTSRequest):
-    """Synthesize high-fidelity audio using unified neural voices (Azure or Google TTS)."""
+async def synthesize_podcast_audio(request: Request, req: TTSRequest):
+    """Synthesize high-fidelity audio via ElevenLabs Multilingual v2 (Azure/Google fallback)."""
     try:
         audio_bytes = await ChampionshipService.synthesize_speech(
             text=req.text, speaker=req.speaker, language=req.language,
             dialect=req.dialect, speed=req.speed, engine=req.engine,
+            api_key=req.api_key,
         )
         if not audio_bytes:
             raise HTTPException(status_code=500, detail="Audio synthesis produced empty stream")
         return Response(content=audio_bytes, media_type="audio/mpeg")
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"TTS synthesis error: {e}")
 
 
 @router.get("/rag/benchmark")
 @limiter.limit("30/minute")
-def get_rag_benchmark(request):
+def get_rag_benchmark(request: Request):
     """Returns quantitative RAG Triad & Ragas standard scientific benchmark metrics."""
     try:
         return ChampionshipService.get_rag_benchmark()
@@ -70,7 +75,7 @@ def get_rag_benchmark(request):
 
 @router.post("/feynman/evaluate")
 @limiter.limit("10/minute")
-def evaluate_feynman(request, req: FeynmanRequest):
+def evaluate_feynman(request: Request, req: FeynmanRequest):
     """Evaluates student's plain-language explanation (Reverse Feynman Challenge)."""
     try:
         return ChampionshipService.evaluate_feynman(
@@ -82,7 +87,7 @@ def evaluate_feynman(request, req: FeynmanRequest):
 
 @router.get("/graph/concepts")
 @limiter.limit("30/minute")
-def get_concept_graph(request, course_id: str = Query("default")):
+def get_concept_graph(request: Request, course_id: str = Query("default")):
     """Returns nodes and edges for 3D/Force-directed Knowledge Graph visualization."""
     try:
         return ChampionshipService.get_knowledge_graph(course_id=course_id)

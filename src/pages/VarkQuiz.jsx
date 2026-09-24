@@ -4,9 +4,10 @@ import { useApp } from '../context/AppContext'
 import LearnerQuestionnaire from '../components/LearnerQuestionnaire'
 import api from '../services/api'
 import { emptySenAnswers, scoreLearnerScreen, VARK_ITEMS } from '../utils/learnerScreening'
+import { deriveId } from '../context/AppContext'
 
 export default function VarkQuiz() {
-  const { user, lang, updateUser } = useApp()
+  const { user, lang, login, updateUser } = useApp()
   const navigate = useNavigate()
   const arabic = lang === 'ar'
   const [phase, setPhase] = useState('sen')
@@ -19,13 +20,18 @@ export default function VarkQuiz() {
   if (user.role === 'teacher') return <Navigate to="/teacher" replace />
   if (user.onboarding_complete) return <Navigate to="/dashboard" replace />
 
+  // Guarantees a usable user id before the backend round-trip, so the quiz
+  // submission (and the post-quiz saved-progress load) never fail on a missing
+  // identifier.
+  const safeUserId = user.id || deriveId(user.email || '', user.name || '')
+
   const submit = async (choices) => {
     setBusy(true)
     setError('')
     try {
       const screening = scoreLearnerScreen(senAnswers, choices)
       const result = await api.submitVarkQuiz({
-        user_id: user.id,
+        user_id: safeUserId,
         sen_flags: screening.flags,
         sen_scores: screening.scores,
         sen_profile: screening.profile,
@@ -34,9 +40,10 @@ export default function VarkQuiz() {
         sen_answers: senAnswers,
       })
       const prof = result?.profile || {}
+      // Merge the backend profile into the app and persist it to localStorage.
+      login({ ...prof, id: prof.user_id || safeUserId, role: prof.role || 'student' })
       updateUser({
-        ...prof,
-        id: prof.user_id || user.id,
+        id: prof.user_id || safeUserId,
         onboarding_complete: true,
         conditions: prof.sen_flags || screening.flags,
         sen_flags: prof.sen_flags || screening.flags,

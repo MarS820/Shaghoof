@@ -148,14 +148,21 @@ class QuizGenerateRequest(BaseModel):
     ground_in_lessons: bool = Field(default=False, description="Ground every question in the student's own lesson material")
     vark_mode: str | None = Field(default=None, description="Override: visual, auditory, reading, kinesthetic")
     sen_profile: str | None = Field(default=None, description="Override: general, text, focus, structure")
+    question_types: list[str] | None = Field(
+        default=None,
+        description="Allowed types: mcq, true_false, fill_blank, short_answer. Defaults by template.",
+    )
 
 
 class QuizQuestionOut(BaseModel):
     question: str
-    options: list[str]
-    correct: int
-    difficulty: str
-    explanation: str
+    type: str = Field(default="mcq", description="mcq | true_false | fill_blank | short_answer")
+    options: list[str] = Field(default_factory=list)
+    correct: int | None = Field(default=None, description="MCQ correct index (0-based)")
+    correct_answer: str | None = Field(default=None, description="Canonical answer for non-MCQ types")
+    accepted_answers: list[str] = Field(default_factory=list, description="Accepted fill/short answers")
+    difficulty: str = "Medium"
+    explanation: str = ""
 
 
 class QuizAdaptationOut(BaseModel):
@@ -246,7 +253,8 @@ class TTSRequest(BaseModel):
     language: str = Field(default="ar")
     dialect: bool = Field(default=True)
     speed: float = Field(default=1.0, ge=0.5, le=2.0)
-    engine: str = Field(default="azure", pattern="^(azure|google)$")
+    engine: str = Field(default="elevenlabs", pattern="^(elevenlabs|azure|google)$")
+    api_key: Optional[str] = Field(default=None, description="Optional ElevenLabs xi-api-key")
 
 
 # ── Feynman Evaluator ───────────────────────────────────────────────────────

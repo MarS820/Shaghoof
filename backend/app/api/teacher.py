@@ -14,15 +14,15 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
+from ..core.database import get_db, SessionLocal
 from ..models import (
     Assessment, AuditLog, Classroom, InterventionTask, Notification,
     StudentEnrollment, Submission, TeacherClassAssignment, TeacherNote,
     TeacherSetting, TeacherUser,
 )
 from ..schemas import (
-    AssessmentCreateIn, AssessmentUpdateIn, ClassCreateIn, GradeOverrideIn,
-    InterventionCreateIn, InterventionUpdateIn, StudentCreateIn,
+    AssessmentCreateIn, AssessmentUpdateIn, ClassCreateIn, EnrollmentUpdateIn,
+    GradeOverrideIn, InterventionCreateIn, InterventionUpdateIn, StudentCreateIn,
     SubmissionCreateIn, TeacherLoginIn, TeacherNoteIn, TeacherRegisterIn,
     TeacherSettingsIn,
 )
@@ -155,7 +155,79 @@ def create_teacher_class(
     ))
     audit(db, teacher.id, "class_created", "class", str(item.id), {"name": item.name, "grade": item.grade})
     db.commit()
+    _auto_enroll_existing_students(item.id, item.grade)
     return {"id": item.id, "name": item.name, "grade": item.grade, "join_code": item.join_code}
+
+
+def _auto_enroll_existing_students(class_id: int, grade: str):
+    """Enroll all existing students of the same grade into the newly created class."""
+    db2 = SessionLocal()
+    try:
+        stmt = select(Classroom).where(Classroom.grade == grade)
+        classes = db2.execute(stmt).scalars().all()
+        grade_class_ids = {c.id for c in classes}
+
+        stmt2 = select(StudentEnrollment).where(
+            StudentEnrollment.class_id.in_(grade_class_ids),
+            StudentEnrollment.enrollment_status == "active",
+        )
+        existing_enrollments = db2.execute(stmt2).scalars().all()
+
+        stmt_check = select(StudentEnrollment).where(
+            StudentEnrollment.class_id == class_id,
+            StudentEnrollment.enrollment_status == "active",
+        )
+        already_in_class = {e.student_id for e in db2.execute(stmt_check).scalars().all()}
+
+        stmt3 = select(Classroom).where(Classroom.id == class_id)
+        target_class = db2.execute(stmt3).scalar_one_or_none()
+        if not target_class:
+            return
+
+        # Dedupe by student_id — the same student appears once per class they
+        # are already in; inserting them twice trips UNIQUE(class_id, student_id)
+        # and the rollback would discard the entire batch.
+        seen: set[str] = set()
+        enrolled_ids: list[str] = []
+        for e in existing_enrollments:
+            if e.student_id in already_in_class or e.student_id in seen:
+                continue
+            seen.add(e.student_id)
+            enrollment = StudentEnrollment(
+                class_id=class_id,
+                student_id=e.student_id,
+                student_name=e.student_name,
+                student_email=e.student_email,
+                progress=0,
+                status="green",
+            )
+            db2.add(enrollment)
+            enrolled_ids.append(e.student_id)
+
+        db2.commit()
+    except Exception:
+        import logging
+        logging.getLogger(__name__).exception("Auto-enroll into new class %d failed", class_id)
+        db2.rollback()
+        enrolled_ids = []
+    finally:
+        db2.close()
+
+    # Mirror into JSON twins so the student's Profile "My Classes" matches SQL.
+    if enrolled_ids:
+        try:
+            from ..core import store as twin_store
+            for sid in enrolled_ids:
+                twin = twin_store.load(sid) or {}
+                merged = set(twin.get("enrolled_classes") or [])
+                if class_id not in merged:
+                    merged.add(class_id)
+                    twin_store.update(sid, {"enrolled_classes": sorted(merged)})
+        except Exception:
+            import logging
+            logging.getLogger(__name__).exception(
+                "Twin enrolled_classes sync failed for new class %d", class_id
+            )
 
 
 @router.get("/roster")
@@ -300,6 +372,38 @@ def create_student_for_class(
         badge=payload.badge,
     )
     db.add(enrollment)
+    # Create a login-capable twin so the student can sign in with the password
+    # the teacher set (otherwise the email has no password_hash and login 401s).
+    if payload.password:
+        from ..core import store as twin_store
+        twin_store.ensure(
+            student_id,
+            defaults={
+                "name": payload.name.strip(),
+                "email": email,
+                "role": "student",
+                "grade": db.get(Classroom, class_id).grade if db.get(Classroom, class_id) else "5th",
+                "password_hash": _hash_password(payload.password),
+            },
+        )
+    # Link the class in the twin's enrolled_classes (create twin if needed) so
+    # the student sees it — not only when a password was supplied.
+    from ..core import store as twin_store
+    if not twin_store.load(student_id):
+        cls = db.get(Classroom, class_id)
+        twin_store.ensure(
+            student_id,
+            defaults={
+                "name": payload.name.strip(),
+                "email": email,
+                "role": "student",
+                "grade": cls.grade if cls else "5th",
+            },
+        )
+    twin = twin_store.load(student_id) or {}
+    enrolled = set(twin.get("enrolled_classes") or [])
+    enrolled.add(class_id)
+    twin_store.update(student_id, {"enrolled_classes": sorted(enrolled)})
     audit(db, teacher.id, "student_enrolled", "student", student_id, {"class_id": class_id})
     db.commit()
     return {"student_id": student_id, "ok": True}
@@ -340,14 +444,27 @@ def student_profile(
         .where(Submission.student_id == student_id, Assessment.class_id == class_id)
         .order_by(Submission.submitted_at.desc())
     ).all()
+    # Pull twin-side exam history + live XP so practice quizzes show on the roster.
+    exam_history = []
+    twin_xp = enrollment.xp
+    twin_badge = enrollment.badge
+    try:
+        from ..core import store as twin_store
+        twin = twin_store.load(student_id) or {}
+        exam_history = (twin.get("exam_history") or [])[-15:]
+        twin_xp = int(twin.get("xp", enrollment.xp or 0) or 0)
+        twin_badge = twin.get("badge") or enrollment.badge or "Bronze"
+    except Exception:
+        pass
     return {
         "student": {"id": enrollment.student_id, "name": enrollment.student_name, "email": enrollment.student_email},
         "class_id": class_id,
         "progress": enrollment.progress,
         "status": enrollment.status,
-        "xp": enrollment.xp,
-        "badge": enrollment.badge,
+        "xp": twin_xp,
+        "badge": twin_badge,
         "academic_risk": student_academic_risk(db, student_id, class_id, enrollment),
+        "exam_history": exam_history,
         "submissions": [{
             "id": s.id,
             "assessment_id": s.assessment_id,

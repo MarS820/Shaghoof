@@ -4,7 +4,7 @@ import api from '../services/api'
 /**
  * PodcastGeneratorModal — NotebookLM-style two-speaker podcast generator.
  * Generates conversational dialogue, plays TTS audio with dual speakers.
- * Supports Arabic (Egyptian/MSA) and English.
+ * Voice engine: ElevenLabs Multilingual v2 (default) → Azure → Google.
  */
 export default function PodcastGeneratorModal({ open, onClose, lang = 'en', onXp }) {
   const [topic, setTopic] = useState('')
@@ -14,6 +14,8 @@ export default function PodcastGeneratorModal({ open, onClose, lang = 'en', onXp
   const [playing, setPlaying] = useState(false)
   const [currentLine, setCurrentLine] = useState(-1)
   const [audioUrl, setAudioUrl] = useState(null)
+  const [engine, setEngine] = useState(() => localStorage.getItem('shaghoof_tts_engine') || 'elevenlabs')
+  const [elevenKey, setElevenKey] = useState(() => localStorage.getItem('shaghoof_eleven_key') || '')
   const audioRef = useRef(null)
   const arabic = lang === 'ar'
 
@@ -26,6 +28,26 @@ export default function PodcastGeneratorModal({ open, onClose, lang = 'en', onXp
       setAudioUrl(null)
     }
   }, [open])
+
+  const setEngineAndSave = (value) => {
+    setEngine(value)
+    localStorage.setItem('shaghoof_tts_engine', value)
+  }
+
+  const promptElevenKey = () => {
+    const input = window.prompt(
+      arabic
+        ? 'أدخل مفتاح ElevenLabs API Key الخاص بك (اختياري - لتشغيل الموديل بمفتاحك):'
+        : 'Enter your ElevenLabs API Key (optional):',
+      elevenKey || ''
+    )
+    if (input !== null) {
+      const trimmed = input.trim()
+      setElevenKey(trimmed)
+      if (trimmed) localStorage.setItem('shaghoof_eleven_key', trimmed)
+      else localStorage.removeItem('shaghoof_eleven_key')
+    }
+  }
 
   const generate = async () => {
     if (!topic.trim()) return
@@ -42,11 +64,13 @@ export default function PodcastGeneratorModal({ open, onClose, lang = 'en', onXp
 
   const playTTS = async (text, speaker) => {
     try {
-      const res = await api.synthesizeTTS({
-        text, speaker, language: lang, dialect, speed: 1.0, engine: 'azure'
+      const blob = await api.synthesizeTTS({
+        text, speaker, language: lang, dialect, speed: 1.0,
+        engine,
+        api_key: engine === 'elevenlabs' ? (elevenKey || undefined) : undefined,
       })
-      const blob = new Blob([res], { type: 'audio/mpeg' })
-      return URL.createObjectURL(blob)
+      if (blob && blob.size > 0) return URL.createObjectURL(blob)
+      return null
     } catch {
       return null
     }
@@ -96,6 +120,44 @@ export default function PodcastGeneratorModal({ open, onClose, lang = 'en', onXp
         <p className="mb-3 text-xs text-gray-500 dark:text-gray-400">
           {arabic ? 'بودكاست تعليمي بنمط NotebookLM مع مقدمين اثنين' : 'NotebookLM-style educational podcast with two hosts'}
         </p>
+
+        {/* Voice engine switcher — mirrors SHAGHOOF-AI-main */}
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          {[
+            { v: 'elevenlabs', label: '👑 ElevenLabs v2', title: 'ElevenLabs Multilingual v2' },
+            { v: 'azure', label: '🔷 Azure', title: 'Microsoft Azure Neural (edge-tts)' },
+            { v: 'google', label: '🟢 Google', title: 'Google gTTS' },
+          ].map((opt) => (
+            <button
+              key={opt.v}
+              type="button"
+              title={opt.title}
+              onClick={() => setEngineAndSave(opt.v)}
+              className={`rounded-full px-3 py-1 text-[11px] font-bold transition ${
+                engine === opt.v
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-200'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+          {engine === 'elevenlabs' && (
+            <button
+              type="button"
+              onClick={promptElevenKey}
+              title="Configure ElevenLabs Key"
+              className="rounded-full border border-purple-300 px-2.5 py-1 text-[11px] font-bold text-purple-700 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-300"
+            >
+              ⚙️ {elevenKey ? 'Key ✓' : 'Key'}
+            </button>
+          )}
+          {engine === 'elevenlabs' && (
+            <span className="text-[10px] font-semibold text-purple-500 dark:text-purple-400">
+              eleven_multilingual_v2
+            </span>
+          )}
+        </div>
 
         <div className="mb-4 flex gap-2">
           <input

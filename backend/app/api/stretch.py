@@ -67,6 +67,11 @@ def submit_stretch(sub: StretchSubmit):
     twin_srv.record_topic(twin_rec, sub.topic, gscore, growth["passed"])
 
     store.save(sub.user_id, twin_rec)
+    try:
+        from ..services.enrollment_sync import sync_twin_to_enrollments
+        sync_twin_to_enrollments(sub.user_id, twin_rec)
+    except Exception:
+        pass
     return {
         "growth_score": gscore,
         "passed": growth["passed"],

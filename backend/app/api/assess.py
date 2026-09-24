@@ -103,6 +103,11 @@ def submit_assessment(sub: AssessSubmit):
     twin.apply_assessment_result(twin_rec, dict(result))
     twin.record_topic(twin_rec, sub.topic, final_score, passed)
     store.save(sub.user_id, twin_rec)
+    try:
+        from ..services.enrollment_sync import sync_twin_to_enrollments
+        sync_twin_to_enrollments(sub.user_id, twin_rec)
+    except Exception:
+        pass
     return {
         "results": result,
         "twin": _summary(sub.user_id, twin_rec),
@@ -128,6 +133,16 @@ def save_assessment_session(session: AssessmentSession):
     history.append(entry)
     twin_rec["exam_history"] = history[-30:]
     store.save(session.user_id, twin_rec)
+    # Award XP to the twin and push live totals to the teacher-facing enrollment.
+    try:
+        from ..services import twin as twin_svc
+        from ..services.enrollment_sync import sync_twin_to_enrollments
+        if session.xp_earned:
+            twin_svc.add_xp(twin_rec, max(0, session.xp_earned))
+            store.save(session.user_id, twin_rec)
+        sync_twin_to_enrollments(session.user_id, twin_rec)
+    except Exception:
+        pass
     return {"ok": True, "session": entry}
 
 

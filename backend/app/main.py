@@ -11,7 +11,6 @@ except ImportError:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -39,15 +38,16 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SecurityHeadersMiddleware)
 
 # CORS
+# allow_credentials is intentionally disabled: Starlette/FastAPI rejects
+# wildcard allow_methods/allow_headers combinations when credentials are
+# True, which produces the 400 Bad Request on pre-flight OPTIONS requests.
+# The app uses localStorage (no HTTP credentials), so no user tokens cross
+# origins. With credentials off, wildcard origins are safe and avoid 400s
+# when Vite binds to a non-default port (5174, 5175, ...).
 app.add_middleware(
     CORSMiddleware,
-    # Credentialed wildcard CORS is unsafe and browsers reject it.  Deployments
-    # can add their own comma-separated origins without changing code.
-    allow_origins=[origin.strip() for origin in os.getenv(
-        "FRONTEND_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5180,http://127.0.0.1:5180"
-    ).split(",") if origin.strip()],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

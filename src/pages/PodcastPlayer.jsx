@@ -44,12 +44,17 @@ export default function PodcastPlayer() {
     if (!podcast) return
     setTtsLoading(true)
     try {
-      const res = await api.synthesizeTTS({
-        text: podcast.script || podcast.content || podcast.text || '',
+      const text = podcast.script || podcast.content || podcast.text || podcast.topic || topic
+      const engine = localStorage.getItem('shaghoof_tts_engine') || 'elevenlabs'
+      const elevenKey = localStorage.getItem('shaghoof_eleven_key') || ''
+      const blob = await api.synthesizeTTS({
+        text,
         language: 'en',
+        dialect: false,
+        engine,
+        api_key: engine === 'elevenlabs' ? (elevenKey || undefined) : undefined,
       })
-      if (res.audio_url) setAudioUrl(res.audio_url)
-      else if (res.audio_base64) setAudioUrl(`data:audio/mpeg;base64,${res.audio_base64}`)
+      if (blob && blob.size > 0) setAudioUrl(URL.createObjectURL(blob))
     } catch {
       // TTS not available
     } finally {

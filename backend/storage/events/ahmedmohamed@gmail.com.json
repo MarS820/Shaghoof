@@ -1,0 +1,32 @@
+[
+  {
+    "event_type": "lesson_generated",
+    "topic": "Task 5 (LangChain).pdf",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {
+      "session_id": "ahmedmohamed@gmail.com_b966aca0f93e",
+      "subject": "coding"
+    },
+    "timestamp": "2026-09-24T13:01:02.224676"
+  },
+  {
+    "event_type": "quiz_submitted",
+    "topic": "",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {},
+    "timestamp": "2026-09-24T13:02:44.282020"
+  },
+  {
+    "event_type": "quiz_submitted",
+    "topic": "",
+    "score": 0,
+    "total": 0,
+    "difficulty": "",
+    "payload": {},
+    "timestamp": "2026-09-24T13:02:45.238732"
+  }
+]

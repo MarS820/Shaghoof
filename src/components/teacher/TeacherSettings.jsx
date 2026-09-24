@@ -2,12 +2,32 @@ import { useState, useEffect } from 'react'
 import api from '../../services/api'
 import AnimatedCard from '../AnimatedCard'
 
+function friendlyError(err, arabic) {
+  const raw = String(err?.message || err || '')
+  if (raw.includes('Failed to fetch') || raw.includes('NetworkError') || raw.includes('API error 0:')) {
+    return arabic ? 'تعذّر الاتصال بالخادم. تأكد من تشغيل الخادم ثم أعد المحاولة.' : 'Cannot reach the server. Start the backend, then try again.'
+  }
+  const detail = raw.match(/\d+:\s*(.*)$/)?.[1] || raw
+  try {
+    const parsed = JSON.parse(detail)
+    if (parsed?.detail) return String(parsed.detail)
+  } catch { /* not JSON */ }
+  return detail.replace(/^API error \d+:\s*/, '') || (arabic ? 'حدث خطأ غير متوقع.' : 'Something went wrong.')
+}
+
 export default function TeacherSettings({ teacherId, lang }) {
   const arabic = lang === 'ar'
   const [settings, setSettings] = useState({ notifications: true, risk_threshold: 40 })
   const [auditLog, setAuditLog] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  const flash = (msg, isError = false) => {
+    if (isError) { setError(msg); setSuccess('') } else { setSuccess(msg); setError('') }
+    setTimeout(() => { setError(''); setSuccess('') }, 4000)
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -16,15 +36,23 @@ export default function TeacherSettings({ teacherId, lang }) {
       api.auditLog(teacherId),
     ]).then(([s, a]) => {
       setSettings(s)
-      setAuditLog(a)
-    }).catch(() => {}).finally(() => setLoading(false))
+      setAuditLog(Array.isArray(a) ? a : [])
+    }).catch((err) => {
+      flash(friendlyError(err, arabic), true)
+    }).finally(() => setLoading(false))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teacherId])
 
   const handleSave = async () => {
+    setError('')
+    setSuccess('')
     setSaving(true)
     try {
       await api.updateTeacherSettings(teacherId, settings)
-    } catch {}
+      flash(arabic ? 'تم حفظ الإعدادات.' : 'Settings saved.')
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setSaving(false)
   }
 
@@ -35,6 +63,13 @@ export default function TeacherSettings({ teacherId, lang }) {
       <h2 className="mb-4 text-xl font-extrabold text-blue-700 dark:text-blue-300">
         {arabic ? 'الإعدادات' : 'Settings'}
       </h2>
+
+      {error && (
+        <p role="alert" className="mb-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:bg-red-950/40 dark:text-red-300">{error}</p>
+      )}
+      {success && (
+        <p role="status" className="mb-3 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">{success}</p>
+      )}
 
       <AnimatedCard className="mb-6 rounded-xl bg-gray-50 p-4 dark:bg-gray-800">
         <div className="mb-4 flex items-center justify-between">

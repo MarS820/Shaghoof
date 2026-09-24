@@ -161,115 +161,178 @@ export default function Register() {
     <div className="flex min-h-[80vh] items-center justify-center px-4 py-10 sm:px-6 sm:py-12">
       <div className="relative z-10 w-full max-w-lg">
         {step === 'account' && (
-          <div className="animate-pop-in rounded-lg border border-[var(--line)] p-6 sm:p-8 md:p-10">
+          <div className="animate-pop-in rounded-3xl border border-[var(--neutral-10)] bg-[var(--window)]/80 p-6 sm:p-8 md:p-10 backdrop-blur-xl shadow-2xl">
             <div className="mb-6 text-center sm:mb-8">
               <div className="mascot-float mb-4"><Mascot size={64} animate mood="happy" /></div>
-              <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white sm:text-3xl" style={{ fontFamily: 'var(--font-heading)' }}>{t.registerTitle}</h1>
-              <p className="mt-2 text-sm text-gray-400 dark:text-gray-500 sm:text-base">{t.registerSubtitle}</p>
+              <h1 className="text-2xl font-extrabold text-[var(--ink)] sm:text-3xl" style={{ fontFamily: 'var(--font-heading)' }}>{t.registerTitle || 'Create your account'}</h1>
+              <p className="mt-2 text-sm text-[var(--muted)] sm:text-base">{t.registerSubtitle || 'Join thousands of students learning their way.'}</p>
             </div>
 
-            {errors.submit && <div className="animate-pop-in mb-5 rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-500 dark:bg-red-900/20">{errors.submit}</div>}
+            {errors.submit && <div className="animate-pop-in mb-5 rounded-2xl bg-[var(--primary-red)]/5 px-4 py-3 text-sm font-bold text-[var(--primary-red)]">{errors.submit}</div>}
 
             <form onSubmit={handleAccountSubmit} className="space-y-4">
               <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
-                <button type="button" onClick={() => update('role', 'student')} className={`rounded-2xl border-2 p-4 text-center transition-standard ${formData.role === 'student' ? 'shadow-md dark:text-blue-300' : 'border-gray-200 bg-white text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400'}`} style={formData.role === 'student' ? { borderColor: 'var(--energy-blue)', background: 'color-mix(in srgb, var(--energy-blue) 10%, transparent)', color: 'var(--energy-blue)' } : {}}>
+                <button
+                  type="button"
+                  onClick={() => update('role', 'student')}
+                  className={`rounded-2xl border-2 p-4 text-center transition-bouncy ${formData.role === 'student' ? 'shadow-md text-[var(--primary-orange)]' : 'border-[var(--neutral-20)] bg-[var(--neutral-05)] text-[var(--muted)] dark:border-[var(--neutral-60)] dark:bg-[var(--neutral-80)] dark:text-[var(--neutral-40)]'}`}
+                  style={formData.role === 'student' ? { borderColor: 'var(--primary-orange)', background: 'color-mix(in srgb, var(--primary-orange) 10%, transparent)' } : {}}
+                >
                   <div className="mb-1 text-2xl">🎓</div>
-                  <div className="text-sm font-bold">{t.roleStudent}</div>
+                  <div className="text-sm font-bold">{t.roleStudent || 'Student'}</div>
                 </button>
-                <button type="button" onClick={() => update('role', 'teacher')} className={`rounded-2xl border-2 p-4 text-center transition-standard ${formData.role === 'teacher' ? 'shadow-md dark:text-purple-300' : 'border-gray-200 bg-white text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400'}`} style={formData.role === 'teacher' ? { borderColor: 'var(--energy-violet)', background: 'color-mix(in srgb, var(--energy-violet) 10%, transparent)', color: 'var(--energy-violet)' } : {}}>
+                <button
+                  type="button"
+                  onClick={() => update('role', 'teacher')}
+                  className={`rounded-2xl border-2 p-4 text-center transition-bouncy ${formData.role === 'teacher' ? 'shadow-md text-[var(--primary-red)]' : 'border-[var(--neutral-20)] bg-[var(--neutral-05)] text-[var(--muted)] dark:border-[var(--neutral-60)] dark:bg-[var(--neutral-80)] dark:text-[var(--neutral-40)]'}`}
+                  style={formData.role === 'teacher' ? { borderColor: 'var(--primary-red)', background: 'color-mix(in srgb, var(--primary-red) 10%, transparent)' } : {}}
+                >
                   <div className="mb-1 text-2xl">👩‍🏫</div>
-                  <div className="text-sm font-bold">{t.roleTeacher}</div>
+                  <div className="text-sm font-bold">{t.roleTeacher || 'Teacher'}</div>
                 </button>
               </div>
 
               {formData.role === 'teacher' ? (
-                <p className="rounded-2xl px-4 py-2.5 text-xs font-bold dark:text-purple-300" style={{ background: 'color-mix(in srgb, var(--energy-violet) 10%, transparent)', color: 'var(--energy-violet)' }}>
-                  👩‍🏫 Teacher accounts go straight to your class dashboard — no learner questionnaire needed.
+                <p className="rounded-2xl px-4 py-2.5 text-xs font-bold text-[var(--primary-red)]" style={{ background: 'color-mix(in srgb, var(--primary-red) 10%, transparent)' }}>
+                  👩‍🏫 {t.teacherNote || 'Teacher accounts go straight to your class dashboard — no learner questionnaire needed.'}
                 </p>
               ) : (
                 <div className="space-y-2">
-                  <p className="rounded-2xl px-4 py-2.5 text-xs font-bold dark:text-blue-300" style={{ background: 'color-mix(in srgb, var(--energy-blue) 10%, transparent)', color: 'var(--energy-blue)' }}>
-                    🎓 Students answer a short questionnaire so lessons match your learning style.
+                  <p className="rounded-2xl px-4 py-2.5 text-xs font-bold text-[var(--primary-orange)]" style={{ background: 'color-mix(in srgb, var(--primary-orange) 10%, transparent)' }}>
+                    🎓 {t.studentNote || 'Students answer a short questionnaire so lessons match your learning style.'}
                   </p>
                   {/* School mode: grade-based enrollment, auto-linked to the teacher's class. */}
-                  <label className="flex cursor-pointer items-center justify-between rounded-2xl border-2 border-[var(--line)] bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+                  <label className="flex cursor-pointer items-center justify-between rounded-2xl border-2 border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-3">
                     <span>
                       <span className="block text-sm font-bold text-[var(--ink)]">🏫 {arabic ? 'أنا طالب في مدرسة' : 'I am a school student'}</span>
                       <span className="block text-[11px] text-[var(--muted)]">{arabic ? 'سيتم ربطك تلقائياً بصف معلمك' : 'Auto-connects you to your teacher\'s class'}</span>
                     </span>
-                    <input type="checkbox" checked={formData.schoolMode} onChange={(e) => update('schoolMode', e.target.checked)} className="h-5 w-5 accent-blue-600" />
+                    <input type="checkbox" checked={formData.schoolMode} onChange={(e) => update('schoolMode', e.target.checked)} className="h-5 w-5 accent-[var(--primary-orange)]" />
                   </label>
                 </div>
               )}
 
               <div>
-                <label htmlFor="reg-name" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{t.fullName}</label>
-                <input id="reg-name" type="text" autoComplete="name" value={formData.name} onChange={(e) => update('name', e.target.value)} placeholder="Maya Chen" className={`brand-input ${errors.name ? 'border-red-400' : ''}`} />
-                {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+                <label htmlFor="reg-name" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{t.fullName || 'Full Name'}</label>
+                <input
+                  id="reg-name"
+                  type="text"
+                  autoComplete="name"
+                  value={formData.name}
+                  onChange={(e) => update('name', e.target.value)}
+                  placeholder="Maya Chen"
+                  className={`brand-input ${errors.name ? 'border-[var(--primary-red)]' : ''}`}
+                />
+                {errors.name && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.name}</p>}
               </div>
 
               <div>
-                <label htmlFor="reg-email" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{t.email}</label>
-                <input id="reg-email" type="email" autoComplete="email" inputMode="email" value={formData.email} onChange={(e) => update('email', e.target.value)} placeholder="maya@email.com" className={`brand-input ${errors.email ? 'border-red-400' : ''}`} />
-                {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+                <label htmlFor="reg-email" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{t.email || 'Email'}</label>
+                <input
+                  id="reg-email"
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  value={formData.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  placeholder="maya@email.com"
+                  className={`brand-input ${errors.email ? 'border-[var(--primary-red)]' : ''}`}
+                />
+                {errors.email && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.email}</p>}
               </div>
 
               {formData.role === 'student' && (
                 <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
                   {formData.schoolMode ? (
                     <div>
-                      <label htmlFor="reg-grade" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{arabic ? 'صفك الدراسي' : 'Your grade'}</label>
-                      <select id="reg-grade" value={formData.grade} onChange={(e) => update('grade', e.target.value)} className={`brand-input ${errors.grade ? 'border-red-400' : ''}`}>
+                      <label htmlFor="reg-grade" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{arabic ? 'صفك الدراسي' : 'Your grade'}</label>
+                      <select id="reg-grade" value={formData.grade} onChange={(e) => update('grade', e.target.value)} className={`brand-input ${errors.grade ? 'border-[var(--primary-red)]' : ''}`}>
                         {GRADES.map((g) => <option key={g} value={g}>{gradeLabel(g, arabic)}</option>)}
                       </select>
                       <p className="mt-1 text-xs text-[var(--muted)]">{arabic ? 'يربطك بصف معلمك تلقائياً' : "Links you to your teacher's class automatically"}</p>
-                      {errors.grade && <p className="mt-1 text-xs text-red-500">{errors.grade}</p>}
+                      {errors.grade && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.grade}</p>}
                     </div>
                   ) : (
                     <div>
-                      <label htmlFor="reg-age" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{t.age}</label>
-                      <input id="reg-age" type="number" inputMode="numeric" value={formData.age} onChange={(e) => update('age', e.target.value)} placeholder="10" min="6" max="16" className={`brand-input ${errors.age ? 'border-red-400' : ''}`} />
-                      {errors.age && <p className="mt-1 text-xs text-red-500">{errors.age}</p>}
+                      <label htmlFor="reg-age" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{t.age || 'Age'}</label>
+                      <input
+                        id="reg-age"
+                        type="number"
+                        inputMode="numeric"
+                        value={formData.age}
+                        onChange={(e) => update('age', e.target.value)}
+                        placeholder="10"
+                        min="6"
+                        max="16"
+                        className={`brand-input ${errors.age ? 'border-[var(--primary-red)]' : ''}`}
+                      />
+                      {errors.age && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.age}</p>}
                     </div>
                   )}
                   <div>
-                    <label htmlFor="reg-subject" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{arabic ? 'المادة المفضلة' : 'Favorite subject'}</label>
-                    <input id="reg-subject" type="text" list="subject-suggestions" value={formData.subject} onChange={(e) => update('subject', e.target.value)} placeholder="Science" className="brand-input" />
+                    <label htmlFor="reg-subject" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{arabic ? 'المادة المفضلة' : 'Favorite subject'}</label>
+                    <input
+                      id="reg-subject"
+                      type="text"
+                      list="subject-suggestions"
+                      value={formData.subject}
+                      onChange={(e) => update('subject', e.target.value)}
+                      placeholder="Science"
+                      className="brand-input"
+                    />
                     <datalist id="subject-suggestions">
                       {SUBJECT_SUGGESTIONS.map((s) => <option key={s} value={s} />)}
                     </datalist>
-                    <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">{arabic ? 'تُستخدم في توليد الدروس والاختبارات' : 'Feeds your lessons, quizzes & tutor'}</p>
+                    <p className="mt-1 text-xs text-[var(--muted)]">{arabic ? 'تُستخدم في توليد الدروس والاختبارات' : 'Feeds your lessons, quizzes & tutor'}</p>
                   </div>
                 </div>
               )}
 
               <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
                 <div>
-                  <label htmlFor="reg-password" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{t.password}</label>
-                  <input id="reg-password" type="password" autoComplete="new-password" value={formData.password} onChange={(e) => update('password', e.target.value)} placeholder="••••••" className={`brand-input ${errors.password ? 'border-red-400' : ''}`} />
-                  {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password}</p>}
+                  <label htmlFor="reg-password" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{t.password || 'Password'}</label>
+                  <input
+                    id="reg-password"
+                    type="password"
+                    autoComplete="new-password"
+                    value={formData.password}
+                    onChange={(e) => update('password', e.target.value)}
+                    placeholder="••••••"
+                    className={`brand-input ${errors.password ? 'border-[var(--primary-red)]' : ''}`}
+                  />
+                  {errors.password && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.password}</p>}
                 </div>
                 <div>
-                  <label htmlFor="reg-confirm" className="mb-1.5 block text-sm font-bold text-gray-600 dark:text-gray-300">{t.confirmPassword}</label>
-                  <input id="reg-confirm" type="password" autoComplete="new-password" value={formData.confirmPassword} onChange={(e) => update('confirmPassword', e.target.value)} placeholder="••••••" className={`brand-input ${errors.confirmPassword ? 'border-red-400' : ''}`} />
-                  {errors.confirmPassword && <p className="mt-1 text-xs text-red-500">{errors.confirmPassword}</p>}
+                  <label htmlFor="reg-confirm" className="mb-1.5 block text-sm font-bold text-[var(--ink)]">{t.confirmPassword || 'Confirm password'}</label>
+                  <input
+                    id="reg-confirm"
+                    type="password"
+                    autoComplete="new-password"
+                    value={formData.confirmPassword}
+                    onChange={(e) => update('confirmPassword', e.target.value)}
+                    placeholder="••••••"
+                    className={`brand-input ${errors.confirmPassword ? 'border-[var(--primary-red)]' : ''}`}
+                  />
+                  {errors.confirmPassword && <p className="mt-1 text-xs text-[var(--primary-red)]">{errors.confirmPassword}</p>}
                 </div>
               </div>
 
-              <button type="submit" disabled={loading} className="brand-btn-primary w-full py-3.5 text-base disabled:opacity-60">{loading ? (arabic ? 'جارٍ الإنشاء…' : 'Creating account…') : t.registerButton}</button>
+              <button type="submit" disabled={loading} className="brand-btn-primary w-full py-3.5 text-base disabled:opacity-60">{loading ? (arabic ? 'جارٍ الإنشاء…' : 'Creating account…') : t.registerButton || 'Create account'}</button>
             </form>
 
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-400 dark:text-gray-500">
-                {t.haveAccount}{' '}
-                <Link to="/login" className="font-bold text-blue-600 transition-standard hover:text-blue-700 dark:text-blue-400">{t.loginHere}</Link>
+              <p className="text-sm text-[var(--muted)]">
+                {t.haveAccount || "Already have an account?"}{' '}
+                <Link to="/login" className="font-bold text-[var(--primary-orange)] transition-standard hover:text-[var(--primary-red)]">
+                  {t.loginHere || 'Log in'}
+                </Link>
               </p>
             </div>
           </div>
         )}
 
         {step === 'sen' && (
-          <div className="animate-pop-in rounded-lg border border-[var(--line)] p-6 sm:p-8">
+          <div className="animate-pop-in rounded-3xl border border-[var(--neutral-10)] bg-[var(--window)]/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
             <LearnerQuestionnaire
               lang={lang}
               phase="sen"
@@ -284,7 +347,7 @@ export default function Register() {
         )}
 
         {step === 'vark' && (
-          <div className="animate-pop-in rounded-lg border border-[var(--line)] p-6 sm:p-8">
+          <div className="animate-pop-in rounded-3xl border border-[var(--neutral-10)] bg-[var(--window)]/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
             <LearnerQuestionnaire
               lang={lang}
               phase="vark"

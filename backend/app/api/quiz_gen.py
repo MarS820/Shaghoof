@@ -17,6 +17,7 @@ def quiz_generate(request: Request, req: QuizGenerateRequest):
             ground_in_lessons=req.ground_in_lessons,
             vark_mode=req.vark_mode,
             sen_profile=req.sen_profile,
+            question_types=req.question_types,
         )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc))

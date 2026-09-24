@@ -38,12 +38,16 @@ export default function Profile() {
   const { user, lang, toggles, setToggles, xpEffective } = useApp()
   const arabic = lang === 'ar'
   const [brainwheel, setBrainwheel] = useState(null)
+  const [enrolledClasses, setEnrolledClasses] = useState([])
   const [showReveal, setShowReveal] = useState(false)
 
   useEffect(() => {
     if (!user?.id) return
     api.brainwheel(user.id).then(setBrainwheel).catch(() => setBrainwheel(null))
-  }, [user?.id, user?.vark])
+    api.enrolledClasses(user.id).then(setEnrolledClasses).catch(() => setEnrolledClasses([]))
+    // Refetch when the user changes; a vark object identity change is not
+    // a reason to re-hit the API (updateUser always creates a new object).
+  }, [user?.id])
 
   if (!user) return <Navigate to="/login" replace />
   if (user.role === 'teacher') return <Navigate to="/teacher" replace />
@@ -63,38 +67,46 @@ export default function Profile() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
-      {/* Header card */}
-      <div className="animate-bubble-in mb-6 overflow-hidden rounded-3xl p-6 text-white shadow-xl" style={{ background: 'linear-gradient(135deg, var(--energy-blue), var(--energy-violet))' }}>
+      {/* Header card — soft peach frosted glass */}
+      <div
+        className="animate-bubble-in mb-6 overflow-hidden rounded-3xl p-6 shadow-xl backdrop-blur-xl"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.72) 0%, rgba(255,240,228,0.58) 55%, rgba(255,228,204,0.50) 100%)',
+          border: '1px solid rgba(255,255,255,0.70)',
+          boxShadow: '0 8px 28px rgba(180,90,40,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
+          color: 'var(--ink)',
+        }}
+      >
         <div className="flex items-center gap-4">
           <Mascot size={64} animate mood="proud" className="animate-bobble" />
           <div className="flex-1">
             <h1 className="text-xl font-extrabold" style={{ fontFamily: 'var(--font-heading)' }}>{user.name || (arabic ? 'طالب' : 'Student')}</h1>
-            <p className="text-sm font-semibold text-white/80">{user.email || ''}</p>
+            <p className="font-semibold" style={{ color: 'var(--muted)' }}>{user.email || ''}</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 p-1.5">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl p-1.5" style={{ background: 'rgba(255,255,255,0.70)', border: '1px solid rgba(255,255,255,0.85)' }}>
               <img src={currentTier.image} alt={currentTier.name} className="h-full w-full object-contain drop-shadow-md" />
             </div>
             <div className="text-end">
               <p className="text-2xl font-extrabold">Lv {profileLevel}</p>
-              <p className="text-xs font-extrabold text-white/90">{currentTier.name}</p>
-              <p className="text-[10px] font-semibold text-white/70">
+              <p className="text-xs font-extrabold" style={{ color: 'var(--primary-orange)' }}>{currentTier.name}</p>
+              <p className="text-[10px] font-semibold" style={{ color: 'var(--muted)' }}>
                 {nextTier ? `${nextTier.xp - displayXp} XP ${arabic ? 'لفتح' : 'to'} ${nextTier.name}` : (arabic ? 'أعلى رتبة!' : 'Max tier!')}
               </p>
             </div>
           </div>
         </div>
-        <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-white/25">
-          <div className="h-full animate-grow-bar rounded-full bg-white transition-all duration-700" style={{ width: `${(intoLevel / 500) * 100}%` }} />
+        <div className="mt-4 h-2.5 overflow-hidden rounded-full" style={{ background: 'rgba(255,138,61,0.18)' }}>
+          <div className="h-full animate-grow-bar rounded-full transition-all duration-700" style={{ width: `${(intoLevel / 500) * 100}%`, background: 'linear-gradient(90deg, var(--primary-orange), var(--primary-red))' }} />
         </div>
-        <p className="mt-1 text-right text-xs font-bold text-white/80">{displayXp} XP {arabic ? 'إجمالي' : 'total'}</p>
+        <p className="mt-1 text-right text-xs font-bold" style={{ color: 'var(--muted)' }}>{displayXp} XP {arabic ? 'إجمالي' : 'total'}</p>
       </div>
 
       {/* Badge collection — all 9 tiers in numerical order */}
       <section className="bubble-card mb-6 p-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-extrabold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🏅 {arabic ? 'مجموعة الشارات' : 'Badge collection'}</h2>
-          <span className="rounded-full bg-[var(--brand-light)] px-2.5 py-0.5 text-[10px] font-extrabold text-[var(--brand)]">
+          <h2 className="text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🏅 {arabic ? 'مجموعة الشارات' : 'Badge collection'}</h2>
+          <span className="rounded-full bg-[var(--brand-light)] px-2.5 py-0.5 text-[10px] font-bold text-[var(--brand)]">
             {badgeTiers.filter((t) => displayXp >= t.xp).length} / {badgeTiers.length}
           </span>
         </div>
@@ -105,24 +117,14 @@ export default function Profile() {
             return (
               <div
                 key={tier.xp}
-                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-3 text-center transition-bouncy hover:-translate-y-0.5 ${
-                  isCurrent
-                    ? 'border-orange-400 bg-gradient-to-b from-orange-50 to-amber-100/60 shadow-md dark:from-orange-950/40 dark:to-amber-950/20'
-                    : unlocked
-                      ? 'border-orange-200 bg-orange-50/50 dark:border-orange-800 dark:bg-orange-950/20'
-                      : 'border-[var(--line)] bg-white/30 opacity-50 dark:bg-slate-900/20'
-                }`}
+                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-3 text-center transition-bouncy hover:-translate-y-0.5 ${isCurrent ? 'border-orange-400 bg-gradient-to-b from-orange-50 to-amber-100/60 shadow-md dark:from-orange-950/40 dark:to-amber-950/20' : unlocked ? 'border-orange-200 bg-orange-50/50 dark:border-orange-800 dark:bg-orange-950/20' : 'border-[var(--neutral-10)] bg-[var(--surface)]/40 opacity-50 dark:bg-slate-900/20'}`}
               >
-                <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-extrabold ${
-                  isCurrent ? 'text-white' : unlocked ? 'text-white' : 'bg-[var(--line)] text-[var(--muted)]'
-                }`} style={isCurrent ? { background: 'var(--energy-orange)' } : unlocked ? { background: 'var(--energy-blue)' } : {}}>{i + 1}</span>
+                <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-extrabold ${isCurrent ? 'text-white' : unlocked ? 'text-white' : 'bg-[var(--neutral-10)] text-[var(--muted)]'}`} style={isCurrent ? { background: 'var(--energy-orange)' } : unlocked ? { background: 'var(--energy-blue)' } : {}}>{i + 1}</span>
                 <img src={tier.image} alt={tier.name} className={`h-11 w-11 object-contain ${!unlocked ? 'grayscale' : ''}`} />
                 <p className={`text-[10px] font-extrabold leading-tight ${isCurrent ? 'dark:text-orange-300' : unlocked ? 'text-[var(--ink)]' : 'text-[var(--muted)]'}`} style={isCurrent ? { color: 'var(--energy-orange)' } : {}}>
                   {tier.name}
                 </p>
-                <span className={`rounded-full px-1.5 py-0.5 text-[8px] font-bold ${
-                  isCurrent ? 'dark:bg-orange-800 dark:text-orange-200' : unlocked ? 'dark:bg-slate-800 dark:text-slate-200' : 'bg-[var(--line)] text-[var(--muted)]'
-                }`} style={isCurrent ? { background: 'color-mix(in srgb, var(--energy-orange) 20%, transparent)', color: 'var(--energy-orange)' } : unlocked ? { background: 'var(--brand-light)', color: 'var(--brand)' } : {}}>
+                <span className={`rounded-full px-1.5 py-0.5 text-[8px] font-bold ${isCurrent ? 'bg-[var(--energy-orange)]/20 text-[var(--energy-orange)]' : unlocked ? 'bg-[var(--brand-light)] text-[var(--brand)]' : 'bg-[var(--neutral-10)] text-[var(--muted)]'}`}>
                   {tier.xp === 0 ? '0 XP' : `${tier.xp}+ XP`}
                 </span>
               </div>
@@ -134,7 +136,7 @@ export default function Profile() {
       {/* Brain Wheel */}
       <section className="bubble-card mb-6 p-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-extrabold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🧠 {arabic ? 'عجلة الدماغ (VARK)' : 'Brain Wheel (VARK)'}</h2>
+          <h2 className="text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🧠 {arabic ? 'عجلة الدماغ (VARK)' : 'Brain Wheel (VARK)'}</h2>
           <div className="flex items-center gap-2">
             <button onClick={() => setShowReveal(true)} className="brand-btn-ghost py-1.5 text-xs">{arabic ? 'اسلوب تعلمي' : 'Learning style'}</button>
             <Link to="/vark-quiz" className="brand-btn-ghost py-1.5 text-xs">{arabic ? 'أعد الاختبار' : 'Retake quiz'}</Link>
@@ -150,7 +152,7 @@ export default function Profile() {
                   <span className="flex items-center gap-1.5 text-[var(--ink)]">{VARK_COPY[key].icon} {arabic ? VARK_COPY[key].ar : VARK_COPY[key].en}</span>
                   <span style={{ color: VARK_COPY[key].color }}>{Math.round(Number(value))}%</span>
                 </div>
-                <div className="h-2.5 overflow-hidden rounded-full bg-[var(--line)]">
+                <div className="h-2.5 overflow-hidden rounded-full bg-[var(--neutral-10)]">
                   <div className="h-full animate-grow-bar rounded-full transition-all duration-700" style={{ width: `${Math.min(Number(value), 100)}%`, background: VARK_COPY[key].color }} />
                 </div>
                 <p className="mt-0.5 text-[10px] font-semibold text-[var(--muted)]">{arabic ? VARK_COPY[key].desc.ar : VARK_COPY[key].desc.en}</p>
@@ -164,14 +166,14 @@ export default function Profile() {
 
       {/* SEN profile */}
       <section className="bubble-card mb-6 p-5">
-        <h2 className="text-base font-extrabold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🧩 {arabic ? 'ملف الدعم (SEN)' : 'Support profile (SEN)'}</h2>
+        <h2 className="text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🧩 {arabic ? 'ملف الدعم (SEN)' : 'Support profile (SEN)'}</h2>
         <p className="mt-1 text-xs font-semibold text-[var(--muted)]">{arabic ? 'الدعم المفعّل يظهر كشارات على كل مقرر.' : 'Active supports show as badges on every course.'}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {flags.length === 0 && <p className="text-xs font-semibold text-[var(--muted)]">{arabic ? 'لا توجد احتياجات مسجلة — هذا لا يمنع تفعيل أدوات الدعم أدناه.' : 'No flagged needs — you can still enable any support tool below.'}</p>}
           {flags.map((f) => {
             const copy = SEN_COPY[String(f).toLowerCase()]
             return (
-              <span key={f} className="rounded-full border border-[var(--line)] bg-[var(--brand-light)] px-3 py-1 text-xs font-extrabold text-[var(--brand)]">
+              <span key={f} className="rounded-full border border-[var(--neutral-10)] bg-[var(--brand-light)] px-3 py-1 text-xs font-bold text-[var(--brand)]">
                 {copy ? `${copy.icon} ${arabic ? copy.ar : copy.label}` : `🧩 ${f}`}
               </span>
             )
@@ -179,9 +181,29 @@ export default function Profile() {
         </div>
       </section>
 
+      {/* Enrolled classes */}
+      <section className="bubble-card mb-6 p-5">
+        <h2 className="text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>🏫 {arabic ? 'فصولي' : 'My classes'}</h2>
+        {enrolledClasses.length === 0 ? (
+          <p className="mt-2 text-xs text-[var(--muted)]">{arabic ? 'لم تسجل في أي فصل بعد.' : 'Not enrolled in any class yet.'}</p>
+        ) : (
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {enrolledClasses.map((cls) => (
+              <div key={cls.id} className="flex items-center justify-between rounded-2xl border border-[var(--neutral-10)] bg-[var(--surface)] p-3">
+                <div>
+                  <p className="text-sm font-bold text-[var(--ink)]">{cls.name}</p>
+                  <p className="text-[10px] text-[var(--muted)]">{cls.grade} · {cls.student_count} {arabic ? 'طالب' : 'students'}</p>
+                </div>
+                <span className="rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-[10px] font-bold text-[var(--brand)]">#{cls.id}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
       {/* Accessibility suite */}
       <section className="bubble-card mb-6 p-5">
-        <h2 className="text-base font-extrabold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>♿ {arabic ? 'إعدادات الوصول' : 'Accessibility settings'}</h2>
+        <h2 className="text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>♿ {arabic ? 'إعدادات الوصول' : 'Accessibility settings'}</h2>
         <p className="mt-1 text-xs font-semibold text-[var(--muted)]">{arabic ? 'تُحفظ تلقائياً على جهازك وتُطبق فوراً.' : 'Saved automatically on your device and applied instantly.'}</p>
         <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
           {SUITE_TOGGLES.map((item, i) => {
@@ -190,16 +212,16 @@ export default function Profile() {
               <button
                 key={item.key}
                 onClick={() => toggle(item.key)}
-                className={`animate-bubble-in flex items-center gap-3 rounded-2xl border-2 p-3 text-left transition-bouncy ${on ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--line)] hover:border-[var(--brand)]'}`}
+                className={`animate-bubble-in flex items-center gap-3 rounded-2xl border p-3 text-left transition-bouncy ${on ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--neutral-10)] hover:border-[var(--brand)]'}`}
                 style={{ animationDelay: `${i * 0.05}s` }}
                 aria-pressed={on}
               >
                 <span className="text-xl">{item.icon}</span>
                 <span className="flex-1">
-                  <span className="block text-xs font-extrabold text-[var(--ink)]">{arabic ? item.ar : item.en}</span>
+                  <span className="block text-xs font-bold text-[var(--ink)]">{arabic ? item.ar : item.en}</span>
                   <span className="block text-[10px] font-semibold text-[var(--muted)]">{arabic ? item.desc.ar : item.desc.en}</span>
                 </span>
-                <span className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? 'bg-[var(--brand)]' : 'bg-[var(--line)]'}`}>
+                <span className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? 'bg-[var(--brand)]' : 'bg-[var(--neutral-10)]'}`}>
                   <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? 'start-[1.15rem]' : 'start-0.5'}`} />
                 </span>
               </button>

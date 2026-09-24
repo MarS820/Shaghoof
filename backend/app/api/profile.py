@@ -312,25 +312,25 @@ def _public_profile(twin_rec):
 
 def _auto_enroll_student(user_id, grade):
     """Automatically enroll a student into all classes matching their grade."""
-    from ..models import Classroom, StudentEnrollment, TeacherUser
+    from ..models import Classroom, StudentEnrollment
     from ..core.database import SessionLocal
+    from sqlalchemy import select
 
     db = SessionLocal()
     try:
-        classes = db.query(Classroom).filter(Classroom.grade == grade).all()
+        stmt = select(Classroom).where(Classroom.grade == grade)
+        classes = db.execute(stmt).scalars().all()
         twin_rec = store.load(user_id)
-        enrolled = set(twin_rec.get("enrolled_classes", []) if twin_rec else [])
         name = twin_rec.get("name", "Student") if twin_rec else "Student"
         email = twin_rec.get("email", "") if twin_rec else ""
 
         for cls in classes:
-            if cls.id in enrolled:
-                continue
-            existing = db.query(StudentEnrollment).filter(
+            stmt2 = select(StudentEnrollment).where(
                 StudentEnrollment.class_id == cls.id,
                 StudentEnrollment.student_id == user_id,
                 StudentEnrollment.enrollment_status == "active",
-            ).first()
+            )
+            existing = db.execute(stmt2).scalar_one_or_none()
             if not existing:
                 enrollment = StudentEnrollment(
                     class_id=cls.id,
@@ -341,20 +341,43 @@ def _auto_enroll_student(user_id, grade):
                     status="green",
                 )
                 db.add(enrollment)
-                enrolled.add(cls.id)
-
-        if enrolled - set(twin_rec.get("enrolled_classes", []) or []):
-            store.update(user_id, {"enrolled_classes": sorted(enrolled)})
 
         db.commit()
+
+        enrolled = set()
+        for cls in classes:
+            stmt3 = select(StudentEnrollment).where(
+                StudentEnrollment.class_id == cls.id,
+                StudentEnrollment.student_id == user_id,
+                StudentEnrollment.enrollment_status == "active",
+            )
+            if db.execute(stmt3).scalar_one_or_none():
+                enrolled.add(cls.id)
+
+        old_enrolled = set(twin_rec.get("enrolled_classes", []) if twin_rec else [])
+        if enrolled - old_enrolled:
+            store.update(user_id, {"enrolled_classes": sorted(enrolled)})
     except Exception:
-        # Never silent: a swallowed error here rolls back the enrollments and
-        # leaves school students unlinked from their teacher's class.
         import logging
         logging.getLogger(__name__).exception("Auto-enroll failed for %s (grade %s)", user_id, grade)
         db.rollback()
     finally:
         db.close()
+
+
+def _sync_enrolled_classes(user_id: str, grade: Optional[str] = None) -> list:
+    """Re-sync twin enrolled_classes from SQL (and back-fill missing rows).
+
+    Students restored from localStorage never hit /auth/login, so a class
+    created after they signed in would otherwise stay invisible until the
+    next full login. Cheap enough to run on profile/enrolled reads.
+    """
+    twin_rec = store.ensure(user_id)
+    if grade is None:
+        grade = twin_rec.get("grade") or store.age_to_grade(twin_rec.get("age", 10))
+    _auto_enroll_student(user_id, grade)
+    twin_rec = store.load(user_id) or twin_rec
+    return list(twin_rec.get("enrolled_classes") or [])
 
 
 @router.get("/profile/brainwheel")
@@ -365,9 +388,36 @@ def brainwheel(user_id: str):
 
 @router.get("/profile")
 def get_profile(user_id: str):
+    # Teacher accounts live in SQL, not the student twin store. Do not
+    # create/serve a student twin for teacher-* ids (it forces role=student
+    # and wipes name/email after refreshProfile).
+    if str(user_id).startswith("teacher-"):
+        from ..core.database import SessionLocal
+        from ..models import TeacherUser
+        from ..services.common import public_user
+        db = SessionLocal()
+        try:
+            teacher = db.get(TeacherUser, user_id)
+            if teacher:
+                pub = public_user(teacher)
+                return {
+                    "user_id": pub["id"],
+                    "id": pub["id"],
+                    "role": "teacher",
+                    "name": pub["name"],
+                    "email": pub["email"],
+                    "grade": None,
+                    "subjects": [],
+                    "data_sources": [],
+                    "enrolled_classes": [],
+                    "onboarding_complete": True,
+                }
+        finally:
+            db.close()
+
     twin_rec = store.ensure(user_id)
     grade = twin_rec.get("grade") or store.age_to_grade(twin_rec.get("age", 10))
-    enrolled_classes = twin_rec.get("enrolled_classes", [])
+    enrolled_classes = _sync_enrolled_classes(user_id, grade)
     return {
         "user_id": user_id,
         "role": twin_rec.get("role", "student"),
@@ -406,7 +456,8 @@ def get_enrolled_classes(user_id: str):
     from ..core.database import SessionLocal
 
     twin_rec = store.ensure(user_id)
-    enrolled_ids = twin_rec.get("enrolled_classes", [])
+    grade = twin_rec.get("grade") or store.age_to_grade(twin_rec.get("age", 10))
+    enrolled_ids = _sync_enrolled_classes(user_id, grade)
     if not enrolled_ids:
         return []
     db = SessionLocal()

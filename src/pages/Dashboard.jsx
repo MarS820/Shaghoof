@@ -40,7 +40,7 @@ function getMoodActivities(mood, arabic, lessons) {
 }
 
 export default function Dashboard() {
-  const { user, lang, awardXp, xpEffective, level, xpIntoLevel } = useApp()
+  const { user, lang, awardXp, xpEffective, level, xpIntoLevel, refreshProfile, updateUser } = useApp()
   const [profile, setProfile] = useState(null)
   const [brainwheel, setBrainwheel] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -61,8 +61,9 @@ export default function Dashboard() {
 
   const arabic = lang === 'ar'
   const subjects = user?.subjects || []
-  const sources = user?.dataSources || []
-  const hasData = subjects.length > 0 || sources.length > 0 || (dailyPlan?.courses?.length > 0) || lessons.length > 0
+  const sources = user?.dataSources || []; const profileSubjects = profile?.subjects || [];
+  const profileSources = profile?.data_sources || [];
+  const hasData = (subjects.length > 0 || profileSubjects.length > 0) || (sources.length > 0 || profileSources.length > 0) || (dailyPlan?.courses?.length > 0) || lessons.length > 0
 
   // Refetch functions for real-time updates
   const refetchPlan = async () => {
@@ -92,6 +93,15 @@ export default function Dashboard() {
           api.dailyPlan(user.id, lang).catch(() => null),
           api.listLessons(user.id).catch(() => null),
         ])
+        // Merge the authoritative backend profile into the app so the saved
+        // progress (enrolled classes, VARK, badges, mood check-ins) is visible.
+        if (profileRes && user?.id) {
+          updateUser({
+            ...profileRes,
+            subjects: profileRes.subjects?.length ? profileRes.subjects : (user.subjects || []),
+            dataSources: profileRes.data_sources?.length ? profileRes.data_sources : (user.dataSources || []),
+          })
+        }
         setProfile(profileRes)
         setBrainwheel(wheelRes)
         setActivityFeed(feedRes?.feed || [])
@@ -100,7 +110,10 @@ export default function Dashboard() {
       } catch {} finally { setLoading(false) }
     }
     fetchData()
-  }, [user?.id, lang, user?.vark])
+    // Depend only on user id + lang. `user.vark` must NOT be a dependency:
+    // updateUser() replaces it with a fresh object each fetch, which would
+    // re-run this effect forever and flood the API (429s / bad requests).
+  }, [user?.id, lang])
 
   // Auto-refresh plan every 5 minutes to stay in sync with backend
   useEffect(() => {

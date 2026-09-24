@@ -234,15 +234,22 @@ export function AppProvider({ children }) {
     if (!user || !user.id) return null
     try {
       const prof = await api.getProfile(user.id)
+      // Never let the student twin store demote a teacher session
+      // (getProfile defaults role to "student" for unknown/teacher ids).
+      const isTeacher = user.role === 'teacher' || String(user.id).startsWith('teacher-')
+      const role = isTeacher ? 'teacher' : (prof.role || user.role || 'student')
       const updated = {
         ...user,
         ...prof,
+        role,
+        name: prof.name || user.name,
+        email: prof.email || user.email,
         subjects: prof.subjects?.length ? prof.subjects : user.subjects || [],
         dataSources: prof.data_sources?.length ? prof.data_sources : user.dataSources || [],
       }
       setUser(updated)
       localStorage.setItem('shaghoof_user', JSON.stringify(updated))
-      return prof
+      return updated
     } catch {
       return null
     }
@@ -284,3 +291,5 @@ export function useApp() {
   }
   return context
 }
+
+export { deriveId }

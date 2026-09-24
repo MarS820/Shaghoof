@@ -21,12 +21,22 @@ const TABS = [
   { key: 'roster', labelEn: 'Roster', labelAr: 'قائمة الطلاب', icon: '👥' },
   { key: 'assessments', labelEn: 'Assessments', labelAr: 'التقييمات', icon: '📝' },
   { key: 'misconceptions', labelEn: 'Misconceptions', labelAr: 'المفاهيم الخاطئة', icon: '⚠️' },
-  { key: 'interventions', labelEn: 'Interventions', labelAr: 'التدخلات', icon: '🎯' },
+  { key: 'interventions', labelEn: 'Interventions', labelAr: 'التدخّلات', icon: '🎯' },
   { key: 'settings', labelEn: 'Settings', labelAr: 'الإعدادات', icon: '⚙️' },
 ]
 
+function friendlyError(err, arabic) {
+  const raw = String(err?.message || err || '')
+  if (raw.includes('Failed to fetch') || raw.includes('NetworkError') || raw.includes('ECONNREFUSED') || raw.includes('API error 0:')) {
+    return arabic
+      ? 'تعذّر الاتصال بالخادم. تأكد من تشغيل الخادم (backend) ثم أعد المحاولة.'
+      : 'Cannot reach the server. Start the backend, then try again.'
+  }
+  return raw.replace(/^API error \d+:\s*/, '') || (arabic ? 'حدث خطأ غير متوقع.' : 'Something went wrong.')
+}
+
 export default function Teacher() {
-  const { t, user, lang } = useApp()
+  const { user, lang } = useApp()
   const arabic = lang === 'ar'
 
   const [classes, setClasses] = useState([])
@@ -37,6 +47,8 @@ export default function Teacher() {
   const [newClassGrade, setNewClassGrade] = useState('1st')
   const [loading, setLoading] = useState(true)
   const [creating, setCreating] = useState(false)
+  const [pageError, setPageError] = useState('')
+  const [createError, setCreateError] = useState('')
 
   // Hooks must run in the same order while auth state hydrates.  Keep the
   // redirect below the hooks rather than returning before them.
@@ -50,13 +62,15 @@ export default function Teacher() {
     }
     try {
       const data = await api.teacherClasses(teacherId)
-      setClasses(data)
-      if (data.length > 0) setSelectedClass((current) => current || data[0])
-    } catch {
+      setClasses(Array.isArray(data) ? data : [])
+      setPageError('')
+      if (Array.isArray(data) && data.length > 0) setSelectedClass((current) => current || data[0])
+    } catch (err) {
       setClasses([])
+      setPageError(friendlyError(err, arabic))
     }
     setLoading(false)
-  }, [teacherId])
+  }, [teacherId, arabic])
 
   useEffect(() => { loadClasses() }, [loadClasses])
 
@@ -66,15 +80,16 @@ export default function Teacher() {
   const handleCreateClass = async () => {
     if (!newClassName.trim()) return
     setCreating(true)
+    setCreateError('')
     try {
       await api.createTeacherClass(teacherId, { name: newClassName.trim(), grade: newClassGrade })
       setNewClassName('')
       setNewClassGrade('1st')
       setShowCreateClass(false)
-      const data = await api.teacherClasses(teacherId)
-      setClasses(data)
-      if (data.length > 0 && !selectedClass) setSelectedClass(data[0])
-    } catch {}
+      await loadClasses()
+    } catch (err) {
+      setCreateError(friendlyError(err, arabic))
+    }
     setCreating(false)
   }
 
@@ -176,6 +191,11 @@ export default function Teacher() {
             >
               {creating ? (arabic ? 'جارٍ الإنشاء...' : '✨ Creating...') : (arabic ? 'إنشاء' : '🚀 Create')}
             </button>
+            {createError && (
+              <p role="alert" className="w-full rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:bg-red-950/40 dark:text-red-300">
+                {createError}
+              </p>
+            )}
           </div>
         )}
       </AnimatedCard>
@@ -213,7 +233,26 @@ export default function Teacher() {
         </AnimatedCard>
       )}
 
-      {!loading && classes.length === 0 && (
+      {!loading && pageError && (
+        <AnimatedCard delay={0.15} className="rounded-2xl border-2 border-red-200 bg-white p-6 dark:border-red-900/40 dark:bg-gray-900">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-bold text-red-600 dark:text-red-300" role="alert">{pageError}</p>
+              <p className="mt-1 text-xs text-red-400 dark:text-red-400">
+                {arabic ? 'قد لا يعمل إنشاء الفصل حتى يستعيد الخادم الاتصال.' : 'Class create will fail until the backend is reachable.'}
+              </p>
+            </div>
+            <button
+              onClick={() => loadClasses()}
+              className="rounded-xl bg-red-500 px-4 py-2 text-xs font-bold text-white transition-bouncy hover:bg-red-600"
+            >
+              {arabic ? 'إعادة المحاولة' : 'Retry'}
+            </button>
+          </div>
+        </AnimatedCard>
+      )}
+
+      {!loading && !pageError && classes.length === 0 && (
         <AnimatedCard delay={0.2} className="rounded-2xl border-2 border-dashed border-blue-300 bg-white p-12 text-center dark:border-blue-700 dark:bg-gray-900">
           <Mascot size={96} mood="thinking" className="mx-auto mb-4" />
           <p className="text-lg font-bold text-blue-400 dark:text-blue-300">

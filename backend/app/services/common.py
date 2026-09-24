@@ -53,6 +53,8 @@ def require_enrollment(db: Session, class_id: int, student_id: str) -> StudentEn
 def public_user(user: TeacherUser) -> dict:
     return {
         "id": user.id,
+        "user_id": user.id,
+        "role": "teacher",
         "name": user.name,
         "email": user.email,
         "is_active": user.is_active,

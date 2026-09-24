@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 async function request(path, { method = 'GET', body, params, isFormData } = {}) {
   let url = `${API_BASE}${path}`
@@ -23,14 +23,22 @@ async function request(path, { method = 'GET', body, params, isFormData } = {}) 
   return res.json()
 }
 
-async function requestBlob(path, { params } = {}) {
+async function requestBlob(path, { method = 'GET', body, params } = {}) {
   let url = `${API_BASE}${path}`
   if (params) {
     const qs = new URLSearchParams(params).toString()
     url += `?${qs}`
   }
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`API error ${res.status}`)
+  const options = { method, headers: {} }
+  if (body !== undefined) {
+    options.headers['Content-Type'] = 'application/json'
+    options.body = JSON.stringify(body)
+  }
+  const res = await fetch(url, options)
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw new Error(`API error ${res.status}: ${text}`)
+  }
   return res.blob()
 }
 
@@ -76,7 +84,7 @@ export const api = {
   teacherRoster: (teacherId, classId, filters = {}) => request('/api/v1/teacher/roster', { params: { teacher_id: teacherId, class_id: classId, ...filters } }),
   teacherDashboard: (teacherId, classId) => request('/api/v1/teacher/dashboard', { params: { teacher_id: teacherId, class_id: classId } }),
   teacherNotifications: (teacherId) => request('/api/v1/teacher/notifications', { params: { teacher_id: teacherId } }),
-  markNotificationsRead: (teacherId, notificationId) => request('/api/v1/teacher/mark-read', { method: 'POST', params: { teacher_id: teacherId, notification_id: notificationId } }),
+  markNotificationsRead: (teacherId, notificationId) => request('/api/v1/teacher/notifications/mark-read', { method: 'POST', params: { teacher_id: teacherId, notification_id: notificationId } }),
   classStudents: (teacherId, classId) => request(`/api/v1/teacher/classes/${classId}/students`, { params: { teacher_id: teacherId } }),
   createStudent: (teacherId, classId, data) => request(`/api/v1/teacher/classes/${classId}/students`, { method: 'POST', params: { teacher_id: teacherId }, body: data }),
   updateEnrollment: (teacherId, classId, studentId, data) => request(`/api/v1/teacher/classes/${classId}/students/${studentId}/enrollment`, { method: 'PATCH', params: { teacher_id: teacherId }, body: data }),
@@ -116,15 +124,6 @@ export const api = {
 
   // ── Assignments ──
   generateAssignment: (data) => request('/assignments/generate', { method: 'POST', body: data }),
-
-  // ── Feynman ──
-  evaluateFeynman: (data) => request('/championship/feynman/evaluate', { method: 'POST', body: data }),
-
-  // ── Knowledge Graph ──
-  getKnowledgeGraph: (courseId) => request('/championship/graph/concepts', { params: { course_id: courseId } }),
-
-  // ── RAG Benchmark ──
-  getRagBenchmark: () => request('/championship/rag/benchmark'),
 
   // ── PDF Chat ──
   uploadPdf: (formData) => fetch(`${API_BASE}/pdf/upload`, { method: 'POST', body: formData }).then(r => { if (!r.ok) throw new Error(`Upload failed ${r.status}`); return r.json() }),
@@ -170,7 +169,8 @@ export const api = {
 
   // ── Championship Suite (Podcast, TTS, Feynman, Knowledge Graph, RAG) ──
   generatePodcast: (data) => request('/championship/podcast/generate', { method: 'POST', body: data }),
-  synthesizeTTS: (data) => request('/championship/podcast/tts', { method: 'POST', body: data }),
+  // TTS returns audio/mpeg bytes — must use blob transport, not res.json()
+  synthesizeTTS: (data) => requestBlob('/championship/podcast/tts', { method: 'POST', body: data }),
   evaluateFeynman: (data) => request('/championship/feynman/evaluate', { method: 'POST', body: data }),
   getKnowledgeGraph: (courseId) => request('/championship/graph/concepts', { params: { course_id: courseId } }),
   getRagBenchmark: () => request('/championship/rag/benchmark'),

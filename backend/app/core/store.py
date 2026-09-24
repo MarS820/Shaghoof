@@ -7,13 +7,15 @@ project we persist to JSON files so nothing is lost on restart.
 import json
 import os
 import threading
+import time
 from pathlib import Path
 from datetime import datetime
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-_lock = threading.Lock()
+# RLock: ensure()/update() call load() and save() nested under the same lock.
+_lock = threading.RLock()
 
 DEFAULT_VARK = {
     "visual": 50.0,
@@ -85,8 +87,11 @@ def load(user_id):
     if not p.exists():
         return None
     try:
-        with open(p, "r", encoding="utf-8") as f:
-            return json.load(f)
+        # Hold the lock while the file is open so os.replace() in save()
+        # cannot race an open handle (PermissionError on Windows).
+        with _lock:
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
     except (OSError, json.JSONDecodeError):
         # Empty or truncated file (e.g. a hard kill mid-write) — treat as a
         # fresh profile instead of 500-ing every request for this user.
@@ -98,39 +103,79 @@ def load(user_id):
 
 
 def ensure(user_id, defaults=None):
-    twin = load(user_id)
-    if twin is None:
-        twin = defaults or default_twin()
-        twin["user_id"] = user_id
-        save(user_id, twin)
-    else:
+    with _lock:
+        twin = load(user_id)
+        if twin is None:
+            twin = defaults or default_twin()
+            twin["user_id"] = user_id
+            save(user_id, twin)
+            return twin
         # Backfill missing keys so crashes/schema-changes don't break us
         base = default_twin()
         base["user_id"] = user_id
+        changed = False
         for k, v in base.items():
             if k not in twin:
                 twin[k] = v
-        save(user_id, twin)
-    return twin
+                changed = True
+        # Only rewrite when something was actually added — GET /profile
+        # used to rewrite the file on every request, racing open readers.
+        if changed:
+            save(user_id, twin)
+        return twin
 
 
 def save(user_id, twin):
     struct = json.dumps(twin, ensure_ascii=False, indent=2)
     target = _path(user_id)
-    # Atomic write (temp + replace): a crash mid-write can never leave a
-    # truncated file behind, which used to hard-break the affected user.
-    tmp = target.with_suffix(target.suffix + ".tmp")
+    # Unique temp name per process/thread so parallel workers never share
+    # one .tmp path (a leftover lock on a fixed .tmp also caused WinError 5).
+    tmp = target.with_name(
+        f"{target.name}.{os.getpid()}.{threading.get_ident()}.tmp"
+    )
+    last_err = None
     with _lock:
-        with open(tmp, "w", encoding="utf-8") as f:
+        for attempt in range(5):
+            try:
+                with open(tmp, "w", encoding="utf-8") as f:
+                    f.write(struct)
+                    f.flush()
+                    os.fsync(f.fileno())
+                os.replace(tmp, target)
+                return
+            except PermissionError as e:
+                # Windows: destination briefly locked by a reader, antivirus,
+                # or cloud-sync. Back off and retry before failing the request.
+                last_err = e
+                try:
+                    if tmp.exists():
+                        tmp.unlink()
+                except OSError:
+                    pass
+                time.sleep(0.05 * (attempt + 1))
+            except OSError as e:
+                last_err = e
+                try:
+                    if tmp.exists():
+                        tmp.unlink()
+                except OSError:
+                    pass
+                time.sleep(0.05 * (attempt + 1))
+        # Last resort after retries: overwrite in place (still under lock).
+        with open(target, "w", encoding="utf-8") as f:
             f.write(struct)
-        os.replace(tmp, target)
+            f.flush()
+            os.fsync(f.fileno())
+        if last_err is not None:
+            return
 
 
 def update(user_id, patch):
-    twin = ensure(user_id)
-    twin.update(patch)
-    save(user_id, twin)
-    return twin
+    with _lock:
+        twin = ensure(user_id)
+        twin.update(patch)
+        save(user_id, twin)
+        return twin
 
 
 def find_by_email(email):
@@ -142,14 +187,15 @@ def find_by_email(email):
     needle = (email or "").strip().lower()
     if not needle:
         return None
-    for path in DATA_DIR.glob("user_*.json"):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                record = json.load(f)
-            if (record.get("email") or "").strip().lower() == needle:
-                return record
-        except (OSError, json.JSONDecodeError):
-            continue
+    with _lock:
+        for path in DATA_DIR.glob("user_*.json"):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    record = json.load(f)
+                if (record.get("email") or "").strip().lower() == needle:
+                    return record
+            except (OSError, json.JSONDecodeError):
+                continue
     return None
 
 

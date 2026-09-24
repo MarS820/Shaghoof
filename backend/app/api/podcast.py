@@ -15,20 +15,7 @@ def generate_podcast(req: PodcastRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/podcast/tts")
-async def synthesize_audio(req: TTSRequest):
-    try:
-        audio = await ChampionshipService.synthesize_speech(
-            text=req.text, speaker=req.speaker, language=req.language,
-            dialect=req.dialect, speed=req.speed, engine=req.engine,
-        )
-        if not audio:
-            raise HTTPException(status_code=500, detail="Audio synthesis produced empty stream")
-        return Response(content=audio, media_type="audio/mpeg")
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"TTS error: {e}")
+# NOTE: POST /championship/podcast/tts lives in api/championship.py (rate-limited).
 
 
 @router.post("/feynman/evaluate", response_model=FeynmanEvaluateResponse)

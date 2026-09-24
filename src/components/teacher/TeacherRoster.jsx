@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react'
 import api from '../../services/api'
 import AnimatedCard from '../AnimatedCard'
 
+function friendlyError(err, arabic) {
+  const raw = String(err?.message || err || '')
+  if (raw.includes('Failed to fetch') || raw.includes('NetworkError') || raw.includes('API error 0:')) {
+    return arabic ? 'تعذّر الاتصال بالخادم. تأكد من تشغيل الخادم ثم أعد المحاولة.' : 'Cannot reach the server. Start the backend, then try again.'
+  }
+  const detail = raw.match(/\d+:\s*(.*)$/)?.[1] || raw
+  try {
+    const parsed = JSON.parse(detail)
+    if (parsed?.detail) return String(parsed.detail)
+  } catch { /* not JSON */ }
+  return detail.replace(/^API error \d+:\s*/, '') || (arabic ? 'حدث خطأ غير متوقع.' : 'Something went wrong.')
+}
+
 export default function TeacherRoster({ teacherId, classId, lang }) {
   const arabic = lang === 'ar'
   const [students, setStudents] = useState([])
@@ -10,11 +23,18 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
   const [filterStatus, setFilterStatus] = useState('')
   const [filterRisk, setFilterRisk] = useState('')
   const [showAdd, setShowAdd] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', progress: 0, status: 'green' })
+  const [form, setForm] = useState({ name: '', email: '', password: '', progress: 0, status: 'green' })
   const [adding, setAdding] = useState(false)
   const [selectedStudent, setSelectedStudent] = useState(null)
   const [profile, setProfile] = useState(null)
   const [profileLoading, setProfileLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  const flash = (msg, isError = false) => {
+    if (isError) { setError(msg); setSuccess('') } else { setSuccess(msg); setError('') }
+    setTimeout(() => { setError(''); setSuccess('') }, 4000)
+  }
 
   const loadStudents = async () => {
     setLoading(true)
@@ -24,32 +44,47 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
         status: filterStatus || undefined,
         risk_level: filterRisk || undefined,
       })
-      setStudents(data)
-    } catch {}
+      setStudents(Array.isArray(data) ? data : [])
+      setError('')
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setLoading(false)
   }
 
   useEffect(() => { loadStudents() }, [teacherId, classId, search, filterStatus, filterRisk])
 
   const handleAdd = async () => {
-    if (!form.name.trim() || !form.email.trim()) return
+    setError('')
+    setSuccess('')
+    if (!form.name.trim() || !form.email.trim()) {
+      flash(arabic ? 'أدخل الاسم والبريد أولاً.' : 'Enter name and email first.', true)
+      return
+    }
     setAdding(true)
     try {
       await api.createStudent(teacherId, classId, form)
-      setForm({ name: '', email: '', progress: 0, status: 'green' })
+      setForm({ name: '', email: '', password: '', progress: 0, status: 'green' })
       setShowAdd(false)
-      loadStudents()
-    } catch {}
+      flash(arabic ? 'تمت إضافة الطالب.' : 'Student added.')
+      await loadStudents()
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setAdding(false)
   }
 
   const openProfile = async (studentId) => {
     setSelectedStudent(studentId)
     setProfileLoading(true)
+    setError('')
     try {
       const data = await api.studentProfile(teacherId, classId, studentId)
       setProfile(data)
-    } catch {}
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+      setProfile(null)
+    }
     setProfileLoading(false)
   }
 
@@ -72,6 +107,9 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
         <button onClick={() => { setSelectedStudent(null); setProfile(null) }} className="mb-4 text-sm font-bold text-blue-500 hover:text-blue-700 dark:text-blue-400">
           ← {arabic ? 'رجوع للقائمة' : 'Back to roster'}
         </button>
+        {error && (
+          <p role="alert" className="mb-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:bg-red-950/40 dark:text-red-300">{error}</p>
+        )}
         {profileLoading ? (
           <div className="py-8 text-center text-gray-400">{arabic ? 'جارٍ التحميل...' : 'Loading...'}</div>
         ) : profile ? (
@@ -83,12 +121,12 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
               </div>
               <div className="flex items-center gap-3">
                 <span className={`rounded-full px-3 py-1 text-sm font-bold ${statusColor(profile.status)}`}>{profile.progress}%</span>
-                <span className={`rounded-full px-3 py-1 text-sm font-bold ${riskColor(profile.academic_risk.level)}`}>
-                  {arabic ? 'خطر' : 'Risk'}: {profile.academic_risk.score}
+                <span className={`rounded-full px-3 py-1 text-sm font-bold ${riskColor(profile.academic_risk?.level)}`}>
+                  {arabic ? 'خطر' : 'Risk'}: {profile.academic_risk?.score ?? 0}
                 </span>
               </div>
             </div>
-            {profile.academic_risk.reasons.length > 0 && (
+            {profile.academic_risk?.reasons?.length > 0 && (
               <div className="mb-4 rounded-xl bg-amber-50 p-4 dark:bg-amber-900/20">
                 <h4 className="mb-2 text-sm font-bold text-amber-700 dark:text-amber-300">{arabic ? 'أسباب الخطر' : 'Risk Reasons'}</h4>
                 {profile.academic_risk.reasons.map((r, i) => (
@@ -96,9 +134,9 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
                 ))}
               </div>
             )}
-            {profile.submissions.length > 0 && (
-              <div>
-                <h4 className="mb-2 text-sm font-bold text-gray-700 dark:text-gray-300">{arabic ? 'النتائج' : 'Submissions'}</h4>
+            {profile.submissions?.length > 0 && (
+              <div className="mb-4">
+                <h4 className="mb-2 text-sm font-bold text-gray-700 dark:text-gray-300">{arabic ? 'التقديمات' : 'Submissions'}</h4>
                 <div className="space-y-2">
                   {profile.submissions.map((s) => (
                     <div key={s.id} className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
@@ -117,6 +155,28 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
                 </div>
               </div>
             )}
+            {profile.exam_history?.length > 0 && (
+              <div>
+                <h4 className="mb-2 text-sm font-bold text-gray-700 dark:text-gray-300">{arabic ? 'سجل الاختبارات' : 'Exam history'} · {profile.xp} XP</h4>
+                <div className="space-y-2">
+                  {profile.exam_history.map((e, i) => (
+                    <div key={e.id || i} className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
+                      <div>
+                        <span className="font-semibold text-gray-900 dark:text-white">{e.topic}</span>
+                        <span className="ml-2 text-xs text-gray-400">{e.mode}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{e.correct_count}/{e.total_questions}</span>
+                        <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${e.score >= 70 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>
+                          {e.score}%
+                        </span>
+                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">+{e.xp_earned} XP</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : null}
       </div>
@@ -129,16 +189,24 @@ export default function TeacherRoster({ teacherId, classId, lang }) {
         <h2 className="text-xl font-extrabold text-blue-700 dark:text-blue-300">
           {arabic ? 'قائمة الطلاب' : 'Roster'}
         </h2>
-        <button onClick={() => setShowAdd(!showAdd)} className="rounded-xl bg-blue-500 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-blue-700">
+        <button onClick={() => { setShowAdd(!showAdd); setError(''); setSuccess('') }} className="rounded-xl bg-blue-500 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-blue-700">
           {arabic ? '+ إضافة طالب' : '+ Add Student'}
         </button>
       </div>
+
+      {error && (
+        <p role="alert" className="mb-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:bg-red-950/40 dark:text-red-300">{error}</p>
+      )}
+      {success && (
+        <p role="status" className="mb-3 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">{success}</p>
+      )}
 
       {showAdd && (
         <div className="mb-4 rounded-xl bg-gray-50 p-4 dark:bg-gray-800">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <input type="text" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder={arabic ? 'الاسم' : 'Name'} className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
             <input type="email" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} placeholder={arabic ? 'البريد' : 'Email'} className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
+            <input type="password" value={form.password} onChange={(e) => setForm({...form, password: e.target.value})} minLength={6} placeholder={arabic ? 'كلمة المرور (اختياري)' : 'Password (optional)'} className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
             <input type="number" min="0" max="100" value={form.progress} onChange={(e) => setForm({...form, progress: Number(e.target.value)})} className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white" />
             <button onClick={handleAdd} disabled={adding} className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700 disabled:opacity-50">
               {adding ? '...' : (arabic ? 'إضافة' : 'Add')}

@@ -1,0 +1,54 @@
+{
+  "title": "Task 5 (LangChain).pdf",
+  "sections": [
+    {
+      "type": "paragraph",
+      "text": "Task 5  \n \n \nTask Title  \nBuild a RAG System  using LangChain framework   \n \nTask Goal  \n Use RAG (Retrieval -Augmented Generation)  and LangChain  to answer \nquestions based on a PDF document  or Excel -sheet   \n \nInstructions  \n Load the provided PDF  or Excel -sheet  as your knowledge base. Then Build \na RAG system (retriever + generator)."
+    }
+  ],
+  "key_concepts": [],
+  "summary": "Task 5  \n \n \nTask Title  \nBuild a RAG System  using LangChain framework   \n \nTask Goal  \n Use RAG (Retrieval -Augmented Generation)  and LangChain  to answer \nquestions based on a PDF document  or Excel -sheet   \n \nInstructions  \n Load the provided PDF  or Excel -sheet  as your knowledge base. Then Build \na RAG system (retriever + generator).",
+  "total_paragraphs": 1,
+  "presentation": {
+    "font_size": "large",
+    "line_height": "wide",
+    "max_paragraph_words": 30,
+    "use_bullet_points": true,
+    "audio_available": false,
+    "sign_language_hint": false,
+    "sensory_reduced": false,
+    "step_by_step": false,
+    "visual_aids_priority": false,
+    "large_text": true,
+    "high_contrast": true
+  },
+  "vark_mode": "reading",
+  "sen_profile": "text",
+  "template_id": "T4",
+  "wordwall": {
+    "embed_suggestions": [
+      {
+        "type": "match",
+        "reason": "Universal format for vocabulary building"
+      },
+      {
+        "type": "quiz",
+        "reason": "Test understanding of any topic"
+      },
+      {
+        "type": "wheel",
+        "reason": "Engaging random selection for review"
+      }
+    ]
+  },
+  "source_type": "pdf",
+  "filename": "Task 5 (LangChain).pdf",
+  "pdf_session_id": "ahmedmohamed_gmail_com_d2f0c704d1",
+  "word_count": 51,
+  "subject": "coding",
+  "course_id": "1790254755762",
+  "source_id": "",
+  "source_name": "",
+  "session_id": "ahmedmohamed@gmail.com_b966aca0f93e",
+  "created_at": "2026-09-24T13:01:02.219700"
+}

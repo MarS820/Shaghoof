@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react'
 import api from '../../services/api'
 import AnimatedCard from '../AnimatedCard'
 
+function friendlyError(err, arabic) {
+  const raw = String(err?.message || err || '')
+  if (raw.includes('Failed to fetch') || raw.includes('NetworkError') || raw.includes('API error 0:')) {
+    return arabic ? 'تعذّر الاتصال بالخادم. تأكد من تشغيل الخادم ثم أعد المحاولة.' : 'Cannot reach the server. Start the backend, then try again.'
+  }
+  const detail = raw.match(/\d+:\s*(.*)$/)?.[1] || raw
+  try {
+    const parsed = JSON.parse(detail)
+    if (parsed?.detail) return String(parsed.detail)
+  } catch { /* not JSON */ }
+  return detail.replace(/^API error \d+:\s*/, '') || (arabic ? 'حدث خطأ غير متوقع.' : 'Something went wrong.')
+}
+
 export default function TeacherAssessments({ teacherId, classId, lang }) {
   const arabic = lang === 'ar'
   const [assessments, setAssessments] = useState([])
@@ -14,6 +27,13 @@ export default function TeacherAssessments({ teacherId, classId, lang }) {
   const [form, setForm] = useState({ title: '', max_score: 100, attempt_limit: 1, status: 'draft' })
   const [resultForm, setResultForm] = useState({ assessment_id: '', student_id: '', raw_score: 0, misconception: '', teacher_feedback: '' })
   const [creating, setCreating] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  const flash = (msg, isError = false) => {
+    if (isError) { setError(msg); setSuccess('') } else { setSuccess(msg); setError('') }
+    setTimeout(() => { setError(''); setSuccess('') }, 4000)
+  }
 
   const loadData = async () => {
     setLoading(true)
@@ -24,43 +44,62 @@ export default function TeacherAssessments({ teacherId, classId, lang }) {
         api.classSubmissions(teacherId, classId),
         api.assessmentAnalytics(teacherId, classId),
       ])
-      setAssessments(a)
-      setStudents(s)
-      setSubmissions(sub)
-      setAnalytics(an)
-    } catch {}
+      setAssessments(Array.isArray(a) ? a : [])
+      setStudents(Array.isArray(s) ? s : [])
+      setSubmissions(Array.isArray(sub) ? sub : [])
+      setAnalytics(Array.isArray(an) ? an : [])
+      setError('')
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setLoading(false)
   }
 
   useEffect(() => { loadData() }, [teacherId, classId])
 
   const handleCreate = async () => {
-    if (!form.title.trim()) return
+    setError('')
+    setSuccess('')
+    if (!form.title.trim()) {
+      flash(arabic ? 'أدخل عنوان التقييم أولاً.' : 'Enter an assessment title first.', true)
+      return
+    }
     setCreating(true)
     try {
       await api.createAssessment(teacherId, classId, form)
       setForm({ title: '', max_score: 100, attempt_limit: 1, status: 'draft' })
       setShowCreate(false)
-      loadData()
-    } catch {}
+      flash(arabic ? 'تم إنشاء التقييم.' : 'Assessment created.')
+      await loadData()
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setCreating(false)
   }
 
   const handleAddResult = async () => {
-    if (!resultForm.assessment_id || !resultForm.student_id) return
+    setError('')
+    setSuccess('')
+    if (!resultForm.assessment_id || !resultForm.student_id) {
+      flash(arabic ? 'اختر التقييم والطالب أولاً.' : 'Select an assessment and student first.', true)
+      return
+    }
     setCreating(true)
     try {
       await api.createSubmission(teacherId, { ...resultForm, raw_score: Number(resultForm.raw_score) })
       setResultForm({ assessment_id: '', student_id: '', raw_score: 0, misconception: '', teacher_feedback: '' })
       setShowAddResult(false)
-      loadData()
-    } catch {}
+      flash(arabic ? 'تمت إضافة النتيجة.' : 'Result added.')
+      await loadData()
+    } catch (err) {
+      flash(friendlyError(err, arabic), true)
+    }
     setCreating(false)
   }
 
   const statusColor = (s) => {
     if (s === 'published') return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300'
-    if (s === 'closed') return 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+    if (s === 'closed') return 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-300'
     return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300'
   }
 
@@ -71,14 +110,21 @@ export default function TeacherAssessments({ teacherId, classId, lang }) {
           {arabic ? 'التقييمات والنتائج' : 'Assessments & Results'}
         </h2>
         <div className="flex gap-2">
-          <button onClick={() => { setShowCreate(!showCreate); setShowAddResult(false) }} className="rounded-xl bg-blue-500 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-blue-700">
+          <button onClick={() => { setShowCreate(!showCreate); setShowAddResult(false); setError(''); setSuccess('') }} className="rounded-xl bg-blue-500 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-blue-700">
             {arabic ? '+ إنشاء تقييم' : '+ New Assessment'}
           </button>
-          <button onClick={() => { setShowAddResult(!showAddResult); setShowCreate(false) }} className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-emerald-700">
+          <button onClick={() => { setShowAddResult(!showAddResult); setShowCreate(false); setError(''); setSuccess('') }} className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white transition-standard hover:bg-emerald-700">
             {arabic ? '+ إضافة نتيجة' : '+ Add Result'}
           </button>
         </div>
       </div>
+
+      {error && (
+        <p role="alert" className="mb-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-600 dark:bg-red-950/40 dark:text-red-300">{error}</p>
+      )}
+      {success && (
+        <p role="status" className="mb-3 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">{success}</p>
+      )}
 
       {showCreate && (
         <div className="mb-4 rounded-xl bg-gray-50 p-4 dark:bg-gray-800">

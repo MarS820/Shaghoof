@@ -35,22 +35,26 @@ const A11Y_OPTIONS = [
 function DataSourceCard({ source, onRemove, onSubjectChange, subjects }) {
   const typeLabels = { pdf: '📄 PDF', url: '🔗 Article', moodle: '🎓 Moodle', text: '✏️ Text' }
   return (
-    <div className="border border-[var(--line)] rounded-lg p-3 bg-[var(--surface)]">
+    <div className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)]/60 p-3 backdrop-blur-sm">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="mb-1 flex items-center gap-2">
             <span className="text-xs font-medium text-[var(--muted)]">{typeLabels[source.type] || source.type}</span>
-            {source.subject && <span className="text-xs font-medium text-[var(--brand)] bg-[var(--brand-light)] px-2 py-0.5 rounded-full">{source.subject}</span>}
+            {source.subject && <span className="rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-xs font-medium text-[var(--brand)]">{source.subject}</span>}
           </div>
-          <p className="text-sm font-medium text-[var(--ink)] truncate">{source.name || source.url || 'Untitled'}</p>
-          {source.wordCount && <p className="text-xs text-[var(--muted)] mt-0.5">{source.wordCount} words</p>}
+          <p className="truncate text-sm font-medium text-[var(--ink)]">{source.name || source.url || 'Untitled'}</p>
+          {source.wordCount && <p className="mt-0.5 text-xs text-[var(--muted)]">{source.wordCount} words</p>}
         </div>
         <div className="flex items-center gap-1 shrink-0">
-          <select value={source.subject || ''} onChange={(e) => onSubjectChange(source.id, e.target.value)} className="text-xs border border-[var(--line)] rounded px-2 py-1 bg-[var(--surface)] text-[var(--ink)]">
+          <select
+            value={source.subject || ''}
+            onChange={(e) => onSubjectChange(source.id, e.target.value)}
+            className="rounded-lg border border-[var(--neutral-10)] bg-[var(--surface)] px-2 py-1 text-xs text-[var(--ink)]"
+          >
             <option value="">Assign subject...</option>
             {subjects.map((s) => <option key={s.id} value={s.name}>{s.name}</option>)}
           </select>
-          <button onClick={() => onRemove(source.id)} className="text-[var(--muted)] hover:text-[var(--danger)] p-1 transition-colors">✕</button>
+          <button onClick={() => onRemove(source.id)} className="text-[var(--muted)] transition-colors hover:text-[var(--danger)]">✕</button>
         </div>
       </div>
     </div>
@@ -101,7 +105,7 @@ export default function Settings() {
       } else if (uploadType === 'pdf' && uploadFile) {
         const fd = new FormData()
         fd.append('file', uploadFile)
-        const upRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/pdf/upload?user_id=${user.id}`, { method: 'POST', body: fd })
+        const upRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/pdf/upload?user_id=${user.id}`, { method: 'POST', body: fd })
         if (!upRes.ok) throw new Error('Upload failed')
         const upData = await upRes.json()
         setSources((prev) => [...prev, { id: Date.now().toString(), type: 'pdf', name: uploadFile.name, subject: '', wordCount: 0, sessionId: upData.session_id }])
@@ -149,7 +153,7 @@ export default function Settings() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-      <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6 flex items-center gap-3">
         <Mascot size={40} animate mood="happy" />
         <div>
           <h1 className="text-xl font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>Settings</h1>
@@ -159,13 +163,17 @@ export default function Settings() {
 
       <div className="space-y-6">
         {/* VARK Learning Style */}
-        <section className="border border-[var(--line)] rounded-lg p-5 bg-[var(--surface)]">
-          <h2 className="text-base font-bold text-[var(--ink)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>Learning Style (VARK)</h2>
-          <p className="text-xs text-[var(--muted)] mb-4">How do you prefer to learn?</p>
+        <section className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] p-5">
+          <h2 className="mb-1 text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>Learning Style (VARK)</h2>
+          <p className="mb-4 text-xs text-[var(--muted)]">How do you prefer to learn?</p>
           <div className="grid grid-cols-2 gap-3">
             {VARK_OPTIONS.map((opt) => (
-              <button key={opt.id} onClick={() => setVark(opt.id)} className={`p-3 rounded-lg border text-left transition-colors ${vark === opt.id ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--line)] hover:border-[var(--brand)]'}`}>
-                <div className="flex items-center gap-2 mb-1">
+              <button
+                key={opt.id}
+                onClick={() => setVark(opt.id)}
+                className={`rounded-xl border p-3 text-left transition-bouncy ${vark === opt.id ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--neutral-10)] hover:border-[var(--brand)]'}`}
+              >
+                <div className="mb-1 flex items-center gap-2">
                   <span className="text-lg">{opt.icon}</span>
                   <span className="text-sm font-semibold text-[var(--ink)]">{opt.label}</span>
                 </div>
@@ -176,25 +184,36 @@ export default function Settings() {
         </section>
 
         {/* SEN Profile */}
-        <section className="border border-[var(--line)] rounded-lg p-5 bg-[var(--surface)]">
-          <h2 className="text-base font-bold text-[var(--ink)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>Support Profile</h2>
-          <p className="text-xs text-[var(--muted)] mb-4">Additional support adaptations</p>
+        <section className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] p-5">
+          <h2 className="mb-1 text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>Support Profile</h2>
+          <p className="mb-4 text-xs text-[var(--muted)]">Additional support adaptations</p>
           <div className="grid grid-cols-2 gap-3">
             {SEN_OPTIONS.map((opt) => (
-              <button key={opt.id} onClick={() => setSenProfile(opt.id)} className={`p-3 rounded-lg border text-left transition-colors ${senProfile === opt.id ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--line)] hover:border-[var(--brand)]'}`}>
+              <button
+                key={opt.id}
+                onClick={() => setSenProfile(opt.id)}
+                className={`rounded-xl border p-3 text-left transition-bouncy ${senProfile === opt.id ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--neutral-10)] hover:border-[var(--brand)]'}`}
+              >
                 <span className="text-sm font-semibold text-[var(--ink)]">{opt.label}</span>
-                <p className="text-xs text-[var(--muted)] mt-0.5">{opt.desc}</p>
+                <p className="mt-0.5 text-xs text-[var(--muted)]">{opt.desc}</p>
               </button>
             ))}
           </div>
         </section>
 
         {/* Subjects */}
-        <section className="border border-[var(--line)] rounded-lg p-5 bg-[var(--surface)]">
-          <h2 className="text-base font-bold text-[var(--ink)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>My Subjects</h2>
-          <p className="text-xs text-[var(--muted)] mb-4">Create subjects to organize your learning material</p>
-          <div className="flex gap-2 mb-3">
-            <input type="text" value={newSubject} onChange={(e) => setNewSubject(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addSubject()} placeholder="e.g. Biology, Algebra, History..." className="flex-1 brand-input text-sm" />
+        <section className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] p-5">
+          <h2 className="mb-1 text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>My Subjects</h2>
+          <p className="mb-4 text-xs text-[var(--muted)]">Create subjects to organize your learning material</p>
+          <div className="mb-3 flex gap-2">
+            <input
+              type="text"
+              value={newSubject}
+              onChange={(e) => setNewSubject(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && addSubject()}
+              placeholder="e.g. Biology, Algebra, History..."
+              className="flex-1 rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-2.5 text-sm"
+            />
             <button onClick={addSubject} disabled={!newSubject.trim()} className="brand-btn-primary text-sm px-4">Add</button>
           </div>
           {subjects.length > 0 ? (
@@ -202,12 +221,15 @@ export default function Settings() {
               {subjects.map((s) => {
                 const sourceCount = sources.filter((src) => src.subject === s.name).length
                 return (
-                  <div key={s.id} className="flex items-center justify-between p-2.5 rounded-lg border border-[var(--line)] bg-[var(--page)]">
+                  <div
+                    key={s.id}
+                    className="flex items-center justify-between rounded-xl border border-[var(--neutral-10)] bg-[var(--page)] p-2.5"
+                  >
                     <div>
                       <span className="text-sm font-medium text-[var(--ink)]">{s.name}</span>
                       <span className="text-xs text-[var(--muted)] ml-2">{sourceCount} source{sourceCount !== 1 ? 's' : ''}</span>
                     </div>
-                    <button onClick={() => removeSubject(s.id)} className="text-[var(--muted)] hover:text-[var(--danger)] text-sm transition-colors">Remove</button>
+                    <button onClick={() => removeSubject(s.id)} className="text-[var(--muted)] transition-colors hover:text-[var(--danger)] text-sm">Remove</button>
                   </div>
                 )
               })}
@@ -218,43 +240,65 @@ export default function Settings() {
         </section>
 
         {/* Data Sources */}
-        <section className="border border-[var(--line)] rounded-lg p-5 bg-[var(--surface)]">
-          <h2 className="text-base font-bold text-[var(--ink)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>Data Sources</h2>
-          <p className="text-xs text-[var(--muted)] mb-4">Upload content that powers your tutor, quizzes, and assessments</p>
+        <section className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] p-5">
+          <h2 className="mb-1 text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>Data Sources</h2>
+          <p className="mb-4 text-xs text-[var(--muted)]">Upload content that powers your tutor, quizzes, and assessments</p>
 
           {/* Source Type Tabs */}
-          <div className="flex gap-2 mb-4">
+          <div className="mb-4 flex gap-2">
             {[
               { id: 'url', label: 'Article Link', icon: '🔗' },
               { id: 'pdf', label: 'PDF Upload', icon: '📄' },
               { id: 'moodle', label: 'Moodle LMS', icon: '🎓' },
             ].map((t) => (
-              <button key={t.id} onClick={() => setUploadType(t.id)} className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${uploadType === t.id ? 'border-[var(--brand)] bg-[var(--brand-light)] text-[var(--brand)]' : 'border-[var(--line)] text-[var(--muted)] hover:border-[var(--brand)]'}`}>
+              <button
+                key={t.id}
+                onClick={() => setUploadType(t.id)}
+                className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-sm font-medium transition-colors ${uploadType === t.id ? 'border-[var(--brand)] bg-[var(--brand-light)] text-[var(--brand)]' : 'border-[var(--neutral-10)] text-[var(--muted)] hover:border-[var(--brand)]'}`}
+              >
                 <span>{t.icon}</span> {t.label}
               </button>
             ))}
           </div>
 
           {/* Upload Forms */}
-          <div className="p-4 rounded-lg border border-[var(--line)] bg-[var(--page)] mb-4">
+          <div className="mb-4 rounded-xl border border-[var(--neutral-10)] bg-[var(--page)] p-4">
             {uploadType === 'url' && (
               <div className="flex gap-2">
-                <input type="url" value={uploadUrl} onChange={(e) => setUploadUrl(e.target.value)} placeholder="https://example.com/article..." className="flex-1 brand-input text-sm" />
+                <input
+                  type="url"
+                  value={uploadUrl}
+                  onChange={(e) => setUploadUrl(e.target.value)}
+                  placeholder="https://example.com/article..."
+                  className="flex-1 rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-2.5 text-sm"
+                />
                 <button onClick={handleUpload} disabled={!uploadUrl.trim() || loading} className="brand-btn-primary text-sm px-4">{loading ? '...' : 'Add'}</button>
               </div>
             )}
             {uploadType === 'pdf' && (
               <div className="flex gap-2">
                 <input ref={fileRef} type="file" accept=".pdf" onChange={(e) => setUploadFile(e.target.files?.[0] || null)} className="hidden" />
-                <button onClick={() => fileRef.current?.click()} className="flex-1 brand-input text-sm text-left cursor-pointer">{uploadFile ? uploadFile.name : 'Select PDF file...'}</button>
+                <button onClick={() => fileRef.current?.click()} className="flex-1 cursor-pointer rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-2.5 text-sm text-left">{uploadFile ? uploadFile.name : 'Select PDF file...'}</button>
                 <button onClick={handleUpload} disabled={!uploadFile || loading} className="brand-btn-primary text-sm px-4">{loading ? '...' : 'Upload'}</button>
               </div>
             )}
             {uploadType === 'moodle' && (
               <div className="space-y-2">
-                <input type="url" value={moodleUrl} onChange={(e) => setMoodleUrl(e.target.value)} placeholder="https://your-moodle-site.com" className="w-full brand-input text-sm" />
-                <input type="text" value={moodleToken} onChange={(e) => setMoodleToken(e.target.value)} placeholder="Moodle API token" className="w-full brand-input text-sm" />
-                <button onClick={handleUpload} disabled={!moodleUrl.trim() || loading} className="brand-btn-primary text-sm px-4 w-full">{loading ? '...' : 'Connect Moodle'}</button>
+                <input
+                  type="url"
+                  value={moodleUrl}
+                  onChange={(e) => setMoodleUrl(e.target.value)}
+                  placeholder="https://your-moodle-site.com"
+                  className="w-full rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-2.5 text-sm"
+                />
+                <input
+                  type="text"
+                  value={moodleToken}
+                  onChange={(e) => setMoodleToken(e.target.value)}
+                  placeholder="Moodle API token"
+                  className="w-full rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] px-4 py-2.5 text-sm"
+                />
+                <button onClick={handleUpload} disabled={!moodleUrl.trim() || loading} className="w-full rounded-xl bg-[var(--primary-orange)] px-4 py-2.5 text-sm font-bold text-white transition-bouncy hover:opacity-90">{loading ? '...' : 'Connect Moodle'}</button>
               </div>
             )}
           </div>
@@ -262,7 +306,7 @@ export default function Settings() {
           {/* Uploaded Sources */}
           {sources.length > 0 && (
             <div className="space-y-2">
-              <p className="text-xs font-medium text-[var(--muted)] mb-2">{sources.length} source{sources.length !== 1 ? 's' : ''} added</p>
+              <p className="mb-2 text-xs font-medium text-[var(--muted)]">{sources.length} source{sources.length !== 1 ? 's' : ''} added</p>
               {sources.map((src) => (
                 <DataSourceCard key={src.id} source={src} onRemove={removeSource} onSubjectChange={assignSubject} subjects={subjects} />
               ))}
@@ -270,10 +314,10 @@ export default function Settings() {
           )}
         </section>
 
-        {/* Accessibility Suite — all toggles have real effects (see index.css / AppContext) */}
-        <section className="border border-[var(--line)] rounded-lg p-5 bg-[var(--surface)]">
-          <h2 className="text-base font-bold text-[var(--ink)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>Accessibility Suite</h2>
-          <p className="text-xs text-[var(--muted)] mb-4">Every option applies instantly and is remembered on this device</p>
+        {/* Accessibility Suite */}
+        <section className="rounded-xl border border-[var(--neutral-10)] bg-[var(--surface)] p-5">
+          <h2 className="mb-1 text-base font-bold text-[var(--ink)]" style={{ fontFamily: 'var(--font-heading)' }}>Accessibility Suite</h2>
+          <p className="mb-4 text-xs text-[var(--muted)]">Every option applies instantly and is remembered on this device</p>
           <div className="grid sm:grid-cols-2 gap-2">
             {A11Y_OPTIONS.map((opt) => {
               const active = !!toggles[opt.key]
@@ -282,7 +326,7 @@ export default function Settings() {
                   key={opt.key}
                   onClick={() => toggleAccessibility(opt.key)}
                   aria-pressed={active}
-                  className={`flex items-center justify-between gap-3 rounded-xl border p-3 text-left transition-bouncy ${active ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--line)] hover:border-[var(--brand)]'}`}
+                  className={`flex items-center justify-between gap-3 rounded-xl border p-3 text-left transition-bouncy ${active ? 'border-[var(--brand)] bg-[var(--brand-light)]' : 'border-[var(--neutral-10)] hover:border-[var(--brand)]'}`}
                 >
                   <span className="flex items-center gap-2.5 min-w-0">
                     <span className="text-lg shrink-0" aria-hidden="true">{opt.icon}</span>
@@ -291,7 +335,7 @@ export default function Settings() {
                       <span className="block text-[11px] text-[var(--muted)] truncate">{opt.desc}</span>
                     </span>
                   </span>
-                  <span className={`shrink-0 inline-flex h-5 w-9 items-center rounded-full p-0.5 transition-colors ${active ? 'bg-[var(--brand)]' : 'bg-gray-300 dark:bg-gray-600'}`}>
+                  <span className={`shrink-0 inline-flex h-5 w-9 items-center rounded-full p-0.5 transition-colors ${active ? 'bg-[var(--brand)]' : 'bg-[var(--neutral-20)]'}`}>
                     <span className={`h-4 w-4 rounded-full bg-white shadow transition-transform ${active ? 'translate-x-4' : ''}`} />
                   </span>
                 </button>
@@ -299,7 +343,7 @@ export default function Settings() {
             })}
           </div>
           {toggles.whiteNoise && (
-            <p className="mt-3 rounded-lg bg-green-50 px-3 py-2 text-[11px] font-semibold text-green-700 dark:bg-green-950/40 dark:text-green-300">
+            <p className="mt-3 rounded-xl bg-[var(--success)]/5 px-3 py-2 text-[11px] font-semibold text-[var(--success)]">
               🎧 White noise is on — use the round control at the bottom-left to pick rain, coffee shop or waves.
             </p>
           )}
@@ -308,7 +352,7 @@ export default function Settings() {
         {/* Save */}
         <div className="flex items-center gap-3 pb-8">
           <button onClick={handleSave} className="brand-btn-primary px-8">{saved ? 'Saved!' : 'Save Settings'}</button>
-          {saved && <span className="text-sm text-[var(--success)] font-medium">Settings saved successfully</span>}
+          {saved && <span className="text-sm font-medium text-[var(--success)]">Settings saved successfully</span>}
         </div>
       </div>
     </div>

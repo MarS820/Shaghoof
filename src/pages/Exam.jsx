@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import Mascot from '../components/Mascot'
 import api from '../services/api'
 import { speak, stopSpeaking } from '../services/speech'
+import { resolveLearningTemplate } from '../utils/learningTemplate'
 
 const MOTIVATIONAL = [
   'You got this!',
@@ -24,21 +25,33 @@ function QuizSetup({ onStart }) {
   const { user } = useApp()
   const [searchParams] = useSearchParams()
   const subjects = user?.subjects || []
+  const template = user ? resolveLearningTemplate(user) : null
   const [subject, setSubject] = useState(() => searchParams.get('subject') || '')
   const [topic, setTopic] = useState('')
   const [count, setCount] = useState(5)
   const [difficulty, setDifficulty] = useState('Medium')
   const [loading, setLoading] = useState(false)
 
+  // Map learning-template quizFormat → backend question_types mix.
+  const FORMAT_TO_TYPES = {
+    sandbox: ['mcq', 'true_false'],
+    podcast: ['mcq', 'fill_blank'],
+    storyboard: ['mcq', 'true_false'],
+    translator: ['fill_blank', 'short_answer', 'mcq'],
+    explorer: ['mcq', 'true_false', 'fill_blank'],
+    routine: ['mcq', 'true_false', 'fill_blank'],
+  }
+
   const handleStart = async () => {
     const quizTopic = topic.trim() || subject
     if (!quizTopic) return
     setLoading(true)
     try {
-      // Grounded in this student's own lessons + adapted to their VARK/SEN template
+      const questionTypes = template?.quizFormat ? FORMAT_TO_TYPES[template.quizFormat] : undefined
       const res = await api.generateQuiz({
         topic: quizTopic, subject: subject || undefined, n: count, difficulty,
         user_id: user.id, ground_in_lessons: true,
+        question_types: questionTypes,
       })
       onStart(res)
     } catch { alert('Failed to generate quiz.') } finally { setLoading(false) }
@@ -103,16 +116,52 @@ function QuizSetup({ onStart }) {
 //  - focus overlay: calmer spacing, no countdown color alarm
 const OPTION_ICONS = ['🅰️', '🆎', '🅾️', '🆑']
 
+const normalize = (s) => String(s ?? '').trim().toLowerCase().replace(/[.!?،,]/g, '').replace(/\s+/g, ' ')
+
+function isCorrectAnswer(question, given) {
+  if (!question) return false
+  const type = question.type || 'mcq'
+  if (type === 'mcq' || type === 'true_false') {
+    return given === question.correct
+  }
+  // fill_blank / short_answer — string match against accepted answers
+  const accepted = (question.accepted_answers || []).map(normalize)
+  const canon = normalize(question.correct_answer)
+  if (canon) accepted.push(canon)
+  const g = normalize(given)
+  if (!g) return false
+  if (accepted.includes(g)) return true
+  // keyword containment for short answers
+  return accepted.some((a) => a.length > 3 && (a.includes(g) || g.includes(a)))
+}
+
 function QuizQuestion({ question, index, total, onAnswer, selected, showResult, speakIt, visualIcons, calm }) {
   const { lang } = useApp()
   const optText = (opt) => (typeof opt === 'string' ? opt : opt?.text || '')
+  const type = question?.type || 'mcq'
+  const [textValue, setTextValue] = useState('')
 
   useEffect(() => {
     if (speakIt && !showResult && question?.question) {
       speak(question.question, { lang, rate: 0.92 })
     }
+    setTextValue(typeof selected === 'string' ? selected : '')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question?.question, speakIt])
+
+  const correct = isCorrectAnswer(question, selected)
+
+  const submitText = () => {
+    if (!textValue.trim() || showResult) return
+    onAnswer(textValue.trim())
+    if (speakIt) stopSpeaking()
+  }
+
+  const typeBadge = type !== 'mcq' && (
+    <span className="ms-2 rounded-full bg-[var(--brand-light)] px-2 py-0.5 text-[10px] font-bold text-[var(--brand)] uppercase">
+      {type.replace('_', ' ')}
+    </span>
+  )
 
   return (
     <div className="max-w-lg mx-auto px-4 py-8">
@@ -124,7 +173,10 @@ function QuizQuestion({ question, index, total, onAnswer, selected, showResult, 
 
       <div className={`border border-[var(--line)] rounded-lg bg-[var(--surface)] ${calm ? 'p-6' : 'p-5'}`}>
         <div className="flex items-start gap-2 mb-4">
-          <h2 className="text-base font-medium text-[var(--ink)] flex-1">{question.question}</h2>
+          <h2 className="text-base font-medium text-[var(--ink)] flex-1">
+            {question.question}
+            {typeBadge}
+          </h2>
           {speakIt && (
             <button
               type="button"
@@ -137,60 +189,101 @@ function QuizQuestion({ question, index, total, onAnswer, selected, showResult, 
             </button>
           )}
         </div>
-        <div className={calm ? 'space-y-3' : 'space-y-2'}>
-          {question.options?.map((opt, i) => {
-            const letter = String.fromCharCode(65 + i)
-            const isSelected = selected === i
-            const isCorrect = i === question.correct
-            const showCorrect = showResult && isCorrect
-            const showWrong = showResult && isSelected && !isCorrect
 
-            return (
-              <button
-                key={i}
-                onClick={() => {
-                  if (!showResult) {
-                    onAnswer(i)
-                    if (speakIt) stopSpeaking()
-                  }
-                }}
-                disabled={showResult}
-                className={`w-full flex items-center gap-3 rounded-md p-3 text-left text-sm border transition-colors ${
-                  showCorrect ? 'border-green-400 bg-green-50' :
-                  showWrong ? 'border-red-400 bg-red-50' :
-                  isSelected ? 'border-[var(--brand)] bg-[var(--brand-light)]' :
-                  'border-[var(--line)] hover:border-[var(--brand)]'
-                }`}
-              >
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                  showCorrect ? 'bg-green-500 text-white' :
-                  showWrong ? 'bg-red-500 text-white' :
-                  isSelected ? 'bg-[var(--brand)] text-white' :
-                  'bg-gray-100 text-[var(--muted)]'
-                }`}>
-                  {showCorrect ? '✓' : showWrong ? '✕' : letter}
-                </div>
-                {visualIcons && !showResult && <span className="shrink-0 text-base" aria-hidden="true">{OPTION_ICONS[i % OPTION_ICONS.length]}</span>}
-                <span className={`${showCorrect ? 'text-green-700 font-medium' : showWrong ? 'text-red-700' : 'text-[var(--ink)]'} flex-1`}>
-                  {optText(opt)}
-                  {speakIt && (
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); speak(optText(opt), { lang, rate: 0.92 }) }}
-                      className="ms-2 rounded px-1 text-[10px] text-[var(--muted)] hover:text-[var(--brand)]"
-                      title="Listen"
-                      aria-label={`Listen to option ${letter}`}
-                    >🔊</button>
-                  )}
-                </span>
-              </button>
-            )
-          })}
-        </div>
+        {/* ── MCQ / True-False choice buttons ── */}
+        {(type === 'mcq' || type === 'true_false') && (
+          <div className={calm ? 'space-y-3' : 'space-y-2'}>
+            {question.options?.map((opt, i) => {
+              const letter = type === 'true_false' ? (i === 0 ? 'T' : 'F') : String.fromCharCode(65 + i)
+              const isSelected = selected === i
+              const isRight = i === question.correct
+              const showCorrect = showResult && isRight
+              const showWrong = showResult && isSelected && !isRight
 
-        {showResult && (
+              return (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (!showResult) {
+                      onAnswer(i)
+                      if (speakIt) stopSpeaking()
+                    }
+                  }}
+                  disabled={showResult}
+                  className={`w-full flex items-center gap-3 rounded-md p-3 text-left text-sm border transition-colors ${
+                    showCorrect ? 'border-green-400 bg-green-50' :
+                    showWrong ? 'border-red-400 bg-red-50' :
+                    isSelected ? 'border-[var(--brand)] bg-[var(--brand-light)]' :
+                    'border-[var(--line)] hover:border-[var(--brand)]'
+                  }`}
+                >
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                    showCorrect ? 'bg-green-500 text-white' :
+                    showWrong ? 'bg-red-500 text-white' :
+                    isSelected ? 'bg-[var(--brand)] text-white' :
+                    'bg-gray-100 text-[var(--muted)]'
+                  }`}>
+                    {showCorrect ? '✓' : showWrong ? '✕' : letter}
+                  </div>
+                  {visualIcons && !showResult && type === 'mcq' && <span className="shrink-0 text-base" aria-hidden="true">{OPTION_ICONS[i % OPTION_ICONS.length]}</span>}
+                  <span className={`${showCorrect ? 'text-green-700 font-medium' : showWrong ? 'text-red-700' : 'text-[var(--ink)]'} flex-1`}>
+                    {optText(opt)}
+                    {speakIt && (
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); speak(optText(opt), { lang, rate: 0.92 }) }}
+                        className="ms-2 rounded px-1 text-[10px] text-[var(--muted)] hover:text-[var(--brand)]"
+                        title="Listen"
+                        aria-label={`Listen to option ${letter}`}
+                      >🔊</button>
+                    )}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {/* ── fill_blank / short_answer text entry ── */}
+        {(type === 'fill_blank' || type === 'short_answer') && (
+          <div className="space-y-3">
+            <label className="block text-xs font-semibold text-[var(--muted)] uppercase tracking-wide">
+              {type === 'fill_blank' ? 'Fill in the blank' : 'Short answer'}
+            </label>
+            <input
+              type="text"
+              value={textValue}
+              onChange={(e) => setTextValue(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && submitText()}
+              disabled={showResult}
+              placeholder={type === 'fill_blank' ? 'Type the missing word(s)…' : 'Type a short answer…'}
+              className="w-full brand-input"
+              autoFocus={!showResult}
+            />
+            <button
+              type="button"
+              onClick={submitText}
+              disabled={showResult || !textValue.trim()}
+              className="w-full brand-btn-primary py-2"
+            >
+              Check answer
+            </button>
+            {showResult && question.correct_answer && (
+              <p className="text-xs text-[var(--muted)]">
+                Correct answer: <strong className="text-green-600">{question.correct_answer}</strong>
+              </p>
+            )}
+          </div>
+        )}
+
+        {showResult && (type === 'mcq' || type === 'true_false') && (
           <div className={`animate-bubble-in mt-4 rounded-2xl p-3 text-center text-sm font-bold ${selected === question.correct ? 'bg-green-50 text-green-700 dark:bg-green-950/40 dark:text-green-300' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300'}`}>
             {selected === question.correct ? '🎉 Correct! +5 XP' : SAFE_FAILURE[Math.floor(Math.random() * SAFE_FAILURE.length)]}
+          </div>
+        )}
+        {showResult && (type === 'fill_blank' || type === 'short_answer') && (
+          <div className={`animate-bubble-in mt-4 rounded-2xl p-3 text-center text-sm font-bold ${correct ? 'bg-green-50 text-green-700 dark:bg-green-950/40 dark:text-green-300' : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300'}`}>
+            {correct ? '🎉 Correct! +5 XP' : SAFE_FAILURE[Math.floor(Math.random() * SAFE_FAILURE.length)]}
           </div>
         )}
       </div>
@@ -199,13 +292,29 @@ function QuizQuestion({ question, index, total, onAnswer, selected, showResult, 
 }
 
 function QuizResults({ questions, answers, onRetry }) {
-  const { awardXp } = useApp()
-  const correct = questions.filter((q, i) => answers[i] === q.correct).length
+  const { awardXp, user } = useApp()
+  const correct = questions.filter((q, i) => isCorrectAnswer(q, answers[i])).length
   const total = questions.length
   const pct = Math.round((correct / total) * 100)
+  const xp = correct * 5
 
   useEffect(() => {
-    awardXp(correct * 5, 'Quiz')
+    awardXp(xp, 'Quiz')
+    // Persist session so the teacher roster / dashboard can see exam history.
+    const payload = {
+      user_id: user?.id,
+      topic: 'Quiz',
+      total_questions: total,
+      correct_count: correct,
+      score: pct,
+      growth_score: 0,
+      xp_earned: xp,
+      mode: 'quiz',
+    }
+    if (user?.id) {
+      api.saveAssessmentSession(payload).catch(() => {})
+      api.trackEvent({ user_id: user.id, event_type: 'quiz_submitted', meta: { score: pct, correct, total } }).catch(() => {})
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -215,7 +324,7 @@ function QuizResults({ questions, answers, onRetry }) {
         <Mascot size={64} animate mood={pct >= 80 ? 'celebrating' : pct >= 50 ? 'happy' : 'thinking'} />
         <h1 className="text-xl font-bold text-[var(--ink)] mt-3" style={{ fontFamily: 'var(--font-heading)' }}>Quiz Complete!</h1>
         <p className="text-sm text-[var(--muted)] mt-1">{MOTIVATIONAL[Math.floor(Math.random() * MOTIVATIONAL.length)]}</p>
-        <p className="mt-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">⭐ +{correct * 5} XP earned</p>
+        <p className="mt-2 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">⭐ +{xp} XP earned</p>
 
         <div className="flex justify-center my-6">
           <div className="h-24 w-24 rounded-full border-4 border-[var(--brand)] flex items-center justify-center">
@@ -242,15 +351,28 @@ function QuizResults({ questions, answers, onRetry }) {
         </div>
 
         <div className="space-y-2 mb-6 text-left">
-          {questions.map((q, i) => (
-            <div key={i} className={`rounded-lg p-3 border ${answers[i] === q.correct ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
-              <p className="text-xs font-medium text-[var(--ink)] line-clamp-1">{i + 1}. {q.question}</p>
-              <p className={`text-[11px] mt-0.5 ${answers[i] === q.correct ? 'text-green-600' : 'text-red-600'}`}>
-                Your answer: {typeof q.options?.[answers[i]] === 'string' ? q.options[answers[i]] : 'N/A'}
-                {answers[i] !== q.correct && <span className="ml-2 text-green-600">Correct: {typeof q.options?.[q.correct] === 'string' ? q.options[q.correct] : 'N/A'}</span>}
-              </p>
-            </div>
-          ))}
+          {questions.map((q, i) => {
+            const ok = isCorrectAnswer(q, answers[i])
+            const given = typeof answers[i] === 'string'
+              ? answers[i]
+              : (typeof q.options?.[answers[i]] === 'string' ? q.options[answers[i]] : 'N/A')
+            const right = q.correct_answer
+              || (typeof q.options?.[q.correct] === 'string' ? q.options[q.correct] : 'N/A')
+            return (
+              <div key={i} className={`rounded-lg p-3 border ${ok ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
+                <p className="text-xs font-medium text-[var(--ink)] line-clamp-1">
+                  {i + 1}. {q.question}
+                  {q.type && q.type !== 'mcq' && (
+                    <span className="ms-1 text-[9px] uppercase opacity-60">{q.type}</span>
+                  )}
+                </p>
+                <p className={`text-[11px] mt-0.5 ${ok ? 'text-green-600' : 'text-red-600'}`}>
+                  Your answer: {given}
+                  {!ok && <span className="ml-2 text-green-600">Correct: {right}</span>}
+                </p>
+              </div>
+            )
+          })}
         </div>
 
         <div className="flex gap-3">
@@ -297,8 +419,8 @@ export default function Exam() {
     setTimeLeft(data.questions?.length * 45 || 300)
   }
 
-  const handleAnswer = (index) => {
-    setAnswers((prev) => ({ ...prev, [currentQ]: index }))
+  const handleAnswer = (value) => {
+    setAnswers((prev) => ({ ...prev, [currentQ]: value }))
     setShowResult(true)
     setTimeout(() => {
       setShowResult(false)
@@ -307,7 +429,7 @@ export default function Exam() {
       } else {
         setFinished(true)
       }
-    }, 1200)
+    }, 1600)
   }
 
   const formatTime = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`

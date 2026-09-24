@@ -11,11 +11,13 @@ import { useState, useRef, useEffect, lazy, Suspense } from 'react'
 const LazyProfile = lazy(() => import('../pages/Profile'))
 const LazySettings = lazy(() => import('../pages/Settings'))
 
-// Floating capsule navigation (pitch-style):
-//  - The bar is a floating dark capsule; the ACTIVE destination renders as a
-//    raised white tab whose bottom corners melt into the page (inverted /
-//    concave corner fillets — pure CSS, see .capsule-tab in index.css).
-//  - Inactive destinations are small ghost pills inside the capsule.
+// Floating capsule navigation (glassmorphism):
+//  - The bar is a frosted-glass capsule on the branded gradient background.
+//  - The active destination renders as a raised white-glass tab whose bottom
+//    corners melt into the content window (inverted / concave corner fillets —
+//    pure CSS, see .capsule-tab in index.css).  The tab and the open window
+//    therefore read as one continuous surface while the tab is on-screen.
+//  - Inactive destinations are ghost pills inside the capsule.
 //  - ALL practice tools collapse into one "Practice" dropdown; Profile /
 //    Settings live in the avatar menu; a ⋯ overflow covers narrow viewports.
 //  - The mobile bottom tab bar (students) is unchanged.
@@ -143,13 +145,13 @@ export default function Navbar() {
             {isStudent && (
               <div className="capsule-xp" title={`Level ${level} · ${badgeTierName}`}>
                 <span aria-hidden="true">⭐</span> Lv {level}
-                <span className="h-1.5 w-10 overflow-hidden rounded-full" style={{ background: 'color-mix(in srgb, var(--energy-orange) 25%, transparent)' }}>
+                <span className="h-1.5 w-10 overflow-hidden rounded-full" style={{ background: 'color-mix(in srgb, var(--primary-orange) 90%, transparent)' }}>
                   <span
                     className="block h-full rounded-full transition-all duration-500"
-                    style={{ width: `${(xpIntoLevel / 500) * 100}%`, background: 'linear-gradient(90deg, #fff, var(--energy-sunshine))' }}
+                    style={{ width: `${(xpIntoLevel / 500) * 100}%`, background: 'linear-gradient(90deg, #fff, #FFD58A)' }}
                   />
                 </span>
-                <span className="rounded-full px-1.5 text-[9px] uppercase tracking-wide" style={{ background: 'color-mix(in srgb, var(--energy-orange) 25%, transparent)' }}>{badgeTierName}</span>
+                <span className="rounded-full px-1.5 text-[9px] uppercase tracking-wide" style={{ background: 'color-mix(in srgb, var(--primary-orange) 90%, transparent)' }}>{badgeTierName}</span>
               </div>
             )}
             {isStudent && (
